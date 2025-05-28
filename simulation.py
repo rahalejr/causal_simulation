@@ -14,7 +14,7 @@ os.makedirs(frame_dir)
 # global parameters
 ball_radius = 28
 border_width = 7
-speed = 50
+speed = 100
 framerate = 30
 time_step = 0.0001
 gate_gap_height = 200
@@ -104,6 +104,8 @@ def run(cond=0, record=False):
     sim_seconds = 0
     SIM_FRAME_TIME = 1.0 / framerate
 
+    clock = pygame.time.Clock()
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -128,14 +130,23 @@ def run(cond=0, record=False):
         frame_count += 1
         pygame.display.flip()
 
-        sim_accum = 0.0
-        while sim_accum < SIM_FRAME_TIME:
-            world.Step(time_step, 20, 10)
-            sim_accum += time_step
-            sim_seconds += time_step
+        if record:
+            sim_accum = 0.0
+            while sim_accum < SIM_FRAME_TIME:
+                world.Step(time_step, 20, 10)
+                sim_accum += time_step
+                sim_seconds += time_step
+        else:
+            steps = int(SIM_FRAME_TIME / time_step)
+            for _ in range(steps):
+                world.Step(time_step, 20, 10)
+                sim_seconds += time_step
 
         if sim_seconds > 20:
             running = False
+
+        if not record:
+            clock.tick(framerate)  # throttle to visual framerate to prevent runaway speed
 
     pygame.quit()
 
