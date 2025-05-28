@@ -96,6 +96,7 @@ def run(cond=0, record=False):
         ball_params[i + 1]['ypos'] = condition.y_positions[i]
         ball_params[i + 1]['angle'] = condition.angles[i]
 
+    print(str(ball_params))
 
     balls = [Ball(world, params) for params in ball_params[0:condition.num_balls + 1]]
 
@@ -138,12 +139,12 @@ def run(cond=0, record=False):
 
     pygame.quit()
 
-    frame_files = sorted([os.path.join(frame_dir, fname)
-                          for fname in os.listdir(frame_dir) if fname.endswith(".png")])
-
     if record:
+        frame_files = sorted([os.path.join(frame_dir, fname)
+                              for fname in os.listdir(frame_dir) if fname.endswith(".png")])
+
         clip = ImageSequenceClip(frame_files, fps=framerate)
         clip.write_videofile("simulation.mp4", codec="libx264")
 
 if __name__ == '__main__':
-    run(3, record=False)
+    run(1, record=False)
