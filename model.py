@@ -1,0 +1,1 @@
+# noise values range from .1 to 2
