@@ -15,8 +15,18 @@ class Condition:
         self.preemption = preemption
 
 conditions = [
+    Condition([227, 137], False), # green cause
+    Condition([217, 140, 148, 145], False), # yellow cause
+    Condition([239, 133, 152, 145], False), # yellow preempts red
+]
+
+
+
+test_conditions = [
     Condition([180], False),
     Condition([150, 200], False),
     Condition([150, 180, 200], False),
-    Condition([210, 200, 180, 170], True)
+    Condition([156, 185, 172, 200], False), # not preempted
+    Condition([217, 140, 148, 145], False), # not preempted
+    Condition([239, 133, 152, 145], False), # yellow preempts red
 ]
