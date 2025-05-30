@@ -141,7 +141,6 @@ def create_world():
     return world
 
 
-
 def is_hit(effect_ball, sim_seconds):
     effect_x, effect_y = effect_ball.body.position
     if effect_x - ball_radius <= border_width and wall_len <= effect_y <= wall_len + gate_gap_height:
@@ -150,15 +149,14 @@ def is_hit(effect_ball, sim_seconds):
     return False
 
 
-
-
-def run(cond=0, record=False, counterfactual=None):
+def run(cond=0, record=False, counterfactual=None, headless=False):
     condition = conditions[cond]
-    pygame.init()
-    screen = pygame.display.set_mode((width, height))
-    pygame.display.set_caption("Box2D Ball Collision Demo")
 
-    
+    if not headless:
+        pygame.init()
+        screen = pygame.display.set_mode((width, height))
+        pygame.display.set_caption("Box2D Ball Collision Demo")
+
     remove = counterfactual['remove'] if counterfactual else None
     step_count, frame_count = 0, 0
     world = create_world()
@@ -168,7 +166,13 @@ def run(cond=0, record=False, counterfactual=None):
         ball_params[i + 1]['angle'] = condition.angles[i]
 
     filtered_params = [params for params in ball_params[0:condition.num_balls + 1] if not (remove == params['ball'])]
-    balls = [Ball(world, params) for params in filtered_params]
+
+    balls = []
+    for params in filtered_params:
+        ball = Ball(world, params)
+        if ball.name == 'effect':
+            effect_ball = ball
+        balls.append(ball)
 
     sim = Simulation(remove)
     collision_listener = CollisionListener(sim)
@@ -178,34 +182,36 @@ def run(cond=0, record=False, counterfactual=None):
     sim_seconds = 0
     SIM_FRAME_TIME = 1.0 / framerate
 
-    clock = pygame.time.Clock()
+    if not headless:
+        clock = pygame.time.Clock()
 
     while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
+        if not headless:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
 
-        screen.fill((255, 255, 255))
+            screen.fill((255, 255, 255))
 
-        wall_len = (height - gate_gap_height) / 2
-        pygame.draw.rect(screen, (0, 0, 0), (0, 0, border_width, wall_len))
-        pygame.draw.rect(screen, (0, 0, 0), (0, height - wall_len, border_width, wall_len))
-        pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, border_width))
-        pygame.draw.rect(screen, (0, 0, 0), (0, height - border_width, width, border_width))
-        pygame.draw.rect(screen, (0, 0, 0), (width - border_width, 0, border_width, height))
+            wall_len = (height - gate_gap_height) / 2
+            pygame.draw.rect(screen, (0, 0, 0), (0, 0, border_width, wall_len))
+            pygame.draw.rect(screen, (0, 0, 0), (0, height - wall_len, border_width, wall_len))
+            pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, border_width))
+            pygame.draw.rect(screen, (0, 0, 0), (0, height - border_width, width, border_width))
+            pygame.draw.rect(screen, (0, 0, 0), (width - border_width, 0, border_width, height))
 
-        pygame.draw.rect(screen, (255, 130, 150), (0, wall_len, border_width, gate_gap_height))
+            pygame.draw.rect(screen, (255, 130, 150), (0, wall_len, border_width, gate_gap_height))
 
-        for ball in balls:
-            if ball.name == 'effect':
-                hit = is_hit(ball, sim_seconds)
-            pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
+            for ball in balls:
+                pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
 
-        if record:
-            pygame.image.save(screen, f"frames/frame_{frame_count:05d}.png")
-        frame_count += 1
-        pygame.display.flip()
+            if record:
+                pygame.image.save(screen, f"frames/frame_{frame_count:05d}.png")
+            frame_count += 1
+            pygame.display.flip()
 
+        hit = is_hit(effect_ball, sim_seconds)
+        
         if record:
             sim_accum = 0.0
             while sim_accum < SIM_FRAME_TIME:
@@ -223,10 +229,11 @@ def run(cond=0, record=False, counterfactual=None):
         if sim_seconds > 20:
             running = False
 
-        if not record:
-          clock.tick(framerate)
+        if not headless:
+            clock.tick(framerate)
 
-    pygame.quit()
+    if not headless:
+        pygame.quit()
 
     if record:
         frames = sorted([os.path.join("frames", fname) for fname in os.listdir("frames") if fname.endswith(".png")])
@@ -234,4 +241,4 @@ def run(cond=0, record=False, counterfactual=None):
         clip.write_videofile("simulation.mp4", codec="libx264")
 
 if __name__ == '__main__':
-    run(2, record=False, counterfactual = {'remove': 'green', 'divergence': 150, 'noise_ball': 'blue'})
+    run(2, record=False, counterfactual = {'remove': 'green', 'divergence': 150, 'noise_ball': 'blue'}, headless=True)
