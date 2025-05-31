@@ -1,5 +1,8 @@
 import numpy as np
-from simulation import width, height
+
+
+width = 1000
+height = 800
 
 class Condition:
 
@@ -10,9 +13,20 @@ class Condition:
         spacing = (height + 100) / (self.num_balls + 1)
         for i in range(self.num_balls):
             self.y_positions.append(round(spacing*(i+1)))
-
-        self.angles = [ang*np.pi/180 for ang in angles]
+        self.angles = angles
+        self.radians = [ang*np.pi/180 for ang in angles]
         self.preemption = preemption
+        self.cause_ball = None
+        self.collisions = 0
+
+    def info(self):
+        return {
+            'num_balls': self.num_balls,
+            'angles': self.angles,
+            'preemption': self.preemption,
+            'cause_ball': self.cause_ball,
+            'collisions': self.collisions
+        }
 
 conditions = [
     Condition([227, 137], False), # green cause

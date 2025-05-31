@@ -1,4 +1,4 @@
-from conditions import *
+from conditions import conditions, test_conditions
 import numpy as np
 import pygame
 import os
@@ -61,6 +61,7 @@ class Ball:
         self.balls_collided_with = []
         self.noisy = False
         self.collisions = []
+        self.last_collision = None
         self.body.userData = self
 
     @property
@@ -69,11 +70,12 @@ class Ball:
     
     def add_collision(self, obj):
         if obj == 'wall':
-            self.collisions += [obj]
+            self.collisions.append(obj)
         elif isinstance(obj, Ball):
+            self.last_collision = obj.name
             if obj.noisy:
                     self.noisy = True
-            self.collisions += [obj.name]
+            self.collisions.append(obj.name)
 
 
 class CollisionListener(b2ContactListener):
@@ -103,9 +105,7 @@ class CollisionListener(b2ContactListener):
         else:
             names.append('wall')
 
-        self.sim.collisions += [{'objects': names, 'noisy': noisy}]
-
-        print(names)
+        self.sim.collisions.append({'objects': names, 'noisy': noisy})
 
 
 # geometry constants for the walls
@@ -141,16 +141,15 @@ def create_world():
     return world
 
 
-def is_hit(effect_ball, sim_seconds):
+def is_hit(sim, effect_ball, sim_seconds):
     effect_x, effect_y = effect_ball.body.position
     if effect_x - ball_radius <= border_width and wall_len <= effect_y <= wall_len + gate_gap_height:
-        print('hit at: ' + str(sim_seconds))
+        sim.hit = True
         return sim_seconds
     return False
 
 
-def run(cond=0, record=False, counterfactual=None, headless=False):
-    condition = conditions[cond]
+def run(condition, record=False, counterfactual=None, headless=False):
 
     if not headless:
         pygame.init()
@@ -163,7 +162,7 @@ def run(cond=0, record=False, counterfactual=None, headless=False):
 
     for i in range(condition.num_balls):
         ball_params[i + 1]['ypos'] = condition.y_positions[i]
-        ball_params[i + 1]['angle'] = condition.angles[i]
+        ball_params[i + 1]['angle'] = condition.radians[i]
 
     filtered_params = [params for params in ball_params[0:condition.num_balls + 1] if not (remove == params['ball'])]
 
@@ -174,11 +173,11 @@ def run(cond=0, record=False, counterfactual=None, headless=False):
             effect_ball = ball
         balls.append(ball)
 
-    sim = Simulation(remove)
+    sim = Simulation(balls, remove)
     collision_listener = CollisionListener(sim)
     world.contactListener = collision_listener 
 
-    running = True
+    running, hit = True, False
     sim_seconds = 0
     SIM_FRAME_TIME = 1.0 / framerate
 
@@ -210,7 +209,9 @@ def run(cond=0, record=False, counterfactual=None, headless=False):
             frame_count += 1
             pygame.display.flip()
 
-        hit = is_hit(effect_ball, sim_seconds)
+
+        if not hit:
+            hit = is_hit(sim, effect_ball, sim_seconds)
         
         if record:
             sim_accum = 0.0
@@ -226,7 +227,7 @@ def run(cond=0, record=False, counterfactual=None, headless=False):
                 step_count += 1
                 sim_seconds += time_step
 
-        if sim_seconds > 20:
+        if (hit and sim_seconds > hit+3) or sim_seconds > 20:
             running = False
 
         if not headless:
@@ -240,5 +241,14 @@ def run(cond=0, record=False, counterfactual=None, headless=False):
         clip = ImageSequenceClip(frames, fps=framerate)
         clip.write_videofile("simulation.mp4", codec="libx264")
 
+    return {
+        'num_balls': sim.num_balls,
+        'angles': condition.angles,
+        'sim_time': sim_seconds,
+        'hit': isinstance(hit, float),
+        'collisions': len(sim.collisions),
+        'cause_ball': effect_ball.last_collision
+    }
+
 if __name__ == '__main__':
-    run(2, record=False, counterfactual = {'remove': 'green', 'divergence': 150, 'noise_ball': 'blue'}, headless=True)
+    run(2, record=False, counterfactual = {'remove': 'green', 'divergence': 150, 'noise_ball': 'blue'}, headless=False)
