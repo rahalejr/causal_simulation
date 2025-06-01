@@ -39,6 +39,13 @@ class Simulation:
         self.hit = False
         self.collisions = []
         self.cause_ball = ''
+        self.step = 0
+    
+    def get_ball(self, name):
+        for b in self.balls:
+            if b.name == name:
+                return b
+        return None
 
     
 
@@ -68,14 +75,18 @@ class Ball:
     def position(self):
         return tuple(map(int, self.body.position))
     
-    def add_collision(self, obj):
+    def add_collision(self, obj, step):
         if obj == 'wall':
             self.collisions.append(obj)
         elif isinstance(obj, Ball):
             self.last_collision = obj.name
             if obj.noisy:
                     self.noisy = True
-            self.collisions.append(obj.name)
+            self.collisions.append({'ball': obj.name, 'step': step})
+    
+    def last_collision(self):
+        return self.collisions[-1] if len(self.collisions) > 0 else None
+
 
 
 class CollisionListener(b2ContactListener):
@@ -90,7 +101,7 @@ class CollisionListener(b2ContactListener):
 
         names, noisy = [], False
         if isinstance(A, Ball):
-            A.add_collision(B)
+            A.add_collision(B, self.sim.step)
             names.append(A.name)
             if A.noisy == True:
                 noisy = True
@@ -98,14 +109,14 @@ class CollisionListener(b2ContactListener):
             names.append('wall')
         
         if isinstance(B, Ball):
-            B.add_collision(A)
+            B.add_collision(A, self.sim.step)
             names.append(B.name)
             if B.noisy == True:
                 noisy = True
         else:
             names.append('wall')
 
-        self.sim.collisions.append({'objects': names, 'noisy': noisy})
+        self.sim.collisions.append({'objects': names, 'step': self.sim.step, 'noisy': noisy})
 
 
 # geometry constants for the walls
@@ -157,7 +168,7 @@ def run(condition, record=False, counterfactual=None, headless=False):
         pygame.display.set_caption("Box2D Ball Collision Demo")
 
     remove = counterfactual['remove'] if counterfactual else None
-    step_count, frame_count = 0, 0
+    frame_count = 0
     world = create_world()
 
     for i in range(condition.num_balls):
@@ -217,14 +228,14 @@ def run(condition, record=False, counterfactual=None, headless=False):
             sim_accum = 0.0
             while sim_accum < SIM_FRAME_TIME:
                 world.Step(time_step, 20, 10)
-                step_count += 1
+                sim.step += 1
                 sim_accum += time_step
                 sim_seconds += time_step
         else:
             steps = int(SIM_FRAME_TIME / time_step)
             for _ in range(steps):
                 world.Step(time_step, 20, 10)
-                step_count += 1
+                sim.step += 1
                 sim_seconds += time_step
 
         if (hit and sim_seconds > hit+3) or sim_seconds > 20:
@@ -241,14 +252,23 @@ def run(condition, record=False, counterfactual=None, headless=False):
         clip = ImageSequenceClip(frames, fps=framerate)
         clip.write_videofile("simulation.mp4", codec="libx264")
 
+    cause_ball = sim.get_ball(effect_ball.last_collision['ball'])
+    if cause_ball:
+        noise_ball = cause_ball.name 
+    noise_ball = sim.get_ball(cause_ball.collisions[0]['ball']) if len(cause_ball.collisions) > 1 else None
+    
+
     return {
         'num_balls': sim.num_balls,
+        'clear_cut': isinstance(noise_ball, None),
         'angles': condition.angles,
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
         'collisions': len(sim.collisions),
-        'cause_ball': effect_ball.last_collision
+        'cause_ball': effect_ball.last_collision,
+        'noise_ball': noise_ball.name,
+        'diverge': None 
     }
 
 if __name__ == '__main__':
-    run(2, record=False, counterfactual = {'remove': 'green', 'divergence': 150, 'noise_ball': 'blue'}, headless=False)
+    run(2, record=False, counterfactual = {'remove': 'green', 'diverge': 150, 'noise_ball': 'blue'}, headless=False)
