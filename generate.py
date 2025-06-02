@@ -36,11 +36,11 @@ if __name__ == '__main__':
         angles = clipped_angles.tolist()
         cond = Condition(angles, False)
 
-        sim = run(cond, record=False, counterfactual=None, headless=True)
+        sim = run(cond, record=False, counterfactual=None, headless=False)
 
         if sim['hit']:
-            counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'divergence': 150, 'noise_ball': 'blue'}, headless=True)
-            cond.preemption, cond.num_collisions, cond.cause_ball = counterfactual['hit'], sim['collisions'], sim['cause_ball']
+            counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'divergence': 150, 'noise_ball': 'blue'}, headless=False)
+            cond.preemption, cond.num_collisions, cond.cause_ball, cond.collisions = counterfactual['hit'], sim['collisions'], sim['cause_ball'], sim['collisons']
             kept_conditions.append(cond.info())
             print(cond.info())
         print(_)

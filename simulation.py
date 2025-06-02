@@ -1,4 +1,5 @@
 from conditions import conditions, test_conditions
+from random import shuffle
 import numpy as np
 import pygame
 import os
@@ -19,13 +20,18 @@ framerate = 30
 time_step = 0.0001
 gate_gap_height = 200
 
+# radomly assign ball colors
+red, green, yellow, blue = (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255)
+colors = [red, green, yellow, blue]
+shuffle(colors)
+
 # ball parameters
 ball_params = [
     {'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0},
-    {'ball': 'red', 'rgb': (255, 0, 0)},
-    {'ball': 'green', 'rgb': (0, 255, 0)},
-    {'ball': 'yellow', 'rgb': (255, 255, 0)},
-    {'ball': 'blue', 'rgb': (0, 0, 255)}
+    {'ball': 1, 'rgb': colors[0]},
+    {'ball': 2, 'rgb': colors[1]},
+    {'ball': 3, 'rgb': colors[2]},
+    {'ball': 4, 'rgb': colors[3]}
 ]
 
 
@@ -42,10 +48,10 @@ class Simulation:
         self.step = 0
     
     def get_ball(self, name):
-        for b in self.balls:
-            if b.name == name:
-                return b
-        return None
+        try:
+            return self.balls[name-1]
+        except:
+            return None
 
     
 
@@ -65,10 +71,10 @@ class Ball:
             speed * np.cos(params['angle']), speed * np.sin(params['angle'])
         )
         self.color = params['rgb']
-        self.balls_collided_with = []
         self.noisy = False
-        self.collisions = []
-        self.last_collision = None
+        self.collided_with = set()
+        self.ball_collisions = []
+        self.all_collisions = []
         self.body.userData = self
 
     @property
@@ -77,15 +83,17 @@ class Ball:
     
     def add_collision(self, obj, step):
         if obj == 'wall':
-            self.collisions.append(obj)
+            self.all_collisions.append({'name': 'wall', 'object': obj, 'step': step})
         elif isinstance(obj, Ball):
-            self.last_collision = obj.name
             if obj.noisy:
                     self.noisy = True
-            self.collisions.append({'ball': obj.name, 'step': step})
+            if obj.name != 'effect' and 'effect' not in self.collided_with:
+                self.ball_collisions.append({'name': obj.name, 'object': obj, 'step': step})
+            self.collided_with.add(obj.name)
+            self.all_collisions.append({'name': obj.name, 'object': obj, 'step': step})
     
     def last_collision(self):
-        return self.collisions[-1] if len(self.collisions) > 0 else None
+        return self.ball_collisions[-1]['object'] if len(self.ball_collisions) > 0 else None
 
 
 
@@ -213,6 +221,7 @@ def run(condition, record=False, counterfactual=None, headless=False):
             pygame.draw.rect(screen, (255, 130, 150), (0, wall_len, border_width, gate_gap_height))
 
             for ball in balls:
+                pygame.draw.circle(screen, (0, 0, 0), (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius + 1)
                 pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
 
             if record:
@@ -238,7 +247,7 @@ def run(condition, record=False, counterfactual=None, headless=False):
                 sim.step += 1
                 sim_seconds += time_step
 
-        if (hit and sim_seconds > hit+3) or sim_seconds > 20:
+        if (hit and sim_seconds > hit+3) or sim_seconds > 18:
             running = False
 
         if not headless:
@@ -252,22 +261,35 @@ def run(condition, record=False, counterfactual=None, headless=False):
         clip = ImageSequenceClip(frames, fps=framerate)
         clip.write_videofile("simulation.mp4", codec="libx264")
 
-    cause_ball = sim.get_ball(effect_ball.last_collision['ball'])
-    if cause_ball:
-        noise_ball = cause_ball.name 
-    noise_ball = sim.get_ball(cause_ball.collisions[0]['ball']) if len(cause_ball.collisions) > 1 else None
-    
+    cause_ball = effect_ball.last_collision()
+    if cause_ball and len(cause_ball.ball_collisions) and hit:
+       noise_ball = cause_ball.ball_collisions[0]['object']
+       diverge_step = cause_ball.ball_collisions[0]['step']
+    else:
+        noise_ball, diverge_step = None, None
 
-    return {
+    if hit:
+        return {
         'num_balls': sim.num_balls,
-        'clear_cut': isinstance(noise_ball, None),
+        'clear_cut': noise_ball is None and hit,
         'angles': condition.angles,
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
         'collisions': len(sim.collisions),
-        'cause_ball': effect_ball.last_collision,
-        'noise_ball': noise_ball.name,
-        'diverge': None 
+        'cause_ball': cause_ball.name if cause_ball else None,
+        'noise_ball': noise_ball.name if noise_ball else None,
+        'diverge': diverge_step
+        }
+    return {
+        'num_balls': sim.num_balls,
+        'clear_cut': noise_ball is None,
+        'angles': condition.angles,
+        'sim_time': sim_seconds,
+        'hit': isinstance(hit, float),
+        'collisions': len(sim.collisions),
+        'cause_ball': cause_ball.name if cause_ball else None,
+        'noise_ball': noise_ball.name if noise_ball else None,
+        'diverge': diverge_step
     }
 
 if __name__ == '__main__':
