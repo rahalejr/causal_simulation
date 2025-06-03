@@ -162,7 +162,7 @@ def create_world():
 
 def is_hit(sim, effect_ball, sim_seconds):
     effect_x, effect_y = effect_ball.body.position
-    if effect_x - ball_radius <= border_width and wall_len <= effect_y <= wall_len + gate_gap_height:
+    if effect_x < 0:
         sim.hit = True
         return sim_seconds
     return False
@@ -268,21 +268,9 @@ def run(condition, record=False, counterfactual=None, headless=False):
     else:
         noise_ball, diverge_step = None, None
 
-    if hit:
-        return {
-        'num_balls': sim.num_balls,
-        'clear_cut': noise_ball is None and hit,
-        'angles': condition.angles,
-        'sim_time': sim_seconds,
-        'hit': isinstance(hit, float),
-        'collisions': len(sim.collisions),
-        'cause_ball': cause_ball.name if cause_ball else None,
-        'noise_ball': noise_ball.name if noise_ball else None,
-        'diverge': diverge_step
-        }
     return {
         'num_balls': sim.num_balls,
-        'clear_cut': noise_ball is None,
+        'clear_cut': True if noise_ball is None and hit else False,
         'angles': condition.angles,
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),

@@ -18,6 +18,10 @@ class Condition:
         self.preemption = preemption
         self.cause_ball = None
         self.collisions = 0
+        self.unambiguous = False
+        self.sim_time = None
+        self.diverge = 0
+        self.noise_ball = None
 
     def info(self):
         return {
@@ -25,7 +29,8 @@ class Condition:
             'angles': self.angles,
             'preemption': self.preemption,
             'cause_ball': self.cause_ball,
-            'collisions': self.collisions
+            'collisions': self.collisions,
+            'unambiguous': self.unambiguous
         }
 
 conditions = [

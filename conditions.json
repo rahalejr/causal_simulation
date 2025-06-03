@@ -1,0 +1,2914 @@
+[
+  {
+    "num_balls": 4,
+    "angles": [
+      170.68238053201878,
+      185.19315340991395,
+      216.79059026803344,
+      159.75222812229282
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      173.69638310042984,
+      227.32790528671669,
+      141.4486101174732,
+      169.72348477156785
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      153.23039045108578,
+      174.0805945680842,
+      211.22166921726318,
+      219.32899672360082
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      226.9835666486915,
+      175.03447926206195,
+      172.43335799082448,
+      195.12975472395337
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      177.51794255659405,
+      153.63989356152135,
+      167.3020010545161,
+      209.56533233507798
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      243.5959128697035,
+      147.8484110216955,
+      167.26518969178753,
+      207.70488279864784
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      190.66307358498742,
+      192.1023168322367,
+      170.09456080245573,
+      211.45906934892167
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      148.72384959970262,
+      176.74672852474257,
+      193.1049171967639,
+      191.39885425978284
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      211.6587647653611,
+      148.5752984655985,
+      145.48466979544753,
+      165.31710451483002
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 11,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      197.6913603861309,
+      152.37274346859198,
+      174.94194719762652,
+      144.21782330249346
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.38320135273185,
+      177.81806628510017,
+      135.57063577283748,
+      220.1007454695462
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.8755614470378,
+      183.01688646807435,
+      193.0670987797649,
+      216.25635779175775
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      154.47938738788662,
+      162.5771535235786,
+      142.57383428407041,
+      170.709908555301
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 15,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      151.6495347015675,
+      201.80762835903684,
+      189.37689902679807,
+      163.40426606125865
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 14,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      170.2756061466594,
+      177.72518194536894,
+      170.55852414129063,
+      129.3814944769112
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 3,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      193.63711900049267,
+      200.5382607046246,
+      191.18365089536383,
+      185.52970908541312
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      194.77225988950318,
+      205.15547683229028,
+      169.8827449709345,
+      211.05637188483337
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      153.15328770203365,
+      171.79764835088972,
+      195.97028037755746,
+      184.6243769885687
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      177.0465600966,
+      220.6186005541486,
+      190.1315919189586,
+      182.33197591570914
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      160.676154996831,
+      164.76886979705057,
+      210.9525828451252,
+      168.58485121614476
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.86558720212534,
+      177.30841469330485,
+      223.12256800282879,
+      218.6116798498761
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      184.66590814651616,
+      126.45375810255811,
+      190.42873815267293,
+      138.21384881887582
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      204.65368491342605,
+      188.76544798204756,
+      191.37226859745266,
+      190.4880229295058
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      157.30417612392557,
+      179.6130898161556,
+      172.41045970883644,
+      192.32581707645892
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      216.9623749812542,
+      170.44918692091423,
+      172.52969433777645,
+      149.24393181428272
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      238.20516833114874,
+      165.60711496323032,
+      185.55317582552485,
+      191.44039984436972
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      169.03424771558875,
+      135.6175420388892,
+      151.57340614368422,
+      230.99065250513215
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      147.26210366711103,
+      156.61943284574488,
+      209.65444725054783,
+      154.59649504400068
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      157.8927529180997,
+      193.59002859169635,
+      210.47531029041372,
+      181.22247327251668
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.6474276764712,
+      178.60057225710293,
+      192.66536879376025,
+      186.0401218341009
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.91529461952234,
+      172.99075994546655,
+      131.43721418244073,
+      171.52774273378174
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      205.33632004972247,
+      182.72397906862426,
+      201.74107584754546,
+      149.913785218174
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 13,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      179.6101279677412,
+      226.7959346292852,
+      192.2738416851662,
+      163.01731398026206
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      188.4198744884916,
+      170.81433528726035,
+      201.75566835051825,
+      221.01324600631844
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      184.23791573948944,
+      201.07638596964765,
+      200.81851882761222,
+      202.2447634573711
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      188.1189073714803,
+      176.03019683449307,
+      182.14265951739762,
+      190.17980125747684
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      151.31365533473527,
+      224.41743918541528,
+      226.73057821657264,
+      202.7900137016351
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      129.58996152530653,
+      127.48618042254347,
+      153.89592963721816,
+      206.12876720783424
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      143.51707149114355,
+      182.37079838879978,
+      190.13393806804743,
+      240.84952621670422
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      192.13196707737796,
+      202.60628690593245,
+      112.56479891445396,
+      202.7040499102898
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.51622051218115,
+      115.90375832125719,
+      148.0602760284967,
+      208.5174729459384
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.27123345895797,
+      184.46528038797476,
+      151.3375678913145,
+      147.666056330313
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      148.5902772930439,
+      216.84744569906482,
+      189.29779888911588,
+      164.102251465893
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      198.7356091525369,
+      244.26921826320634,
+      164.80927188275496,
+      204.39903087654187
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      176.88627453270402,
+      182.27290282809577,
+      192.01537105343425,
+      138.1979897992595
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      174.23519781663288,
+      180.8067469355702,
+      168.26852361565147,
+      212.20793871918647
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      188.7468208904983,
+      201.9515574420029,
+      180.39262819755731,
+      151.1281780904514
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.15563502966927,
+      145.5867290752874,
+      145.4648662419547,
+      170.03180878761384
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.507029839133,
+      182.7483283768233,
+      151.1740644803715,
+      202.096196333095
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.6351335831631,
+      178.77926983244902,
+      176.6045982596949,
+      165.84168988551045
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      155.40011099444797,
+      181.21583187664888,
+      193.67417424997836,
+      196.4388656167826
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      224.53238234476356,
+      184.07703058480817,
+      193.35635370179966,
+      200.5642743429266
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      219.29947370516405,
+      178.26134206809357,
+      171.44083081636086,
+      193.5507231074482
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      215.23871880567913,
+      156.22832971168125,
+      159.3193243675573,
+      190.23730818333166
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 13,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      173.80165141885323,
+      204.02852188532336,
+      215.50252161234795,
+      150.8339961478777
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 14,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      169.25273710626257,
+      201.25713660947832,
+      233.41499365908345,
+      157.44286453399462
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      182.79719735202627,
+      132.3944661545619,
+      190.12280913143132,
+      214.40775311115334
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 4,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      210.25641419210913,
+      186.8754408877036,
+      165.7431043440578,
+      206.45913574813767
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.51787351261493,
+      211.78496000679726,
+      162.98689882182924,
+      220.07380559746997
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.80907088670673,
+      194.2456137060493,
+      160.96121376123722,
+      219.155174186135
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      191.63320514054527,
+      184.00205681265044,
+      170.52560650764616,
+      209.65827582438536
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      199.89379358748877,
+      166.95983848559652,
+      197.71825964112625,
+      197.98005601410853
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      191.66561813223169,
+      222.89951707666884,
+      205.99953513777226,
+      182.7017588293004
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      167.81507825079848,
+      200.73329281811792,
+      163.86683380745555,
+      149.97529051777232
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      181.60982093391198,
+      177.66328423536012,
+      182.77434781517113,
+      166.50635691782173
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      168.4611781579018,
+      145.91746011931895,
+      181.06687414108217,
+      151.3506331468195
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.22174982054872,
+      175.52732375194813,
+      189.73812685068728,
+      214.56964544526926
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      168.30397811871015,
+      167.16943555300645,
+      163.13739275991497,
+      197.3364819160895
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      162.15897553098932,
+      131.1660548921227,
+      171.08582294831194,
+      219.7361675240986
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.40501610614734,
+      192.048744796593,
+      215.6549915431733,
+      214.447929294574
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 14,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      129.90768378238582,
+      126.14488396901416,
+      190.69450794864636,
+      160.31510104448247
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      203.00369455637363,
+      174.54480108375023,
+      228.31640932172277,
+      186.54659049923026
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      155.8180099642406,
+      176.28663744278586,
+      187.155277763655,
+      188.48925901918165
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.39957544335874,
+      133.14363713584206,
+      167.76189708747717,
+      208.36421101571767
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.69937135754745,
+      168.6865628197346,
+      227.62986511279135,
+      199.5542401851208
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      161.87323835330253,
+      129.07211991255159,
+      188.60641540734318,
+      216.05088752572271
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      139.02958057318372,
+      213.11067484856696,
+      147.75857659965857,
+      162.9193191609398
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      214.12249964040504,
+      136.58840161881113,
+      157.3576712549161,
+      239.639561369333
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      200.14432010493982,
+      222.32541092196638,
+      260.0,
+      206.48692675474655
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      161.28272926219725,
+      173.92623227199434,
+      149.03627372032994,
+      116.26162213941308
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      128.33198343380008,
+      170.40295869053287,
+      197.40749408326104,
+      121.3012313648306
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      199.12268707046832,
+      157.7543241711226,
+      148.79157567767064,
+      236.42652405034227
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 14,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.37398494995492,
+      173.98729093703727,
+      178.84186374571252,
+      238.27901557117298
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.76231994960338,
+      213.21939563133924,
+      178.14498781770945,
+      207.61181225689654
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 13,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      194.47728375409048,
+      126.53665502367552,
+      148.29958374559087,
+      181.8114425175628
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 15,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      144.0202612244238,
+      167.17219320026953,
+      227.2153644737394,
+      191.5851161683056
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      195.4554611224915,
+      218.9891666289376,
+      190.16546268523595,
+      161.82359359129873
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      114.62349125702022,
+      174.89074484020153,
+      187.3445964205906,
+      109.44275857963687
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      213.65837378060706,
+      164.68511824205513,
+      146.62105750542614,
+      237.28636018716918
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 4,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      214.71549147670444,
+      157.665403297332,
+      226.8788699231913,
+      176.88067224193847
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      230.82237096300057,
+      222.0030357029566,
+      163.09726187665234,
+      223.67130688852376
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.30746707925906,
+      190.47858987926202,
+      167.59239635184795,
+      143.37314118496326
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.0270150909427,
+      175.39969852817885,
+      178.10449844642147,
+      217.69840278812546
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      182.8500813520342,
+      176.69252978390656,
+      179.85443806190094,
+      182.79120557484995
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      146.99922310133365,
+      202.36070035474265,
+      192.4610646303097,
+      199.83190401502026
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      194.60066702914528,
+      165.95318808919484,
+      180.28920096502236,
+      208.95580234429204
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.0427905931984,
+      225.88390827361474,
+      198.46266462256656,
+      204.52798001079825
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 13,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      159.057509809323,
+      181.51467407152634,
+      141.39270403706468,
+      111.71417321572113
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.3963898605954,
+      134.90164750576312,
+      204.16351347266848,
+      187.25552199803587
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      137.56066236352353,
+      199.36985888952748,
+      190.04183813205884,
+      192.0399878504804
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 4,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      210.95886948096737,
+      229.52705871745377,
+      226.95881942209041,
+      184.0310614372728
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.18852524486306,
+      187.27825520237357,
+      196.60145682500558,
+      204.11203144217123
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      205.40906249077236,
+      248.16119089471093,
+      157.4864333670132,
+      197.03868377536597
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.96993679251983,
+      145.95513548522854,
+      169.10007335367612,
+      165.237888847924
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      195.25268378261825,
+      145.10242274461137,
+      168.0106044698058,
+      201.60579999975602
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      183.78395991944427,
+      176.5070336402916,
+      181.55455176501374,
+      155.96226195218804
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.98739271651596,
+      200.29612265542647,
+      143.77640601149784,
+      142.37966844367875
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 15,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      190.40535886960453,
+      206.11905670243982,
+      191.55205954144256,
+      196.70640737319056
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      158.9026383923602,
+      134.58696175894283,
+      122.72022861160517,
+      210.67574980174425
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      148.48546524733024,
+      249.60032395306496,
+      199.23741341975582,
+      159.0384485026123
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.76867892952833,
+      173.21520422813228,
+      202.3050591721431,
+      221.40342886666184
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      157.6566517363365,
+      182.53374897719073,
+      211.4393563533536,
+      192.0432721800134
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.466637172253,
+      177.62036199418588,
+      141.24576379993218,
+      192.86181263794353
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      205.2635092307678,
+      194.7825373964862,
+      190.56384956727382,
+      205.79910592021602
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      162.58924195875096,
+      147.89688700445112,
+      153.929694064683,
+      129.0897171023537
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      197.3723922810482,
+      221.53651109391987,
+      192.1149924610515,
+      212.1272868515644
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.50157912476092,
+      233.33341869048985,
+      223.83184132739342,
+      215.91871161947677
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      141.19153750599557,
+      129.5709416876092,
+      224.77110733026547,
+      169.0950817305992
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 15,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.2899344883421,
+      197.49376079399386,
+      227.922195444726,
+      154.31952858621108
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      171.00274694712832,
+      202.72988089549398,
+      211.00231286311643,
+      225.28879939462792
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.69491415878463,
+      114.46375407536455,
+      211.81714588952102,
+      182.44134114547032
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      176.4986494166731,
+      175.13859538974364,
+      210.59827599730244,
+      150.48453469016272
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      205.06196759327239,
+      145.81822158405762,
+      156.68267281007894,
+      165.8860867566073
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 13,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      177.8240689991616,
+      108.45654855060475,
+      208.93351890899913,
+      203.23095639741422
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      182.03948502062258,
+      203.60607586833487,
+      199.7022645039546,
+      150.6830886843088
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 11,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      136.2171055283489,
+      178.54384474657704,
+      223.01364404633165,
+      193.13209181725307
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      212.4342806753874,
+      147.95074883771585,
+      170.7568585821646,
+      150.75330139078528
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      194.47277310705618,
+      181.51324009387153,
+      147.16809565087732,
+      137.7703110132598
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      196.77235376898184,
+      222.5121536949314,
+      179.44399332364208,
+      148.80445116595888
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.3566927489142,
+      179.40977207750356,
+      194.07716407545396,
+      151.61321923990604
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.09747701659313,
+      222.00693896475943,
+      203.8229420990265,
+      159.12929565745205
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      156.26244252524995,
+      189.643898819995,
+      242.34369342913993,
+      202.28275053268823
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      178.27898580456298,
+      257.7798442419479,
+      169.00813961086854,
+      206.67326944206346
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      220.16018634706984,
+      219.53188923356285,
+      206.35409617791214,
+      139.5576069353107
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 14,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      200.27266260540642,
+      121.23771510784556,
+      160.3906283697023,
+      217.01878965992915
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      195.27102063456522,
+      130.67169803293996,
+      190.85168393016326,
+      194.7655890274516
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      186.71879254294555,
+      187.3052331812649,
+      189.49663095233225,
+      135.82314848581728
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      216.5884472644101,
+      172.86681907696527,
+      195.7570385627424,
+      200.51226840826203
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      209.67764901235435,
+      167.49362991829182,
+      122.54318259575228,
+      136.67250905658608
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.04894572605252,
+      135.73194760062466,
+      199.37270028648445,
+      181.06475882616388
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      128.10125066573818,
+      177.38796167088017,
+      228.36646908827498,
+      209.44843123960604
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      230.35813627994304,
+      180.72908021679808,
+      159.91519977310793,
+      204.27197290381054
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      216.4256061324738,
+      171.4722559507345,
+      166.5395906214088,
+      210.78862885531586
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      145.1638963747843,
+      180.63815954692026,
+      196.71918803888914,
+      145.0572206898063
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      217.73457177524267,
+      197.78893594053633,
+      190.48641279384734,
+      176.96175320133796
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      181.24961338604638,
+      206.04940856780075,
+      163.8963065542514,
+      218.39029401342435
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      182.6894695394188,
+      162.31981501778836,
+      140.55171798438812,
+      145.37414339995664
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      122.87809619285372,
+      181.7936938116139,
+      166.2869369753771,
+      196.21239566214317
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 11,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      155.61495845713264,
+      142.27256431185813,
+      168.3736551178119,
+      212.595473615758
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.98028317994334,
+      167.91000529266634,
+      181.88421552704227,
+      180.64911453538525
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      214.39322757592433,
+      185.60225294342416,
+      166.9339519883346,
+      175.03474402301137
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      235.78617531641504,
+      169.86474012406416,
+      156.5312635225466,
+      227.47254211295433
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      167.36313492323555,
+      183.31667356443108,
+      170.01994008684122,
+      206.46705824542644
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      134.09618038412862,
+      195.025028034959,
+      165.84990305563412,
+      114.65562577698033
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      168.16412536274103,
+      234.54918750496273,
+      119.99141331499754,
+      212.68220017268922
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      145.64388287409548,
+      140.99480859659107,
+      249.6134754839336,
+      210.29734255349183
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      174.5675623677862,
+      161.33718104622662,
+      186.5330370829334,
+      166.8287607604409
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      190.16543085393286,
+      169.22163945280835,
+      144.64767802406553,
+      216.16793812304235
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 15,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      198.89460278770954,
+      197.39369562612035,
+      157.22957205228275,
+      150.0099449431493
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 18,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      220.03440843197865,
+      230.5374296409273,
+      191.19472910412114,
+      158.20040518102633
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.5719062943487,
+      175.89165874872495,
+      170.2995487654112,
+      189.82227450601587
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      124.72748694464259,
+      174.60679228364023,
+      185.9463415830414,
+      167.2107842277887
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      169.28411207113263,
+      159.20149051931202,
+      119.82225519270858,
+      156.48892279660882
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 13,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      168.70002694457298,
+      190.2686513614785,
+      260.0,
+      166.921320673455
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.33604836241773,
+      136.11832929825917,
+      138.8275745436634,
+      143.46512956604846
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      191.41322373093203,
+      204.6694499391029,
+      191.01295893153548,
+      183.3440494544856
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      157.64453700905054,
+      178.20742329686112,
+      202.48371928097683,
+      113.23098810564892
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      163.04950538138644,
+      241.42106489614133,
+      167.15925059031278,
+      242.44697019719365
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      193.10485154982632,
+      179.12195125422724,
+      152.97932323129078,
+      146.58431478889747
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      165.8805415174252,
+      148.3382378110409,
+      219.84610659652947,
+      194.33922732236644
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      147.54867058935085,
+      234.8998394909609,
+      190.82422152835613,
+      204.0644135587442
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      159.6144677679794,
+      135.96826098936103,
+      188.366854410984,
+      197.86207657830946
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      197.25221122182222,
+      175.82964930522223,
+      182.17089272840803,
+      167.48127661865828
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      201.64957701560064,
+      166.22238716071024,
+      183.77919711614277,
+      213.09102719610428
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 11,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      219.01735415775772,
+      170.6253120094808,
+      149.54799659052645,
+      213.34968353866648
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      168.27941251467198,
+      149.246719460725,
+      161.75087776033732,
+      209.7947711473566
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      180.4791520081363,
+      187.08807943587405,
+      190.00464885386208,
+      191.26525978033135
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      202.95250994174225,
+      192.6405522867812,
+      163.53791625277657,
+      214.6595463846988
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      112.64858429210517,
+      185.56256337740595,
+      185.4106620355394,
+      151.84409753019676
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      209.68954071262237,
+      189.5575144129826,
+      186.25262617520644,
+      162.9839166765257
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      223.75483143466772,
+      180.1623748968078,
+      185.75429861431277,
+      179.25111419223538
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      199.30392724076876,
+      178.96243271751229,
+      167.32883498784696,
+      202.48306855498322
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      224.87506841178399,
+      195.86994251191675,
+      212.34177555105,
+      139.46942452897386
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      214.74281172908755,
+      228.56498314595433,
+      194.96747005661751,
+      157.43433611286858
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      181.73976473440672,
+      200.0371679141328,
+      194.75452914625725,
+      201.16144187714315
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      172.5193245509006,
+      176.57501784397977,
+      150.09504633636905,
+      254.324874250734
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      185.31851894235768,
+      161.15403684689105,
+      174.36509623373325,
+      214.34479009047615
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      181.00005181073882,
+      161.94052506470365,
+      209.39323224925764,
+      202.438722144692
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      202.63665483017581,
+      252.73284232516423,
+      191.55600028099914,
+      198.53221679834942
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      154.86795368536818,
+      196.87735333161353,
+      191.72968901372155,
+      148.19193013866615
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      113.55869596110942,
+      149.51111672798658,
+      187.62246811043752,
+      152.03148725546572
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      166.21817250202994,
+      177.05094244186589,
+      159.33795173709584,
+      215.43416191770459
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      158.79184565019636,
+      172.4403517312264,
+      196.73773539433736,
+      153.04257770025166
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.95987566292916,
+      152.55062325515945,
+      202.4594814186612,
+      148.24627793648224
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      178.3645133440373,
+      196.7685510532,
+      169.4479682952162,
+      211.4543819915409
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      169.8154451082263,
+      157.29497629667972,
+      205.60389909365205,
+      207.45174256620246
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      184.66127956221962,
+      179.8343679899421,
+      186.16096771855058,
+      180.3731122830461
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.45426812028143,
+      143.17789175261947,
+      187.99793729421955,
+      159.1273630831188
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      162.10284786115693,
+      164.81764735585008,
+      160.17075779309297,
+      195.42530277563876
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 11,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      204.46821181733768,
+      190.1579766981884,
+      192.16402639204983,
+      186.62811626502352
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      164.64949769200092,
+      176.69458948821438,
+      174.70842900552768,
+      149.97068475742108
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      219.1991859734855,
+      169.90247912866394,
+      199.2261772763694,
+      146.65139363495766
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      224.91015371059683,
+      126.5432607642164,
+      188.99043177398937,
+      159.17597575552284
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      154.28518210268612,
+      220.23834696805807,
+      181.85053667890122,
+      150.52992493021833
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      176.86018580157204,
+      191.3933327872107,
+      188.3005694573765,
+      202.9158264178339
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 7,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      180.5488866712485,
+      195.52396663972166,
+      200.90335464094187,
+      153.2115039876424
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 13,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      151.6502726725726,
+      205.02712510609,
+      164.1236413235178,
+      206.45922173114727
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      238.78812261056387,
+      205.852223884918,
+      156.9022393743515,
+      197.8873727031559
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 9,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      207.85966216816786,
+      175.40092932906498,
+      182.22324643118966,
+      180.07070942977728
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 10,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      162.9891712287342,
+      180.163966127697,
+      193.46734497835126,
+      157.86336065965395
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 12,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      141.63581926809994,
+      179.5207508066692,
+      120.62152297315833,
+      191.1866715816343
+    ],
+    "preemption": false,
+    "cause_ball": 4,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      161.23849404124945,
+      174.25680445318997,
+      162.4012911595915,
+      249.73005587486603
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      156.00748894716742,
+      145.60778242843662,
+      144.79393839357297,
+      128.65636476811773
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      214.51315407334874,
+      140.18456980338576,
+      160.1420279789421,
+      222.37291360779787
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 6,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      169.1587672846946,
+      174.31918593186353,
+      162.4792889590214,
+      192.55795174083076
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      145.402488400636,
+      177.15300473526455,
+      153.00038434722887,
+      180.67884108070677
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      178.10172230960634,
+      179.13412071439762,
+      193.4725413870608,
+      145.73500997536178
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 10,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      135.18254949590875,
+      107.41928123198961,
+      219.92189490325794,
+      169.141822305315
+    ],
+    "preemption": false,
+    "cause_ball": 3,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      204.2963244236425,
+      176.75132885816697,
+      184.8114212259221,
+      210.3988766549212
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 4,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      234.05434991404493,
+      228.25378350309197,
+      172.3602489309324,
+      162.02110877082464
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "collisions": 11,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      198.7190638806162,
+      166.36967052949873,
+      186.73909951173135,
+      184.9276377143741
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 8,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      143.11639012949473,
+      184.6823581060829,
+      115.83744259630691,
+      180.0289198007698
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": false
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      203.78284182510703,
+      160.98951013649537,
+      187.03529649646484,
+      165.8269750217327
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 8,
+    "unambiguous": true
+  },
+  {
+    "num_balls": 4,
+    "angles": [
+      187.1684675407216,
+      222.06935203402412,
+      183.63118483147608,
+      162.04299982060064
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 9,
+    "unambiguous": true
+  }
+]
