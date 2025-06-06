@@ -1,0 +1,92 @@
+[
+  {
+    "num_balls": 2,
+    "angles": [
+      170.40058649372304,
+      162.05261189050543
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 3,
+    "unambiguous": true,
+    "jitter": [
+      6.863959178152124,
+      -11.17719216870544
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      213.40297365827203,
+      188.39596653563865
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -5.104185891062136,
+      -11.117428722322636
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      196.28154875860088,
+      192.17902837651604
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": true,
+    "jitter": [
+      10.467077565004017,
+      16.637765049185422
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      170.78607185378905,
+      180.58897554312787
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 2,
+    "unambiguous": true,
+    "jitter": [
+      -7.011366201368057,
+      -4.105491371334769
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      179.30333590759247,
+      144.3639394474688
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      2.2116204444270666,
+      10.620033716628775
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      210.05628303518165,
+      191.89307667602063
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -11.33851013010284,
+      0.30926165487035884
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-from conditions import conditions, test_conditions
+from conditions import conditions, test_conditions, Condition
 from random import shuffle
 import numpy as np
 import pygame
@@ -7,32 +7,22 @@ from moviepy.editor import ImageSequenceClip
 from Box2D import (b2World, b2PolygonShape, b2CircleShape, b2ContactListener, b2_staticBody, b2_dynamicBody)
 import shutil
 
-shutil.rmtree("frames") if os.path.exists("frames") else None
-os.makedirs("frames")
+digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
 # global parameters
 width = 1000
 height = 800
 ball_radius = 28
-border_width = 7
+border_width = 11
+margin = 15
 speed = 100
 framerate = 30
 time_step = 0.0001
 gate_gap_height = 200
 
 # radomly assign ball colors
-red, green, yellow, blue = (255, 0, 0), (0, 255, 0), (255, 255, 0), (0, 0, 255)
-colors = [red, green, yellow, blue]
-shuffle(colors)
-
-# ball parameters
-ball_params = [
-    {'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0},
-    {'ball': 1, 'rgb': colors[0]},
-    {'ball': 2, 'rgb': colors[1]},
-    {'ball': 3, 'rgb': colors[2]},
-    {'ball': 4, 'rgb': colors[3]}
-]
+red, green, yellow, blue, purple = (255, 0, 0), (20, 82, 20), (255, 255, 0), (0, 0, 255), (128, 0, 128)
+colors = [red, green, yellow, blue, purple]
 
 
 class Simulation:
@@ -59,11 +49,14 @@ class Ball:
 
     def __init__(self, world, params):
         self.name = params['ball']
-        xpos = round(width / 4) if self.name == 'effect' else width + 50
-        self.body = world.CreateDynamicBody(
-            position=(xpos, params['ypos']),
-            shapes=b2CircleShape(radius=ball_radius)
-        )
+        # xpos = round(width / 4) if self.name == 'effect' else width + 30 + params['jitter']
+        xpos = round(width / 5) if self.name == 'effect' else width + 30
+
+        if self.name == 'effect':
+            self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2PolygonShape(box=(ball_radius, ball_radius)))
+        else:
+            self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2CircleShape(radius=ball_radius))
+
         self.body.fixtures[0].restitution = 1.0
         self.body.fixtures[0].friction = 0
         self.body.linearDamping = 0
@@ -127,27 +120,22 @@ class CollisionListener(b2ContactListener):
         self.sim.collisions.append({'objects': names, 'step': self.sim.step, 'noisy': noisy})
 
 
-# geometry constants for the walls
-wall_len = (height - gate_gap_height) / 2
+# wall geom constants
+left_edge_x = margin + border_width / 2
+top_edge_y = margin + border_width / 2
+bottom_edge_y = height - margin - border_width / 2
+wall_len = (height - gate_gap_height - 2 * margin) / 2
 wall_half_len = wall_len / 2
-border_half = border_width / 2
 
-screen_center_x = width / 2
-screen_half_width = width / 2
-
-top_wall_center_y = wall_half_len
-bottom_wall_center_y = height - wall_half_len
-top_bottom_wall_center_y = border_half
-bottom_wall_center_y_full = height - border_half
 
 def create_world():
-    world = b2World(gravity=(0, 0), doSleep=True)   
+    world = b2World(gravity=(0, 0), doSleep=True)
 
     wall_shapes = [
-        ((border_half, top_wall_center_y), b2PolygonShape(box=(border_half, wall_half_len))),
-        ((border_half, bottom_wall_center_y), b2PolygonShape(box=(border_half, wall_half_len))),
-        ((screen_center_x, top_bottom_wall_center_y), b2PolygonShape(box=(screen_half_width, border_half))),
-        ((screen_center_x, bottom_wall_center_y_full), b2PolygonShape(box=(screen_half_width, border_half)))
+        ((left_edge_x, margin + wall_half_len), b2PolygonShape(box=(border_width/2, wall_half_len))),
+        ((left_edge_x, height - margin - wall_half_len), b2PolygonShape(box=(border_width/2, wall_half_len))),
+        ((width / 2, top_edge_y), b2PolygonShape(box=((width - 2*margin)/2, border_width/2))),
+        ((width / 2, bottom_edge_y), b2PolygonShape(box=((width - 2*margin)/2, border_width/2))),
     ]
 
     for position, shape in wall_shapes:
@@ -161,14 +149,29 @@ def create_world():
 
 
 def is_hit(sim, effect_ball, sim_seconds):
-    effect_x, effect_y = effect_ball.body.position
-    if effect_x < 0:
+    effect_x = effect_ball.body.position[0]
+    if effect_x < -5:
         sim.hit = True
         return sim_seconds
     return False
 
 
-def run(condition, record=False, counterfactual=None, headless=False):
+def run(condition, record=False, counterfactual=None, headless=False, clip_num=1):
+
+    shuffle(colors)
+
+    # ball parameters
+    ball_params = [
+        {'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0},
+        {'ball': 1, 'rgb': colors[0]},
+        {'ball': 2, 'rgb': colors[1]},
+        {'ball': 3, 'rgb': colors[2]},
+        {'ball': 4, 'rgb': colors[3]},
+        {'ball': 5, 'rgb': colors[4]}
+]
+
+    shutil.rmtree("frames") if os.path.exists("frames") else None
+    os.makedirs("frames")
 
     if not headless:
         pygame.init()
@@ -182,11 +185,12 @@ def run(condition, record=False, counterfactual=None, headless=False):
     for i in range(condition.num_balls):
         ball_params[i + 1]['ypos'] = condition.y_positions[i]
         ball_params[i + 1]['angle'] = condition.radians[i]
+        ball_params[i + 1]['jitter'] = condition.jitter[i]
 
     filtered_params = [params for params in ball_params[0:condition.num_balls + 1] if not (remove == params['ball'])]
 
     balls = []
-    for params in filtered_params:
+    for i, params in enumerate(filtered_params):
         ball = Ball(world, params)
         if ball.name == 'effect':
             effect_ball = ball
@@ -211,18 +215,24 @@ def run(condition, record=False, counterfactual=None, headless=False):
 
             screen.fill((255, 255, 255))
 
-            wall_len = (height - gate_gap_height) / 2
-            pygame.draw.rect(screen, (0, 0, 0), (0, 0, border_width, wall_len))
-            pygame.draw.rect(screen, (0, 0, 0), (0, height - wall_len, border_width, wall_len))
-            pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, border_width))
-            pygame.draw.rect(screen, (0, 0, 0), (0, height - border_width, width, border_width))
-            pygame.draw.rect(screen, (0, 0, 0), (width - border_width, 0, border_width, height))
+            vert_wall_len = (height - gate_gap_height - 2 * margin) / 2
 
-            pygame.draw.rect(screen, (255, 130, 150), (0, wall_len, border_width, gate_gap_height))
+            pygame.draw.rect(screen, (0, 0, 0), (margin, margin, border_width, vert_wall_len))
+            pygame.draw.rect(screen, (0, 0, 0), (margin, height - margin - vert_wall_len, border_width, vert_wall_len))
+            pygame.draw.rect(screen, (0, 0, 0), (margin, margin, width - margin, border_width))
+            pygame.draw.rect(screen, (0, 0, 0), (margin, height - margin - border_width, width - margin, border_width))
+            pygame.draw.rect(screen, (255, 130, 150), (margin, margin + vert_wall_len, border_width, gate_gap_height))
 
             for ball in balls:
-                pygame.draw.circle(screen, (0, 0, 0), (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius + 1)
-                pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
+                if ball.name == 'effect':
+                    side = ball_radius * 2
+                    x = int(ball.body.position[0] - ball_radius)
+                    y = int(ball.body.position[1] - ball_radius)
+                    pygame.draw.rect(screen, (0, 0, 0), (x-1, y-1, side+2, side+2))
+                    pygame.draw.rect(screen, ball.color, (x, y, side, side))
+                else:
+                    pygame.draw.circle(screen, (0, 0, 0), (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius + 1)
+                    pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
 
             if record:
                 pygame.image.save(screen, f"frames/frame_{frame_count:05d}.png")
@@ -259,7 +269,13 @@ def run(condition, record=False, counterfactual=None, headless=False):
     if record:
         frames = sorted([os.path.join("frames", fname) for fname in os.listdir("frames") if fname.endswith(".png")])
         clip = ImageSequenceClip(frames, fps=framerate)
-        clip.write_videofile("simulation.mp4", codec="libx264")
+        # experiment = 'clean' if condition.unambiguous else 'complex'
+        experiment = 'clean'
+        if condition.unambiguous:
+            directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/{'' if condition.preemption else 'no_' }preemption/"
+        else:
+            directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/"
+        clip.write_videofile(f"{directory}simulation{clip_num}.mp4", codec="libx264")
 
     cause_ball = effect_ball.last_collision()
     if cause_ball and len(cause_ball.ball_collisions) and hit:
@@ -270,7 +286,7 @@ def run(condition, record=False, counterfactual=None, headless=False):
 
     return {
         'num_balls': sim.num_balls,
-        'clear_cut': True if noise_ball is None and hit else False,
+        'clear_cut': True if hit and noise_ball is None and len(effect_ball.collided_with) == 1 else False,
         'angles': condition.angles,
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
@@ -281,4 +297,6 @@ def run(condition, record=False, counterfactual=None, headless=False):
     }
 
 if __name__ == '__main__':
-    run(2, record=False, counterfactual = {'remove': 'green', 'diverge': 150, 'noise_ball': 'blue'}, headless=False)
+    cond = Condition([180,180,180], False)
+    run(cond, record=True, counterfactual=None, headless=False)
+

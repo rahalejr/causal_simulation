@@ -6,11 +6,11 @@ height = 800
 
 class Condition:
 
-    def __init__(self, angles, preemption):
+    def __init__(self, angles, preemption=False, unambiguous=False):
         self.num_balls = len(angles)
         
         self.y_positions = []
-        spacing = (height + 100) / (self.num_balls + 1)
+        spacing = height / (self.num_balls + 1)
         for i in range(self.num_balls):
             self.y_positions.append(round(spacing*(i+1)))
         self.angles = angles
@@ -18,10 +18,11 @@ class Condition:
         self.preemption = preemption
         self.cause_ball = None
         self.collisions = 0
-        self.unambiguous = False
+        self.unambiguous = unambiguous
         self.sim_time = None
         self.diverge = 0
         self.noise_ball = None
+        self.jitter = list(np.random.normal(loc=0, scale=10, size=self.num_balls))
 
     def info(self):
         return {
@@ -30,7 +31,8 @@ class Condition:
             'preemption': self.preemption,
             'cause_ball': self.cause_ball,
             'collisions': self.collisions,
-            'unambiguous': self.unambiguous
+            'unambiguous': self.unambiguous,
+            'jitter': self.jitter
         }
 
 conditions = [

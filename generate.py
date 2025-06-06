@@ -15,8 +15,8 @@ def get_conditions(filename='conditions.json'):
         data = []
     return data
 
-def add_conditions(new_data, filename='conditions.json'):
-    conditions = get_conditions()
+def add_conditions(new_data, filename='conditions.json', append=True):
+    conditions = get_conditions() if append else []
     
     # append new data
     if isinstance(new_data, list):
@@ -31,54 +31,66 @@ def add_conditions(new_data, filename='conditions.json'):
 def generate_conditions():
     kept_conditions = []
 
-    for _ in range(1000):
+    for j in [2]:
+        for _ in range(2000 if j == 5 else 1000):
 
-        num_angles = 4
-        raw_angles = np.random.normal(loc=180, scale=30, size=num_angles)
-        clipped_angles = np.clip(raw_angles, 100, 260)
-        angles = clipped_angles.tolist()
-        cond = Condition(angles, False)
+            num_angles = j
+            raw_angles = np.random.normal(loc=180, scale=30, size=num_angles)
+            clipped_angles = np.clip(raw_angles, 120, 240)
+            angles = clipped_angles.tolist()
+            cond = Condition(angles, False)
 
-        sim = run(cond, record=False, counterfactual=None, headless=True)
+            sim = run(cond, record=False, counterfactual=None, headless=True)
 
-        if sim['hit']:
-            counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'diverge': 150, 'noise_ball': sim['noise_ball']}, headless=True)
-            
-            cond.preemption = counterfactual['hit']
-            cond.collisions = sim['collisions']
-            cond.cause_ball = sim['cause_ball']
-            cond.sim_time = sim['sim_time']
-            cond.unambiguous = sim['clear_cut']
-            cond.noise_ball = sim['noise_ball']
-            cond.diverge = sim['diverge']
+            if sim['hit']:
+                counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'diverge': 150, 'noise_ball': sim['noise_ball']}, headless=True)
+                
+                cond.preemption = counterfactual['hit']
+                cond.collisions = sim['collisions']
+                cond.cause_ball = sim['cause_ball']
+                cond.sim_time = sim['sim_time']
+                cond.unambiguous = sim['clear_cut']
+                cond.noise_ball = sim['noise_ball']
+                cond.diverge = sim['diverge']
 
-            kept_conditions.append(cond.info())
-            print(cond.info())
-        print(_)
+                if cond.preemption:
+                    kept_conditions.append(cond.info())
+                    print(cond.info())
+            print(_)
 
-    add_conditions(kept_conditions)
+        add_conditions(kept_conditions)
 
 
 def play_conditions():
 
-    conditions = get_conditions()
-    filtered = [cond for cond in conditions if cond['preemption'] and cond['unambiguous']]
+    conditions = get_conditions('conditions.json')
+    filtered = [cond for cond in conditions if cond['num_balls'] == 2 and cond['unambiguous'] and cond['preemption']]
 
     kept = []
     for c in filtered:
-        cond = Condition(cond['angles'], cond['preemption'])
+        cond = Condition(c['angles'], c['preemption'])
         run(cond, record=False, counterfactual=None, headless=False)
         if input("Keep?: ").upper() == 'Y':
             if input("Play Counterfactual?: ").upper() == 'Y':
-                run(cond, record=False, counterfactual={'remove': c['cause_ball'], 'diverge': c['diverge'], 'noise_ball': c['noise_ball']}, headless=False)
+                run(cond, record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
             kept.append(c)
 
-    add_conditions(kept, filename="preempted_clean.json")
+    add_conditions(kept, filename="preempt2ball.json", append=False)
 
+def record_conditions():
+
+    for j in ['nopre2ball.json', 'preempt2ball.json', 'unambiguous.json']:
+        conditions = get_conditions(j)
+        conditions = [c for c in conditions if c['num_balls']==2 and c['preemption']]
+        for i, c in enumerate(conditions):
+            cond = Condition(c['angles'], c['preemption'], c['unambiguous'])
+            run(cond, record=True, counterfactual=None, headless=False, clip_num=i)
+    add_conditions(conditions, file_name='video_meta.json')
 
 if __name__ == '__main__':
-    generate_conditions()
+    # generate_conditions()
     # play_conditions()
+    record_conditions()
 
 
 
