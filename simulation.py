@@ -24,12 +24,24 @@ gate_gap_height = 200
 red, green, yellow, blue, purple = (255, 0, 0), (20, 82, 20), (255, 255, 0), (0, 0, 255), (128, 0, 128)
 colors = [red, green, yellow, blue, purple]
 
+# fix this redundancy
+col_dict = {
+    'red': (255, 0, 0),
+    'green': (20, 82, 20),
+    'yellow': (255, 255, 0),
+    'blue': (0, 0, 255),
+    'purple': (128, 0, 128)
+}
+
+# Flip keys and values for reverse lookup
+rgb_to_name = {v: k for k, v in col_dict.items()}
+
 
 class Simulation:
 
     def __init__(self, balls, counterfactual = False, noise = 0):
         self.balls = balls
-        self.num_balls = len(balls)
+        self.num_balls = len(balls)-1
         self.noise = noise
         self.counterfactual = True if counterfactual else False
         self.hit = False
@@ -275,7 +287,8 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
             directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/{'' if condition.preemption else 'no_' }preemption/"
         else:
             directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/"
-        clip.write_videofile(f"{directory}simulation{clip_num}.mp4", codec="libx264")
+        file_name = f"{directory}simulation{clip_num}.mp4"
+        clip.write_videofile(file_name, codec="libx264")
 
     cause_ball = effect_ball.last_collision()
     if cause_ball and len(cause_ball.ball_collisions) and hit:
@@ -293,7 +306,9 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
         'collisions': len(sim.collisions),
         'cause_ball': cause_ball.name if cause_ball else None,
         'noise_ball': noise_ball.name if noise_ball else None,
-        'diverge': diverge_step
+        'diverge': diverge_step,
+        'file_name': file_name,
+        'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]]
     }
 
 if __name__ == '__main__':

@@ -1,0 +1,499 @@
+{
+  "five_ball": [
+    {
+      "num_balls": 5,
+      "angles": [
+        176.92678215104502,
+        170.52709857912507,
+        123.22070073980228,
+        208.3536837632492,
+        181.8135225235405
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 6,
+      "unambiguous": true,
+      "jitter": [
+        14.138988768227868,
+        -21.2702586058387,
+        -0.193964225115491,
+        -4.781831070153519,
+        1.84701745154192
+      ],
+      "file_name": "videos/clean/five_candidate/no_preemption/simulation0.mp4",
+      "colors": [
+        "blue",
+        "red",
+        "yellow",
+        "green",
+        "purple"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        182.93742268924896,
+        167.7042681809304,
+        172.65693155877787,
+        176.80106428534427,
+        178.94801170219324
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 7,
+      "unambiguous": true,
+      "jitter": [
+        -5.164608098042517,
+        -0.4065658349521405,
+        -19.572555124760047,
+        -4.611310543347346,
+        -6.086284350485079
+      ],
+      "file_name": "videos/clean/five_candidate/no_preemption/simulation1.mp4",
+      "colors": [
+        "purple",
+        "red",
+        "blue",
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        181.56990501797006,
+        188.42396541297688,
+        206.10260414252573,
+        190.89729839479705,
+        177.58984876429065
+      ],
+      "preemption": false,
+      "cause_ball": 4,
+      "collisions": 13,
+      "unambiguous": true,
+      "jitter": [
+        -1.9667411469448017,
+        -12.367808524771032,
+        5.770231153361529,
+        -14.39216292245624,
+        -11.569628242998691
+      ],
+      "file_name": "videos/clean/five_candidate/no_preemption/simulation4.mp4",
+      "colors": [
+        "red",
+        "green",
+        "yellow",
+        "purple",
+        "blue"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        189.47233051776237,
+        178.91491642260945,
+        182.45474819225032,
+        180.09775398465572,
+        140.2125551870223
+      ],
+      "preemption": false,
+      "cause_ball": 3,
+      "collisions": 9,
+      "unambiguous": true,
+      "jitter": [
+        3.8606990912525045,
+        -4.16015220175617,
+        14.58779361950086,
+        -0.9493463581691252,
+        -13.078017719337362
+      ],
+      "file_name": "videos/clean/five_candidate/no_preemption/simulation5.mp4",
+      "colors": [
+        "yellow",
+        "purple",
+        "red",
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        191.56297412307046,
+        170.86874335357123,
+        145.78689316840183,
+        197.77947070996254,
+        166.32387719944538
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 11,
+      "unambiguous": true,
+      "jitter": [
+        5.573457867037863,
+        15.401168243270247,
+        10.674146648333105,
+        -0.35653071188779145,
+        2.9359847011209594
+      ],
+      "file_name": "videos/clean/five_candidate/no_preemption/simulation7.mp4",
+      "colors": [
+        "blue",
+        "purple",
+        "green",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        203.95566026649306,
+        170.96803305245257,
+        159.72509475965086,
+        161.37788282874308,
+        161.58421211095427
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 19,
+      "unambiguous": true,
+      "jitter": [
+        -5.341898549670427,
+        9.599744051905105,
+        9.50477396022292,
+        4.402882689075245,
+        -8.189891000163538
+      ],
+      "file_name": "videos/clean/five_candidate/preemption/simulation19.mp4",
+      "colors": [
+        "green",
+        "purple",
+        "blue",
+        "yellow",
+        "red"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        208.9828626391409,
+        169.6611632528851,
+        167.98659818419387,
+        162.2033784548933,
+        170.43823834601005
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 14,
+      "unambiguous": true,
+      "jitter": [
+        -0.16483594917106079,
+        7.994362821239056,
+        9.51112568088626,
+        -8.4323144212503,
+        2.988487695091911
+      ],
+      "file_name": "videos/clean/five_candidate/preemption/simulation21.mp4",
+      "colors": [
+        "blue",
+        "red",
+        "green",
+        "purple",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        193.68873508805734,
+        171.27190420912444,
+        120.0,
+        179.64939700309827,
+        153.424822719106
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 12,
+      "unambiguous": true,
+      "jitter": [
+        -2.193872967717776,
+        7.665059254521638,
+        15.04690559139112,
+        2.5473489643875693,
+        -2.8932782634894445
+      ],
+      "file_name": "videos/clean/five_candidate/preemption/simulation24.mp4",
+      "colors": [
+        "yellow",
+        "red",
+        "green",
+        "purple",
+        "blue"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        157.76858660380074,
+        157.86482153362454,
+        179.27792753539097,
+        207.94050035365234,
+        197.96874184187027
+      ],
+      "preemption": true,
+      "cause_ball": 5,
+      "collisions": 9,
+      "unambiguous": true,
+      "jitter": [
+        7.386802514976873,
+        12.289025137220818,
+        -6.499198500269267,
+        -3.4198283800516824,
+        1.625152458476283
+      ],
+      "file_name": "videos/clean/five_candidate/preemption/simulation25.mp4",
+      "colors": [
+        "blue",
+        "yellow",
+        "green",
+        "red",
+        "purple"
+      ]
+    },
+    {
+      "num_balls": 5,
+      "angles": [
+        210.93570109633464,
+        202.92535046957752,
+        196.7384910384093,
+        191.79053176422514,
+        189.70570789618472
+      ],
+      "preemption": true,
+      "cause_ball": 4,
+      "collisions": 11,
+      "unambiguous": true,
+      "jitter": [
+        -3.810239229830114,
+        -13.510920874611303,
+        12.120259368624486,
+        5.2790974498309495,
+        5.592456307591203
+      ],
+      "file_name": "videos/clean/five_candidate/preemption/simulation31.mp4",
+      "colors": [
+        "blue",
+        "red",
+        "purple",
+        "yellow",
+        "green"
+      ]
+    }
+  ],
+
+  "two_ball": [
+    {
+      "num_balls": 2,
+      "angles": [
+        170.40058649372304,
+        162.05261189050543
+      ],
+      "preemption": false,
+      "cause_ball": 1,
+      "collisions": 3,
+      "unambiguous": true,
+      "jitter": [
+        6.863959178152124,
+        -11.17719216870544
+      ],
+      "file_name": "videos/clean/two_candidate/no_preemption/simulation0.mp4",
+      "colors": [
+        "purple",
+        "green"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        196.28154875860088,
+        192.17902837651604
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 5,
+      "unambiguous": true,
+      "jitter": [
+        10.467077565004017,
+        16.637765049185422
+      ],
+      "file_name": "videos/clean/two_candidate/no_preemption/simulation2.mp4",
+      "colors": [
+        "red",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        170.78607185378905,
+        180.58897554312787
+      ],
+      "preemption": false,
+      "cause_ball": 1,
+      "collisions": 2,
+      "unambiguous": true,
+      "jitter": [
+        -7.011366201368057,
+        -4.105491371334769
+      ],
+      "file_name": "videos/clean/two_candidate/no_preemption/simulation3.mp4",
+      "colors": [
+        "green",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        179.30333590759247,
+        144.3639394474688
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        2.2116204444270666,
+        10.620033716628775
+      ],
+      "file_name": "videos/clean/two_candidate/no_preemption/simulation4.mp4",
+      "colors": [
+        "green",
+        "red"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        210.05628303518165,
+        191.89307667602063
+      ],
+      "preemption": false,
+      "cause_ball": 2,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        -11.33851013010284,
+        0.30926165487035884
+      ],
+      "file_name": "videos/clean/two_candidate/no_preemption/simulation5.mp4",
+      "colors": [
+        "blue",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        168.93246045233556,
+        143.80919647199798
+      ],
+      "preemption": true,
+      "cause_ball": 1,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        -16.043114269400004,
+        16.042031789552528
+      ],
+      "file_name": "videos/clean/two_candidate/preemption/simulation0.mp4",
+      "colors": [
+        "green",
+        "blue"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        134.60444888785628,
+        189.31902267098957
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 2,
+      "unambiguous": true,
+      "jitter": [
+        -12.597087619974804,
+        -9.737489316530464
+      ],
+      "file_name": "videos/clean/two_candidate/preemption/simulation2.mp4",
+      "colors": [
+        "yellow",
+        "green"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        132.06911231195525,
+        143.7621637056007
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        0.8820408320539824,
+        15.706615918454364
+      ],
+      "file_name": "videos/clean/two_candidate/preemption/simulation3.mp4",
+      "colors": [
+        "blue",
+        "green"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        171.6596345211745,
+        144.91195876461305
+      ],
+      "preemption": true,
+      "cause_ball": 1,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        -6.122896875437288,
+        0.4471735838136218
+      ],
+      "file_name": "videos/clean/two_candidate/preemption/simulation4.mp4",
+      "colors": [
+        "purple",
+        "yellow"
+      ]
+    },
+    {
+      "num_balls": 2,
+      "angles": [
+        215.79328070863914,
+        187.5647627948606
+      ],
+      "preemption": true,
+      "cause_ball": 2,
+      "collisions": 4,
+      "unambiguous": true,
+      "jitter": [
+        -8.51307371117777,
+        -17.475369266130333
+      ],
+      "file_name": "videos/clean/two_candidate/preemption/simulation5.mp4",
+      "colors": [
+        "red",
+        "blue"
+      ]
+    }
+  ]
+
+}
+

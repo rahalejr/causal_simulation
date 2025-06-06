@@ -15,8 +15,18 @@ def get_conditions(filename='conditions.json'):
         data = []
     return data
 
+def simple_info(filename='selected_videos.json'):
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            data = json.load(f)
+            for j in (data['five_ball'], data['two_ball']):
+                for i in j:
+                    del i['angles']
+                    del i['jitter']
+            add_conditions(data, filename='cleaned_video_meta.json', append=False)
+
 def add_conditions(new_data, filename='conditions.json', append=True):
-    conditions = get_conditions() if append else []
+    conditions = get_conditions(filename) if append else []
     
     # append new data
     if isinstance(new_data, list):
@@ -79,18 +89,19 @@ def play_conditions():
 
 def record_conditions():
 
-    for j in ['nopre2ball.json', 'preempt2ball.json', 'unambiguous.json']:
+    for j in ['preempt2ball.json']:
         conditions = get_conditions(j)
-        conditions = [c for c in conditions if c['num_balls']==2 and c['preemption']]
         for i, c in enumerate(conditions):
             cond = Condition(c['angles'], c['preemption'], c['unambiguous'])
-            run(cond, record=True, counterfactual=None, headless=False, clip_num=i)
-    add_conditions(conditions, file_name='video_meta.json')
+            info = run(cond, record=True, counterfactual=None, headless=False, clip_num=i)
+            conditions[i]['file_name'] = info['file_name']
+            conditions[i]['colors'] = info['colors']
+    add_conditions(conditions, filename='video_meta.json')
 
 if __name__ == '__main__':
     # generate_conditions()
     # play_conditions()
-    record_conditions()
-
+    # record_conditions()
+    simple_info()
 
 

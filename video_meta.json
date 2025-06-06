@@ -1,0 +1,202 @@
+[
+  {
+    "num_balls": 2,
+    "angles": [
+      170.40058649372304,
+      162.05261189050543
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 3,
+    "unambiguous": true,
+    "jitter": [
+      6.863959178152124,
+      -11.17719216870544
+    ],
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation0.mp4",
+    "colors": [
+      "purple",
+      "green"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      196.28154875860088,
+      192.17902837651604
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 5,
+    "unambiguous": true,
+    "jitter": [
+      10.467077565004017,
+      16.637765049185422
+    ],
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation2.mp4",
+    "colors": [
+      "red",
+      "yellow"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      170.78607185378905,
+      180.58897554312787
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 2,
+    "unambiguous": true,
+    "jitter": [
+      -7.011366201368057,
+      -4.105491371334769
+    ],
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation3.mp4",
+    "colors": [
+      "green",
+      "yellow"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      179.30333590759247,
+      144.3639394474688
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      2.2116204444270666,
+      10.620033716628775
+    ],
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation4.mp4",
+    "colors": [
+      "green",
+      "red"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      210.05628303518165,
+      191.89307667602063
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -11.33851013010284,
+      0.30926165487035884
+    ],
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation5.mp4",
+    "colors": [
+      "blue",
+      "yellow"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      168.93246045233556,
+      143.80919647199798
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -16.043114269400004,
+      16.042031789552528
+    ],
+    "file_name": "videos/clean/two_candidate/preemption/simulation0.mp4",
+    "colors": [
+      "green",
+      "blue"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      134.60444888785628,
+      189.31902267098957
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 2,
+    "unambiguous": true,
+    "jitter": [
+      -12.597087619974804,
+      -9.737489316530464
+    ],
+    "file_name": "videos/clean/two_candidate/preemption/simulation2.mp4",
+    "colors": [
+      "yellow",
+      "green"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      132.06911231195525,
+      143.7621637056007
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      0.8820408320539824,
+      15.706615918454364
+    ],
+    "file_name": "videos/clean/two_candidate/preemption/simulation3.mp4",
+    "colors": [
+      "blue",
+      "green"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      171.6596345211745,
+      144.91195876461305
+    ],
+    "preemption": true,
+    "cause_ball": 1,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -6.122896875437288,
+      0.4471735838136218
+    ],
+    "file_name": "videos/clean/two_candidate/preemption/simulation4.mp4",
+    "colors": [
+      "purple",
+      "yellow"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      215.79328070863914,
+      187.5647627948606
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 4,
+    "unambiguous": true,
+    "jitter": [
+      -8.51307371117777,
+      -17.475369266130333
+    ],
+    "file_name": "videos/clean/two_candidate/preemption/simulation5.mp4",
+    "colors": [
+      "red",
+      "blue"
+    ]
+  }
+]
