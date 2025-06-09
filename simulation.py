@@ -15,10 +15,10 @@ height = 800
 ball_radius = 28
 border_width = 11
 margin = 15
-speed = 100
+speed = 200
 framerate = 30
 time_step = 0.0001
-gate_gap_height = 200
+gate_gap_height = 225
 
 # radomly assign ball colors
 red, green, yellow, blue, purple = (255, 0, 0), (20, 82, 20), (255, 255, 0), (0, 0, 255), (128, 0, 128)
@@ -61,13 +61,10 @@ class Ball:
 
     def __init__(self, world, params):
         self.name = params['ball']
-        # xpos = round(width / 4) if self.name == 'effect' else width + 30 + params['jitter']
-        xpos = round(width / 5) if self.name == 'effect' else width + 30
+        xpos = round(width / 4) if self.name == 'effect' else width + 30 + params['x_jitter']
+        # xpos = round(width / 5) if self.name == 'effect' else width + 30
 
-        if self.name == 'effect':
-            self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2PolygonShape(box=(ball_radius, ball_radius)))
-        else:
-            self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2CircleShape(radius=ball_radius))
+        self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2CircleShape(radius=ball_radius))
 
         self.body.fixtures[0].restitution = 1.0
         self.body.fixtures[0].friction = 0
@@ -132,6 +129,23 @@ class CollisionListener(b2ContactListener):
         self.sim.collisions.append({'objects': names, 'step': self.sim.step, 'noisy': noisy})
 
 
+def draw_checkerboard_square(surface, center, side, num_checks=16):
+    x0, y0 = center
+    half = (side // 2) + 5
+    check_size = side // num_checks
+    colors = [(200, 200, 200), (255,255,255)]  # Black and white
+
+    for row in range(num_checks):
+        for col in range(num_checks):
+            c = colors[(row+col)%2]
+            rect = pygame.Rect(
+                x0 - half + col*check_size,
+                y0 - half + row*check_size,
+                check_size,
+                check_size
+            )
+            pygame.draw.rect(surface, c, rect)
+
 # wall geom constants
 left_edge_x = margin + border_width / 2
 top_edge_y = margin + border_width / 2
@@ -195,9 +209,10 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     world = create_world()
 
     for i in range(condition.num_balls):
-        ball_params[i + 1]['ypos'] = condition.y_positions[i]
+        ball_params[i + 1]['ypos'] = condition.y_positions[i] + condition.jitter['y'][i]
         ball_params[i + 1]['angle'] = condition.radians[i]
-        ball_params[i + 1]['jitter'] = condition.jitter[i]
+        ball_params[i + 1]['y_jitter'] = condition.jitter['y'][i]
+        ball_params[i + 1]['x_jitter'] = condition.jitter['x'][i]
 
     filtered_params = [params for params in ball_params[0:condition.num_balls + 1] if not (remove == params['ball'])]
 
@@ -226,6 +241,14 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
                     running = False
 
             screen.fill((255, 255, 255))
+            
+            effect_start_pos = (int(effect_ball.body.position[0])+6, int(effect_ball.body.position[1])+6) if frame_count == 0 else effect_start_pos
+            # checkerboard square at the effect ball's initial position
+            draw_checkerboard_square(
+                screen, 
+                effect_start_pos,
+                side=ball_radius*2+12
+            )
 
             vert_wall_len = (height - gate_gap_height - 2 * margin) / 2
 
@@ -236,15 +259,9 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
             pygame.draw.rect(screen, (255, 130, 150), (margin, margin + vert_wall_len, border_width, gate_gap_height))
 
             for ball in balls:
-                if ball.name == 'effect':
-                    side = ball_radius * 2
-                    x = int(ball.body.position[0] - ball_radius)
-                    y = int(ball.body.position[1] - ball_radius)
-                    pygame.draw.rect(screen, (0, 0, 0), (x-1, y-1, side+2, side+2))
-                    pygame.draw.rect(screen, ball.color, (x, y, side, side))
-                else:
-                    pygame.draw.circle(screen, (0, 0, 0), (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius + 1)
-                    pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
+                pygame.draw.circle(screen, (0, 0, 0), (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius + 1)
+                pygame.draw.circle(screen, ball.color, (int(ball.body.position[0]), int(ball.body.position[1])), ball_radius)
+
 
             if record:
                 pygame.image.save(screen, f"frames/frame_{frame_count:05d}.png")
@@ -269,7 +286,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
                 sim.step += 1
                 sim_seconds += time_step
 
-        if (hit and sim_seconds > hit+3) or sim_seconds > 18:
+        if (hit and sim_seconds > hit+2) or sim_seconds > 18:
             running = False
 
         if not headless:
@@ -289,6 +306,8 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
             directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/"
         file_name = f"{directory}simulation{clip_num}.mp4"
         clip.write_videofile(file_name, codec="libx264")
+    else:
+        file_name = ''
 
     cause_ball = effect_ball.last_collision()
     if cause_ball and len(cause_ball.ball_collisions) and hit:
