@@ -3,6 +3,7 @@ import json
 import numpy as np
 from simulation import run
 from conditions import Condition
+from videos.qualpaths import paths
 
 def get_conditions(filename='conditions.json'):
     if os.path.exists(filename):
@@ -15,14 +16,15 @@ def get_conditions(filename='conditions.json'):
         data = []
     return data
 
-def simple_info(filename='selected_videos.json'):
+def simple_info(filename='kept_video_meta.json'):
     if os.path.exists(filename):
         with open(filename, 'r') as f:
             data = json.load(f)
-            for j in (data['five_ball'], data['two_ball']):
-                for i in j:
-                    del i['angles']
-                    del i['jitter']
+            for i in data:
+                del i['angles']
+                del i['jitter']
+                sim_number = int(i['file_name'].split('simulation')[-1].split('.')[0])
+                i['qual_path'] = paths[sim_number]
             add_conditions(data, filename='cleaned_video_meta.json', append=False)
 
 def add_conditions(new_data, filename='conditions.json', append=True):
@@ -41,9 +43,9 @@ def add_conditions(new_data, filename='conditions.json', append=True):
 def generate_conditions():
     kept_conditions = []
 
-    for j in [5, 2]:
-        for _ in range(500 if j == 5 else 2000):
-            sd = 30 if j==2 else 10
+    for j in [4]:
+        for _ in range(200):
+            sd = 30 if j==2 else 20
             num_angles = j
             raw_angles = np.random.normal(loc=180, scale=sd, size=num_angles)
             clipped_angles = np.clip(raw_angles, 110, 250)
@@ -68,7 +70,7 @@ def generate_conditions():
                     print(cond.info())
             print(_)
 
-        add_conditions(kept_conditions, append=True)
+        add_conditions(kept_conditions, append=False)
 
 
 def play_conditions():
@@ -79,11 +81,13 @@ def play_conditions():
         '5True': 0,
         '5False': 0,
         '2True': 0,
-        '2False': 0
+        '2False': 0,
+        '3True': 0,
+        '3False': 0
     }
     kept = []
     for c in filtered:
-        if counts[f"{c['num_balls']}{c['preemption']}"] > 10:
+        if counts[f"{c['num_balls']}{c['preemption']}"] > 3:
             continue
         cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'])
         run(cond, record=False, counterfactual=None, headless=False)
@@ -93,11 +97,11 @@ def play_conditions():
             kept.append(c)
             counts[f"{c['num_balls']}{c['preemption']}"] += 1
 
-    add_conditions(kept, filename="kept_conditions.json", append=True)
+    add_conditions(kept, filename="training_conditions.json", append=True)
 
 def record_conditions():
 
-    for j in ['clean_preemption_5ball.json']:
+    for j in ['training_conditions.json']:
         conditions = get_conditions(j)
         for i, c in enumerate(conditions):
             cond = Condition(c['angles'], c['preemption'], c['unambiguous'], c['jitter'])
@@ -107,9 +111,9 @@ def record_conditions():
     add_conditions(conditions, filename='video_meta.json')
 
 if __name__ == '__main__':
-    generate_conditions()
+    # generate_conditions()
     # play_conditions()
-    # record_conditions()
+    record_conditions()
     # simple_info()
 
 

@@ -27,7 +27,15 @@
         15.284831939664352,
         15.10239804792211
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation0.mp4",
+    "colors": [
+      "purple",
+      "red",
+      "blue",
+      "green",
+      "yellow"
+    ]
   },
   {
     "num_balls": 5,
@@ -57,7 +65,15 @@
         -17.89316746516117,
         28.90674321359672
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation1.mp4",
+    "colors": [
+      "blue",
+      "red",
+      "green",
+      "yellow",
+      "purple"
+    ]
   },
   {
     "num_balls": 5,
@@ -87,7 +103,15 @@
         7.151496063324129,
         14.487521161792982
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation2.mp4",
+    "colors": [
+      "green",
+      "yellow",
+      "red",
+      "purple",
+      "blue"
+    ]
   },
   {
     "num_balls": 5,
@@ -117,7 +141,15 @@
         12.482029439521662,
         -23.089597956182363
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation3.mp4",
+    "colors": [
+      "yellow",
+      "purple",
+      "blue",
+      "red",
+      "green"
+    ]
   },
   {
     "num_balls": 5,
@@ -147,7 +179,15 @@
         1.8640205176275524,
         14.563035587760124
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation4.mp4",
+    "colors": [
+      "green",
+      "purple",
+      "red",
+      "yellow",
+      "blue"
+    ]
   },
   {
     "num_balls": 5,
@@ -177,7 +217,15 @@
         18.4138693491921,
         -26.03420054983578
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation5.mp4",
+    "colors": [
+      "yellow",
+      "green",
+      "purple",
+      "red",
+      "blue"
+    ]
   },
   {
     "num_balls": 5,
@@ -207,7 +255,15 @@
         25.869634766583935,
         -22.062034646550405
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation6.mp4",
+    "colors": [
+      "blue",
+      "red",
+      "yellow",
+      "purple",
+      "green"
+    ]
   },
   {
     "num_balls": 5,
@@ -237,7 +293,15 @@
         8.108967008362493,
         29.686715231311645
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation7.mp4",
+    "colors": [
+      "blue",
+      "purple",
+      "red",
+      "yellow",
+      "green"
+    ]
   },
   {
     "num_balls": 5,
@@ -267,7 +331,15 @@
         14.634252074871794,
         -9.566545087459957
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation8.mp4",
+    "colors": [
+      "red",
+      "purple",
+      "green",
+      "blue",
+      "yellow"
+    ]
   },
   {
     "num_balls": 5,
@@ -297,7 +369,15 @@
         -20.37248684208249,
         31.707711407450315
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation9.mp4",
+    "colors": [
+      "purple",
+      "yellow",
+      "blue",
+      "red",
+      "green"
+    ]
   },
   {
     "num_balls": 5,
@@ -327,7 +407,15 @@
         -23.009414176522483,
         -9.026969978224699
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation10.mp4",
+    "colors": [
+      "yellow",
+      "green",
+      "purple",
+      "blue",
+      "red"
+    ]
   },
   {
     "num_balls": 5,
@@ -357,7 +445,15 @@
         20.113076446143566,
         -3.0366765403286298
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/no_preemption/simulation11.mp4",
+    "colors": [
+      "blue",
+      "red",
+      "yellow",
+      "green",
+      "purple"
+    ]
   },
   {
     "num_balls": 5,
@@ -387,7 +483,15 @@
         -6.668738963751881,
         0.32034565900856027
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation12.mp4",
+    "colors": [
+      "purple",
+      "green",
+      "yellow",
+      "blue",
+      "red"
+    ]
   },
   {
     "num_balls": 5,
@@ -417,7 +521,15 @@
         -7.382699478416295,
         -17.65108310993497
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation13.mp4",
+    "colors": [
+      "red",
+      "purple",
+      "green",
+      "yellow",
+      "blue"
+    ]
   },
   {
     "num_balls": 5,
@@ -447,7 +559,15 @@
         -6.668738963751881,
         0.32034565900856027
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation14.mp4",
+    "colors": [
+      "purple",
+      "yellow",
+      "green",
+      "blue",
+      "red"
+    ]
   },
   {
     "num_balls": 5,
@@ -477,7 +597,15 @@
         -7.382699478416295,
         -17.65108310993497
       ]
-    }
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation15.mp4",
+    "colors": [
+      "blue",
+      "green",
+      "yellow",
+      "red",
+      "purple"
+    ]
   },
   {
     "num_balls": 2,
@@ -498,7 +626,12 @@
         -0.2889386027896407,
         5.673144694005517
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation16.mp4",
+    "colors": [
+      "yellow",
+      "blue"
+    ]
   },
   {
     "num_balls": 2,
@@ -519,7 +652,12 @@
         65.46668329804673,
         18.8036900380231
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation17.mp4",
+    "colors": [
+      "green",
+      "yellow"
+    ]
   },
   {
     "num_balls": 2,
@@ -540,7 +678,12 @@
         -23.1842726523439,
         -15.418981673743318
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation18.mp4",
+    "colors": [
+      "yellow",
+      "purple"
+    ]
   },
   {
     "num_balls": 2,
@@ -561,7 +704,12 @@
         -18.88410228391586,
         13.947313703018333
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation19.mp4",
+    "colors": [
+      "purple",
+      "yellow"
+    ]
   },
   {
     "num_balls": 2,
@@ -582,7 +730,12 @@
         -42.88670999236444,
         2.6197062134095908
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation20.mp4",
+    "colors": [
+      "green",
+      "red"
+    ]
   },
   {
     "num_balls": 2,
@@ -603,7 +756,12 @@
         -89.01466782849437,
         -0.541046398495838
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation21.mp4",
+    "colors": [
+      "blue",
+      "yellow"
+    ]
   },
   {
     "num_balls": 2,
@@ -624,7 +782,12 @@
         43.41643046091459,
         54.519497687744064
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation22.mp4",
+    "colors": [
+      "red",
+      "green"
+    ]
   },
   {
     "num_balls": 2,
@@ -645,7 +808,12 @@
         -7.68670621452915,
         -44.39104953119678
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation23.mp4",
+    "colors": [
+      "red",
+      "yellow"
+    ]
   },
   {
     "num_balls": 2,
@@ -666,7 +834,12 @@
         -38.59792714278771,
         -68.97268124710226
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation24.mp4",
+    "colors": [
+      "blue",
+      "purple"
+    ]
   },
   {
     "num_balls": 2,
@@ -687,7 +860,12 @@
         14.366096681243034,
         7.179448128193024
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation25.mp4",
+    "colors": [
+      "green",
+      "purple"
+    ]
   },
   {
     "num_balls": 2,
@@ -708,7 +886,12 @@
         -13.568141851454538,
         28.771956107850805
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/no_preemption/simulation26.mp4",
+    "colors": [
+      "purple",
+      "green"
+    ]
   },
   {
     "num_balls": 2,
@@ -729,7 +912,12 @@
         -70.86561223785574,
         -41.094100315475714
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation27.mp4",
+    "colors": [
+      "red",
+      "blue"
+    ]
   },
   {
     "num_balls": 2,
@@ -750,7 +938,12 @@
         62.94411269376054,
         7.600811542224973
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation28.mp4",
+    "colors": [
+      "purple",
+      "green"
+    ]
   },
   {
     "num_balls": 2,
@@ -771,7 +964,12 @@
         -8.688781035391775,
         29.123973026327064
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation29.mp4",
+    "colors": [
+      "purple",
+      "blue"
+    ]
   },
   {
     "num_balls": 2,
@@ -792,7 +990,12 @@
         -45.68265331821967,
         -23.086618492150453
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation30.mp4",
+    "colors": [
+      "yellow",
+      "blue"
+    ]
   },
   {
     "num_balls": 2,
@@ -813,7 +1016,12 @@
         -28.793756985126446,
         -33.99894569655563
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation31.mp4",
+    "colors": [
+      "blue",
+      "purple"
+    ]
   },
   {
     "num_balls": 2,
@@ -834,6 +1042,161 @@
         -8.888476963988998,
         11.379596165746385
       ]
-    }
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation32.mp4",
+    "colors": [
+      "green",
+      "purple"
+    ]
+  },
+  {
+    "num_balls": 3,
+    "angles": [
+      207.26398616243293,
+      182.74508794105145,
+      176.54118654646834
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -9.821997507513688,
+        21.988133272096775,
+        2.5252206215755506
+      ],
+      "y": [
+        0.3820323066308965,
+        15.271025095317881,
+        -5.204517899376128
+      ]
+    },
+    "file_name": "videos/clean/three_candidate/no_preemption/simulation0.mp4",
+    "colors": [
+      "blue",
+      "green",
+      "purple"
+    ]
+  },
+  {
+    "num_balls": 3,
+    "angles": [
+      215.42315786799924,
+      162.6612675712995,
+      175.12271712970156
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 9,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -1.9647793482212952,
+        -10.971641613998045,
+        23.198581189696988
+      ],
+      "y": [
+        11.912564677064362,
+        11.13146316906414,
+        -23.095300530121982
+      ]
+    },
+    "file_name": "videos/clean/three_candidate/no_preemption/simulation1.mp4",
+    "colors": [
+      "green",
+      "yellow",
+      "purple"
+    ]
+  },
+  {
+    "num_balls": 3,
+    "angles": [
+      182.04429992059266,
+      179.01900555273855,
+      182.24160011165367
+    ],
+    "preemption": false,
+    "cause_ball": 2,
+    "collisions": 3,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        8.9211443696181,
+        -33.71641406446399,
+        -8.921505933767772
+      ],
+      "y": [
+        10.529237082406521,
+        -26.016024831685698,
+        18.639791406868696
+      ]
+    },
+    "file_name": "videos/clean/three_candidate/no_preemption/simulation2.mp4",
+    "colors": [
+      "red",
+      "yellow",
+      "blue"
+    ]
+  },
+  {
+    "num_balls": 3,
+    "angles": [
+      164.24977613290628,
+      169.68102827495792,
+      182.8493613357932
+    ],
+    "preemption": false,
+    "cause_ball": 1,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        12.373481251603229,
+        -21.802559438604195,
+        9.588218745316361
+      ],
+      "y": [
+        6.145946337297095,
+        34.555303136370746,
+        -8.606084485671605
+      ]
+    },
+    "file_name": "videos/clean/three_candidate/no_preemption/simulation3.mp4",
+    "colors": [
+      "purple",
+      "red",
+      "blue"
+    ]
+  },
+  {
+    "num_balls": 3,
+    "angles": [
+      165.3362258508518,
+      179.86329312110607,
+      147.5982465732514
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 7,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -10.985463163991351,
+        -37.544604407449015,
+        -10.480099878670488
+      ],
+      "y": [
+        0.6315992604603708,
+        8.075244221449992,
+        5.2350098982476645
+      ]
+    },
+    "file_name": "videos/clean/three_candidate/preemption/simulation4.mp4",
+    "colors": [
+      "green",
+      "red",
+      "blue"
+    ]
   }
 ]
