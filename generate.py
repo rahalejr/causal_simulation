@@ -75,7 +75,7 @@ def generate_conditions():
 
 def play_conditions():
 
-    filtered = get_conditions('conditions.json')
+    filtered = get_conditions('kept_conditions.json')
 
     counts = {
         '5True': 0,
@@ -101,7 +101,7 @@ def play_conditions():
 
 def record_conditions():
 
-    for j in ['training_conditions.json']:
+    for j in ['kept_conditions.json']:
         conditions = get_conditions(j)
         for i, c in enumerate(conditions):
             cond = Condition(c['angles'], c['preemption'], c['unambiguous'], c['jitter'])
