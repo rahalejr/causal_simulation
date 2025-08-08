@@ -7,16 +7,19 @@ ball_radius = 28
 
 class Condition:
 
-    def __init__(self, angles, preemption=False, unambiguous=False, jitter=None):
+    def __init__(self, angles, preemption=False, unambiguous=False, jitter=None, y_positions=None):
         self.num_balls = len(angles)
 
         jitter_scale = 20 if self.num_balls > 2 else 50
         
-        self.y_positions = []
-        spacing = height / (self.num_balls + 1)
-        max_jitter = spacing - (ball_radius * 2)
-        for i in range(self.num_balls):
-            self.y_positions.append(round(spacing*(i+1)))
+        if y_positions:
+            self.y_positions = y_positions
+        else:
+            self.y_positions = []
+            spacing = height / (self.num_balls + 1)
+            max_jitter = spacing - (ball_radius * 2)
+            for i in range(self.num_balls):
+                self.y_positions.append(round(spacing*(i+1)))
         self.angles = angles
         self.radians = [ang*np.pi/180 for ang in angles]
         self.preemption = preemption
