@@ -1,20 +1,10 @@
 # noise values range from .1 to 2
 # how many e's do we need to generate?
-# Jitter problem - we should find each x and why based on jitter before running counterfactual
-# How do they define cause(x)?
-#   for C in balls
-    #   difference_maker(C) = P(de'=/= de | S, remove(C))
-    #   if difference_maker(C, cond) > 0
-    #       whether_cause(C, cond) = P(e'=/= e | S, remove(C))
-    #       how_cause(C, cond) = P(e' = e| S, change(C))
-    #       
-    #       create 2 new conditions: cond1 = remonve(not C) and cond2 = change(not C)
-    #           sufficient_cause(C) = wether_cause(C, cond1)
-    #           robust_cause(C) = wether_cause(C, cond2)
 
 import os
 import json
 import copy
+import numpy as np
 from simulation import run
 from conditions import Condition
 
@@ -27,8 +17,14 @@ def process_conditions(conds_list):
 
 def run_condition(cond):
 
-    actual_output=run(cond, record=False, counterfactual=None, headless=False)
-        
+    actual_output=run(cond, record=False, counterfactual=None, headless=True)
+
+    difference_maker(actual_output, cond, 2)
+    whether(actual_output, cond, 2)
+    how(actual_output, cond, 2)
+    sufficient(cond, 2)
+    robust(actual_output, cond, 2)
+
     # difference maker cause
     diff_maker_balls = []
     for c in range(cond.num_balls):
@@ -135,21 +131,25 @@ def remove_others(cond, c):
     
     return new_cond
 
-# PLACEHOLDER
 def change_ball(cond, c):
     new_cond = copy.deepcopy(cond)
-    # placeholder value
-    new_cond.angles[c] += 5
+    new_cond.angles[c] += gaussian_noise(0.0001)
+    new_cond.radians[c] = new_cond.angles[c] * np.pi / 180
     return new_cond
 
-# PLACEHOLDER
 def change_others(cond, c):
     new_cond = copy.deepcopy(cond)
     for i in range(cond.num_balls):
         if i == c : continue
         else:
-            new_cond.angles[c] += 5
+            new_cond.angles[i] += gaussian_noise(10)
+            new_cond.radians[i] = new_cond.angles[i] * np.pi / 180
     return new_cond
+
+def gaussian_noise(standard_dev):
+	u = 1 - np.random.random()
+	v = 1 - np.random.random()
+	return standard_dev * np.sqrt(-2*np.log(u)) * np.cos(2 * np.pi * v)
 
 if __name__ == '__main__':
     filename = 'video_meta.json'
