@@ -177,6 +177,7 @@ def create_world():
 def is_hit(sim, effect_ball, sim_seconds):
     effect_x = effect_ball.body.position[0]
     if effect_x < -5:
+        final_position = effect_ball.body.position[1]
         sim.hit = True
         return sim_seconds
     return False
@@ -228,6 +229,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     world.contactListener = collision_listener 
 
     running, hit = True, False
+    final_position = -1
     sim_seconds = 0
     SIM_FRAME_TIME = 1.0 / framerate
 
@@ -327,7 +329,8 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
         'noise_ball': noise_ball.name if noise_ball else None,
         'diverge': diverge_step,
         'file_name': file_name,
-        'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]]
+        'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
+        'final_effect_position': final_position
     }
 
 if __name__ == '__main__':
