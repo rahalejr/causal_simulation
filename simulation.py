@@ -179,8 +179,8 @@ def is_hit(sim, effect_ball, sim_seconds):
     if effect_x < -5:
         final_position = effect_ball.body.position[1]
         sim.hit = True
-        return sim_seconds
-    return False
+        return sim_seconds, effect_ball.body.position[1]
+    return False, 0
 
 
 def run(condition, record=False, counterfactual=None, headless=False, clip_num=1):
@@ -231,6 +231,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     running, hit = True, False
     final_position = -1
     sim_seconds = 0
+    final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
 
     if not headless:
@@ -272,7 +273,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
 
 
         if not hit:
-            hit = is_hit(sim, effect_ball, sim_seconds)
+            hit, final_pos = is_hit(sim, effect_ball, sim_seconds)
         
         if record:
             sim_accum = 0.0
@@ -330,7 +331,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
         'diverge': diverge_step,
         'file_name': file_name,
         'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
-        'final_effect_position': final_position
+        'final_pos': final_pos
     }
 
 if __name__ == '__main__':
