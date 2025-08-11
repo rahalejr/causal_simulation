@@ -1,0 +1,67 @@
+{
+    "two_ball": {
+        "preemption": [
+            {
+                "cond_index": 1,
+                "num_balls": 2,
+                "ball_positions": [2, 4],
+                "angles": [216, 189],
+                "preemption": true,
+                "cause_ball": 2,
+                "unambiguous": true,
+                "jitter": {
+                    "x": [3, 12],
+                    "y": [-40, -29]
+                },
+                "file_name": "videos/clean/two_candidate/preemption/simulation1.mp4"
+            },
+            {}
+        ],
+        "no_preemption": [
+            {
+                "num_balls": 2,
+                "ball_positions": [1, 3],
+                "angles": [200, 179],
+                "preemption": false,
+                "cause_ball": 2,
+                "collisions": 7,
+                "unambiguous": true,
+                "jitter": {
+                "x": [-80, 60],
+                "y": [1, -20]
+                },
+                "file_name": "videos/clean/five_candidate/no_preemption/simulation6.mp4",
+                "colors": [
+                "blue",
+                "red",
+                "purple",
+                "green",
+                "yellow"
+                ]
+            }
+
+        ]
+    },
+
+    "five_ball": {
+        "preemption": [
+
+        ],
+        "no_preemption": [
+            {
+                "num_balls": 5,
+                "ball_positions": [1, 2, 3, 4, 5],
+                "angles": [200, 190, 179, 176, 178],
+                "preemption": false,
+                "cause_ball": 3,
+                "collisions": 7,
+                "unambiguous": true,
+                "jitter": {
+                    "x": [-80, 20, 60, 10, -52],
+                    "y": [1, 33, -20, 15, 15]
+                },
+                "file_name": "videos/clean/five_candidate/no_preemption/simulation6.mp4"
+            }
+        ]
+    }
+}

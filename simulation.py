@@ -1,4 +1,4 @@
-from conditions import conditions, test_conditions, Condition
+from conditions import Condition
 from random import shuffle
 import numpy as np
 import pygame
@@ -62,7 +62,6 @@ class Ball:
     def __init__(self, world, params):
         self.name = params['ball']
         xpos = round(width / 4) if self.name == 'effect' else width + 30 + params['x_jitter']
-        # xpos = round(width / 5) if self.name == 'effect' else width + 30
 
         self.body = world.CreateDynamicBody(position=(xpos, params['ypos']),shapes=b2CircleShape(radius=ball_radius))
 
@@ -177,15 +176,18 @@ def create_world():
 def is_hit(sim, effect_ball, sim_seconds):
     effect_x = effect_ball.body.position[0]
     if effect_x < -5:
-        final_position = effect_ball.body.position[1]
+        final_pos = effect_ball.body.position[1]
         sim.hit = True
         return sim_seconds, effect_ball.body.position[1]
     return False, 0
 
 
-def run(condition, record=False, counterfactual=None, headless=False, clip_num=1):
+def run(condition, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1):
 
+    ind = colors.index(col_dict[cause_color])
+    colors.pop(ind)
     shuffle(colors)
+    colors.insert(cause_ball-1, col_dict[cause_color])
 
     # ball parameters
     ball_params = [
@@ -203,7 +205,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     if not headless:
         pygame.init()
         screen = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("Box2D Ball Collision Demo")
+        clock = pygame.time.Clock()
 
     remove = counterfactual['remove'] if counterfactual else None
     frame_count = 0
@@ -229,13 +231,9 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     world.contactListener = collision_listener 
 
     running, hit = True, False
-    final_position = -1
     sim_seconds = 0
     final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
-
-    if not headless:
-        clock = pygame.time.Clock()
 
     while running:
         if not headless:
@@ -335,6 +333,5 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     }
 
 if __name__ == '__main__':
-    cond = Condition([180,180,180], False)
-    run(cond, record=True, counterfactual=None, headless=False)
+    pass
 

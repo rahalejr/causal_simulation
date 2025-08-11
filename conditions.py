@@ -7,19 +7,15 @@ ball_radius = 28
 
 class Condition:
 
-    def __init__(self, angles, preemption=False, unambiguous=False, jitter=None, y_positions=None):
+    def __init__(self, angles, ball_positions, preemption=False, unambiguous=False, jitter=None):
         self.num_balls = len(angles)
-
-        jitter_scale = 20 if self.num_balls > 2 else 50
         
-        if y_positions:
-            self.y_positions = y_positions
-        else:
-            self.y_positions = []
-            spacing = height / (self.num_balls + 1)
-            max_jitter = spacing - (ball_radius * 2)
-            for i in range(self.num_balls):
-                self.y_positions.append(round(spacing*(i+1)))
+        self.y_positions = []
+        spacing = height / 6
+
+        for i in ball_positions:
+            self.y_positions.append(round(spacing*i))
+
         self.angles = angles
         self.radians = [ang*np.pi/180 for ang in angles]
         self.preemption = preemption
@@ -29,7 +25,10 @@ class Condition:
         self.sim_time = None
         self.diverge = 0
         self.noise_ball = None
+
         if not jitter:
+            jitter_scale = 20 if self.num_balls > 2 else 50
+            max_jitter = spacing - (ball_radius * 2)
             self.jitter = {
                 'x': list(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter)),
                 'y': list(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter))
@@ -37,6 +36,11 @@ class Condition:
         else:
             self.jitter = jitter
 
+    def adjust_angle(self, deg, index):
+        self.angles[index] += deg
+        self.radians[index] = self.angles[index]*np.pi/180
+
+    
     def info(self):
         return {
             'num_balls': self.num_balls,
@@ -48,19 +52,3 @@ class Condition:
             'jitter': self.jitter
         }
 
-conditions = [
-    Condition([227, 137], False), # green cause
-    Condition([217, 140, 148, 145], False), # yellow cause
-    Condition([239, 133, 152, 145], False), # yellow preempts red
-]
-
-
-
-test_conditions = [
-    Condition([180], False),
-    Condition([150, 200], False),
-    Condition([150, 180, 200], False),
-    Condition([156, 185, 172, 200], False), # not preempted
-    Condition([217, 140, 148, 145], False), # not preempted
-    Condition([239, 133, 152, 145], False), # yellow preempts red
-]

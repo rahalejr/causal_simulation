@@ -638,5 +638,137 @@
       "green",
       "purple"
     ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      216.17394884219271,
+      189.22704398219338
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        3,
+        12
+      ],
+      "y": [
+        -28,
+        -26
+      ]
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation19.mp4",
+    "colors": [
+      "green",
+      "blue"
+    ]
+  },
+  {
+    "num_balls": 2,
+    "angles": [
+      216.17394884219271,
+      189.22704398219338
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        3,
+        12
+      ],
+      "y": [
+        -28,
+        -29
+      ]
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation19.mp4",
+    "colors": [
+      "green",
+      "blue"
+    ]
+  },
+  {
+    "num_balls": 5,
+    "angles": [
+      180,
+      216,
+      230,
+      189
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -80,
+        3,
+        70,
+        12
+      ],
+      "y": [
+        30,
+        -40,
+        0,
+        -29
+      ]
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation19.mp4",
+    "colors": [
+      "green",
+      "blue"
+    ],
+    "ball_positions": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "cond_index": 1,
+    "num_balls": 5,
+    "ball_positions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "angles": [
+      180,
+      216,
+      230,
+      189,
+      180
+    ],
+    "preemption": true,
+    "cause_ball": 4,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -80,
+        3,
+        70,
+        12,
+        120
+      ],
+      "y": [
+        30,
+        -40,
+        0,
+        -29,
+        0
+      ]
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation1.mp4",
+    "colors": [
+      "green",
+      "blue"
+    ]
   }
 ]
