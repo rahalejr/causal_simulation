@@ -151,6 +151,10 @@ def gaussian_noise(standard_dev):
 	v = 1 - np.random.random()
 	return standard_dev * np.sqrt(-2*np.log(u)) * np.cos(2 * np.pi * v)
 
+def collision_compare(output, counterfactual):
+    
+    return []
+
 if __name__ == '__main__':
     filename = 'video_meta.json'
     if os.path.exists(filename):
