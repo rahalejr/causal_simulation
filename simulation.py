@@ -126,7 +126,7 @@ class CollisionListener(b2ContactListener):
         else:
             names.append('wall')
 
-        self.sim.collisions.append({'objects': names, 'step': self.sim.step, 'noisy': noisy})
+        self.sim.collisions.append({'objects': set(names), 'step': self.sim.step})
 
 
 def draw_checkerboard_square(surface, center, side, num_checks=16):
@@ -296,6 +296,7 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
     if not headless:
         pygame.quit()
 
+
     if record:
         frames = sorted([os.path.join("frames", fname) for fname in os.listdir("frames") if fname.endswith(".png")])
         clip = ImageSequenceClip(frames, fps=framerate)
@@ -329,7 +330,8 @@ def run(condition, record=False, counterfactual=None, headless=False, clip_num=1
         'diverge': diverge_step,
         'file_name': file_name,
         'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
-        'final_pos': final_pos
+        'final_pos': final_pos,
+        'collisions': sim.collisions
     }
 
 if __name__ == '__main__':
