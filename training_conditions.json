@@ -770,5 +770,105 @@
       "green",
       "blue"
     ]
+  },
+  {
+    "num_balls": 2,
+    "ball_positions": [
+      2,
+      4
+    ],
+    "angles": [
+      215,
+      189
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        30,
+        12
+      ],
+      "y": [
+        -29,
+        -34
+      ]
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation19.mp4"
+  },
+  {
+    "num_balls": 4,
+    "ball_positions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "angles": [
+      190,
+      215,
+      195,
+      189,
+      160
+    ],
+    "preemption": true,
+    "cause_ball": 2,
+    "collisions": 6,
+    "unambiguous": true,
+    "jitter": {
+      "x": [
+        -50,
+        30,
+        0,
+        12,
+        0
+      ],
+      "y": [
+        20,
+        -29,
+        0,
+        -34,
+        -20
+      ]
+    },
+    "file_name": "videos/clean/two_candidate/preemption/simulation19.mp4"
+  },
+  {
+    "ball_positions": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "num_balls": 5,
+    "angles": [
+      162,
+      178,
+      183,
+      175,
+      182
+    ],
+    "preemption": true,
+    "cause_ball": 3,
+    "jitter": {
+      "x": [
+        103,
+        -30,
+        -55,
+        14,
+        26
+      ],
+      "y": [
+        -8,
+        -20,
+        14,
+        -7,
+        -18
+      ]
+    },
+    "file_name": "videos/clean/five_candidate/preemption/simulation5.mp4"
   }
 ]

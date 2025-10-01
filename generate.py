@@ -1,6 +1,7 @@
 import os
 import json
 import numpy as np
+from random import shuffle
 from simulation import run
 from conditions import Condition
 from videos.qualpaths import paths
@@ -75,77 +76,45 @@ def generate_conditions():
 
 def play_conditions():
 
-    filtered = get_conditions('kept_conditions.json')
+    filtered = get_conditions('complex_conditions.json')
     kept = []
 
-    filtered = [
-        {
-            "cond_index": 1,
-            "num_balls": 5,
-            "ball_positions": [1, 2, 3, 4, 5],
-            "angles": [180, 216, 230, 189, 180],
-            "preemption": True,
-            "cause_ball": 4,
-            "unambiguous": True,
-            "jitter": {
-                "x": [-80, 3, 70, 12, 120],
-                "y": [30, -40, 0, -29, 0]
-            },
-            "file_name": "videos/clean/five_candidate/preemption/simulation1.mp4",
-            "colors": [
-            "green",
-            "blue"
-            ]
-        },
-        {
-            "num_balls": 2,
-            "ball_positions": [1, 3],
-            "angles": [200, 179],
-            "preemption": False,
-            "cause_ball": 2,
-            "collisions": 7,
-            "unambiguous": True,
-            "jitter": {
-            "x": [-80, 60],
-            "y": [1, -20]
-            },
-            "file_name": "videos/clean/five_candidate/no_preemption/simulation%%.mp4",
-            "colors": [
-            "blue",
-            "red",
-            "purple",
-            "green",
-            "yellow"
-            ]
-        }
-    ]
+    for c in filtered['training']:
 
-    for c in filtered[0:]:
-
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'])
-        run(cond, 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
+        output = run(cond, 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
         if input("Keep?: ").upper() == 'Y':
             if input("Play Counterfactual?: ").upper() == 'Y':
                 run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
             kept.append(c)
 
-    add_conditions(kept, filename="training_conditions.json", append=True)
+    add_conditions(kept, filename="training.json", append=True)
 
 def record_conditions():
 
-    for j in ['kept_conditions.json']:
-        conditions = get_conditions(j)
-        for i, c in enumerate(conditions):
-            cond = Condition(c['angles'], c['preemption'], c['unambiguous'], c['jitter'])
-            info = run(cond, record=True, counterfactual=None, headless=False, clip_num=i)
-            conditions[i]['file_name'] = info['file_name']
-            conditions[i]['colors'] = info['colors']
-    add_conditions(conditions, filename='video_meta.json')
+    colors = ['red', 'green', 'yellow', 'blue', 'purple']
+    shuffle(colors)
+    conditions = get_conditions('complex_conditions.json')['three_dm']
+    for c in conditions:
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
+        output = run(cond, colors[(c['index'] -1)], cause_ball = c['cause_ball'], record=True, counterfactual=None, headless=False)
+        colls = output['cause_collisions']
+        times = []
+        for i in colls:
+            times.append(i['time'])
+            if i['name'] == 'effect':
+                break
+        if len(times) > 1:
+            time_diff = times[-1] - times[-2]
+        else:
+            time_diff = times[-1]
+        time_diff = round(time_diff, 2)
+        print(output)
 
 if __name__ == '__main__':
     # generate_conditions()
-    play_conditions()
-    # record_conditions()
+    # play_conditions()
+    record_conditions()
     # simple_info()
 
 
