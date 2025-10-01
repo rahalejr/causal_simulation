@@ -52,6 +52,7 @@ class Simulation:
         self.collisions = []
         self.cause_ball = ''
         self.step = 0
+        self.sim_seconds = 0
     
     def get_ball(self, name):
         try:
@@ -84,16 +85,16 @@ class Ball:
     def position(self):
         return tuple(map(int, self.body.position))
     
-    def add_collision(self, obj, step):
+    def add_collision(self, obj, step, time):
         if obj == 'wall':
-            self.all_collisions.append({'name': 'wall', 'object': obj, 'step': step})
+            self.all_collisions.append({'name': 'wall', 'object': obj, 'step': step, 'time': time})
         elif isinstance(obj, Ball):
             if obj.noisy:
                     self.noisy = True
-            if obj.name != 'effect' and 'effect' not in self.collided_with:
-                self.ball_collisions.append({'name': obj.name, 'object': obj, 'step': step})
+            # if obj.name != 'effect' and 'effect' not in self.collided_with:
+            self.ball_collisions.append({'name': obj.name, 'object': obj, 'step': step, 'time': time})
             self.collided_with.add(obj.name)
-            self.all_collisions.append({'name': obj.name, 'object': obj, 'step': step})
+            self.all_collisions.append({'name': obj.name, 'object': obj, 'step': step, 'time': time})
     
     def last_collision(self):
         return self.ball_collisions[-1]['object'] if len(self.ball_collisions) > 0 else None
@@ -137,13 +138,13 @@ class CollisionListener(b2ContactListener):
 
         names, noisy = [], False
         if isinstance(A, Ball):
-            A.add_collision(B, self.sim.step)
+            A.add_collision(B, self.sim.step, self.sim.sim_seconds)
             names.append(A.name)
         else:
             names.append('wall')
         
         if isinstance(B, Ball):
-            B.add_collision(A, self.sim.step)
+            B.add_collision(A, self.sim.step, self.sim.sim_seconds)
             names.append(B.name)
         else:
             names.append('wall')
@@ -316,12 +317,14 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
                 sim.step += 1
                 sim_accum += time_step
                 sim_seconds += time_step
+                sim.sim_seconds += time_step
         else:
             steps = int(SIM_FRAME_TIME / time_step)
             for _ in range(steps):
                 world.Step(time_step, 20, 10)
                 sim.step += 1
                 sim_seconds += time_step
+                sim.sim_seconds += time_step
 
         if (hit and sim_seconds > hit+2) or sim_seconds > 6:
             running = False
@@ -336,16 +339,8 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
     if record:
         frames = sorted([os.path.join("frames", fname) for fname in os.listdir("frames") if fname.endswith(".png")])
         clip = ImageSequenceClip(frames, fps=framerate)
-        # experiment = 'clean' if condition.unambiguous else 'complex'
-        experiment = 'clean'
-        if condition.unambiguous:
-            directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/{'' if condition.preemption else 'no_' }preemption/"
-        else:
-            directory = f"videos/{experiment}/{digits[condition.num_balls]}_candidate/"
-        file_name = f"{directory}simulation{clip_num}.mp4"
-        clip.write_videofile(file_name, codec="libx264")
-    else:
-        file_name = ''
+        clip.write_videofile(condition.filename, codec="libx264")
+
 
     cause_ball = effect_ball.last_collision()
     if cause_ball and len(cause_ball.ball_collisions) and hit:
@@ -385,9 +380,9 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
         'cause_ball': cause_ball.name if cause_ball else None,
+        'cause_collisions': cause_ball.all_collisions,
         'noise_ball': noise_ball.name if noise_ball else None,
         'diverge': diverge_step,
-        'file_name': file_name,
         'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
         'final_pos': final_pos,
         'collisions': sim.collisions
