@@ -6,6 +6,7 @@ import os
 from moviepy.editor import ImageSequenceClip
 from Box2D import (b2World, b2PolygonShape, b2CircleShape, b2ContactListener, b2_staticBody, b2_dynamicBody)
 import shutil
+import math
 
 digits = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 
@@ -38,9 +39,9 @@ rgb_to_name = {v: k for k, v in col_dict.items()}
 
 
 class Simulation:
-
-    def __init__(self, balls, counterfactual = False, noise = 0):
+    def __init__(self, balls, counterfactual = False, noise = 0.1, actual_collisions = []):
         self.balls = balls
+        self.actual_collisions = []
         self.num_balls = len(balls)-1
         self.noise = noise
         self.counterfactual = True if counterfactual else False
@@ -54,11 +55,9 @@ class Simulation:
             return self.balls[name-1]
         except:
             return None
-
     
 
 class Ball:
-
     def __init__(self, world, params):
         self.name = params['ball']
         xpos = round(width / 4) if self.name == 'effect' else width + 30 + params['x_jitter']
@@ -96,7 +95,10 @@ class Ball:
     def last_collision(self):
         return self.ball_collisions[-1]['object'] if len(self.ball_collisions) > 0 else None
 
-
+    def add_noise(self, noise=.1):
+        noiseval = gaussian_noise(noise)
+        # angular velocity in terms of radians
+        self.body.rotate_velocity(noiseval)
 
 class CollisionListener(b2ContactListener):
     def __init__(self, sim):
@@ -108,25 +110,42 @@ class CollisionListener(b2ContactListener):
         A = contact.fixtureA.body.userData
         B = contact.fixtureB.body.userData
 
+        matching = False
+        for collision in self.sim.actual_collisions:
+            # check if time and objects are equal (use set to test if the objects are the same, so that order doesn't matter)
+            if collision['step'] == self.sim.step and collision['objects'] == set([A.name,B.name]):
+                #matching collision found
+                matching = True
+                break
+        # unique counterfactual collision
+        if matching == False:
+            for obj in [A,B]:
+                if isinstance(obj, Ball):
+                    obj.add_noise()
+            
+
         names, noisy = [], False
         if isinstance(A, Ball):
             A.add_collision(B, self.sim.step)
             names.append(A.name)
-            if A.noisy == True:
-                noisy = True
         else:
             names.append('wall')
         
         if isinstance(B, Ball):
             B.add_collision(A, self.sim.step)
             names.append(B.name)
-            if B.noisy == True:
-                noisy = True
         else:
             names.append('wall')
 
         self.sim.collisions.append({'objects': set(names), 'step': self.sim.step})
 
+#double check this chatgpt wrote it
+def rotate_velocity(body, theta):
+    vx, vy = body.linearVelocity
+    cos_t, sin_t = math.cos(theta), math.sin(theta)
+    new_vx = vx * cos_t - vy * sin_t
+    new_vy = vx * sin_t + vy * cos_t
+    body.linearVelocity = (new_vx, new_vy)
 
 def draw_checkerboard_square(surface, center, side, num_checks=16):
     x0, y0 = center
@@ -152,6 +171,10 @@ bottom_edge_y = height - margin - border_width / 2
 wall_len = (height - gate_gap_height - 2 * margin) / 2
 wall_half_len = wall_len / 2
 
+def gaussian_noise(standard_dev):
+	u = 1 - np.random.random()
+	v = 1 - np.random.random()
+	return standard_dev * np.sqrt(-2*np.log(u)) * np.cos(2 * np.pi * v)
 
 def create_world():
     world = b2World(gravity=(0, 0), doSleep=True)
@@ -181,8 +204,8 @@ def is_hit(sim, effect_ball, sim_seconds):
         return sim_seconds, effect_ball.body.position[1]
     return False, 0
 
-
-def run(condition, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1):
+#need to pass in actual data
+def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1):
 
     ind = colors.index(col_dict[cause_color])
     colors.pop(ind)
@@ -226,7 +249,7 @@ def run(condition, cause_color='red', cause_ball = 1, record=False, counterfactu
             effect_ball = ball
         balls.append(ball)
 
-    sim = Simulation(balls, remove)
+    sim = Simulation(balls, remove, actual_collisions = None)
     collision_listener = CollisionListener(sim)
     world.contactListener = collision_listener 
 
@@ -235,6 +258,9 @@ def run(condition, cause_color='red', cause_ball = 1, record=False, counterfactu
     final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
 
+
+    #to do: find a collision with collision listener, print out self.sim.step in collision listener. then print out step
+    #then in run print out a message at that step and see which one runs first
     while running:
         if not headless:
             for event in pygame.event.get():
@@ -318,13 +344,36 @@ def run(condition, cause_color='red', cause_ball = 1, record=False, counterfactu
     else:
         noise_ball, diverge_step = None, None
 
+    # check to make sure there is an actual to compare to
+        #if there is then iterate through collisions to see if there is one at the current step that isnt in counterfactual
+            #if there is then add noise to the ball(s) involved
+    if actual_data:
+        for collision in actual_data['collisions']:
+            #if there is an actual collision at the current step
+            if collision['step'] == sim.step:
+                #prevents index error
+                if not sim.collisions:
+                    for obj in collision['objects']:
+                        b = sim.get_ball(obj['name'])
+                        if isinstance(b, Ball):
+                            b.add_noise()
+                #if there is a counterfactual collision at the same (current) step with the same objects
+                elif sim.collisions[-1]['step'] == sim.step and sim.collisions[-1]['objects'] == collision['objects']:
+                    continue
+                #if there ISNT a matching counterfactual collision, add noise to both balls
+                else:
+                    for obj in collision['objects']:
+                        b = sim.get_ball(obj['name'])
+                        if isinstance(b, Ball):
+                            b.add_noise()
+                        
+
     return {
         'num_balls': sim.num_balls,
         'clear_cut': True if hit and noise_ball is None and len(effect_ball.collided_with) == 1 else False,
         'angles': condition.angles,
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
-        'collisions': len(sim.collisions),
         'cause_ball': cause_ball.name if cause_ball else None,
         'noise_ball': noise_ball.name if noise_ball else None,
         'diverge': diverge_step,
