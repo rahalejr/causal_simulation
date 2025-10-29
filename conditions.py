@@ -31,8 +31,8 @@ class Condition:
             jitter_scale = 20 if self.num_balls > 2 else 50
             max_jitter = spacing - (ball_radius * 2)
             self.jitter = {
-                'x': list(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter)),
-                'y': list(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter))
+                'x': list(np.round(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter))),
+                'y': list(np.round(np.clip(np.random.normal(loc=0, scale=jitter_scale, size=self.num_balls), -max_jitter, max_jitter)))
             }
         else:
             self.jitter = jitter

@@ -5,7 +5,6 @@
             "num_balls": 3,
             "ball_positions": [1, 2, 4],
             "angles": [194, 173, 140],
-            "preemption": true,
             "last_collision": 2.46,
             "cause_ball": 2,
             
@@ -20,7 +19,6 @@
             "num_balls": 4,
             "ball_positions": [1, 2, 4],
             "angles": [164, 148, 140],
-            "preemption": true,
             "last_collision": 2.41,
             "cause_ball": 1,
             
@@ -35,7 +33,6 @@
             "num_balls": 3,
             "ball_positions": [2, 3, 5],
             "angles": [150, 189, 150],
-            "preemption": true,
             "last_collision": 2.34,
             "cause_ball": 3,
             
@@ -50,7 +47,6 @@
             "num_balls": 3,
             "ball_positions": [1, 3, 4],
             "angles": [185, 209, 143],
-            "preemption": true,
             "cause_ball": 3,
             "last_collision": 1.92,
             "jitter": {
@@ -64,7 +60,6 @@
             "num_balls": 3,
             "ball_positions": [3, 4, 5],
             "angles": [180, 164, 212],
-            "preemption": true,
             "last_collision": 2.48,
             "cause_ball": 1,
             
@@ -73,7 +68,156 @@
                 "y": [3, 30, 41]
             },
             "file_name": "videos/complex/one_dm/stim5.mp4"
+        },
+        {
+        "index": 34,
+        "num_balls": 3,
+        "ball_positions": [
+            1,
+            2,
+            3
+        ],
+        "angles": [
+            212,
+            149,
+            185
+        ],
+        "last_collision": 2.27,
+        "cause_ball": 1,
+        "duration": 6.06,
+        "difference_makers": 1,
+        "jitter": {
+            "x": [
+            -34.0,
+            -26.0,
+            -26.0
+            ],
+            "y": [
+            -7.0,
+            3.0,
+            29.0
+            ]
         }
+        },
+        {
+        "index": 35,
+        "num_balls": 3,
+        "ball_positions": [
+            1,
+            3,
+            4
+        ],
+        "angles": [
+            209,
+            223,
+            204
+        ],
+        "last_collision": 2.46,
+        "cause_ball": 1,
+        "duration": 5.96,
+        "difference_makers": 1,
+        "jitter": {
+            "x": [
+            1.0,
+            8.0,
+            -57.0
+            ],
+            "y": [
+            -34.0,
+            15.0,
+            -18.0
+            ]
+        }},
+        {
+            "index": 32,
+            "num_balls": 3,
+            "ball_positions": [
+                1,
+                2,
+                4
+            ],
+            "angles": [
+                192,
+                190,
+                140
+            ],
+            "last_collision": 1.86,
+            "cause_ball": 3,
+            "duration": 6.56,
+            "difference_makers": 1,
+            "jitter": {
+                "x": [
+                32.0,
+                -25.0,
+                -20.0
+                ],
+                "y": [
+                30.0,
+                -16.0,
+                -20.0
+                ]
+            }
+            },
+            {
+            "index": 5,
+            "num_balls": 3,
+            "ball_positions": [
+                1,
+                4,
+                5
+            ],
+            "angles": [
+                197,
+                229,
+                175
+            ],
+            "last_collision": 1.47,
+            "cause_ball": 2,
+            "duration": 6.726599999997662,
+            "difference_makers": 1,
+            "jitter": {
+                "x": [
+                52.09447379161969,
+                -14.90041179376734,
+                11.837495169292552
+                ],
+                "y": [
+                -30.333761868321332,
+                5.433216298873146,
+                -18.331545084209843
+                ]
+            }
+            },
+            {
+            "index": 20,
+            "num_balls": 3,
+            "ball_positions": [
+                1,
+                3,
+                5
+            ],
+            "angles": [
+                207,
+                181,
+                174
+            ],
+            "last_collision": 2.45,
+            "cause_ball": 2,
+            "duration": 5.36,
+            "difference_makers": 1,
+            "jitter": {
+                "x": [
+                3.0,
+                10.0,
+                -22.0
+                ],
+                "y": [
+                11.0,
+                4.0,
+                -16.0
+                ]
+            }
+            }
     ],
 
     "two_dm": [
@@ -82,7 +226,6 @@
             "num_balls": 3,
             "ball_positions": [1, 4, 5],
             "angles": [200, 133, 150],
-            "preemption": true,
             "last_collision": 1.71,
             "cause_ball": 3,
             "jitter": {
@@ -96,7 +239,6 @@
             "num_balls": 4,
             "ball_positions": [1, 2, 4],
             "angles": [174, 148, 140],
-            "preemption": true,
             "last_collision": 0.9,
             "cause_ball": 2,
             
@@ -111,7 +253,6 @@
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [155, 189, 143],
-            "preemption": true,
             "cause_ball": 2,
             "last_collision": 1.0,
             "jitter": {
@@ -125,7 +266,6 @@
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [189, 220, 140],
-            "preemption": true,
             "cause_ball": 3,
             "last_collision": 0.49,
             "jitter": {
@@ -139,7 +279,6 @@
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [166, 208, 170],
-            "preemption": true,
             "cause_ball": 1,
             "last_collision": 1.16,
             "jitter": {
@@ -147,7 +286,157 @@
                 "y": [0, 0, 0]
             },
             "file_name": "videos/complex/two_dm/stim5.mp4"
-        }
+        },
+        {
+            "index": 3,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              3,
+              4
+            ],
+            "angles": [
+              208,
+              177,
+              183
+            ],
+            "last_collision": 0.77,
+            "cause_ball": 2,
+            "duration": 5.494500000000533,
+            "difference_makers": 2,
+            "jitter": {
+              "x": [
+                -7.7597186347176415,
+                4.477419476807735,
+                -6.344944961325156
+              ],
+              "y": [
+                2.2630515004744405,
+                4.863396364383319,
+                -20.478182366682617
+              ]
+            }
+          },
+          {
+            "index": 6,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              2,
+              5
+            ],
+            "angles": [
+              218,
+              213,
+              174
+            ],
+            "last_collision": 2.02,
+            "cause_ball": 1,
+            "duration": 6.127199999999059,
+            "difference_makers": 2,
+            "jitter": {
+              "x": [
+                -14.608338916663591,
+                -5.387344521646193,
+                -13.74001467697088
+              ],
+              "y": [
+                -14.147776149962128,
+                17.046285620767037,
+                10.923437568956745
+              ]
+            }
+          },
+          {
+            "index": 11,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              3,
+              4
+            ],
+            "angles": [
+              153,
+              188,
+              169
+            ],
+            "last_collision": 3.28,
+            "cause_ball": 1,
+            "duration": 7.1261999999967305,
+            "difference_makers": 2,
+            "jitter": {
+              "x": [
+                15.756400138742144,
+                -3.67400108718464,
+                -3.097822600278196
+              ],
+              "y": [
+                5.285006237124923,
+                -12.331760013460665,
+                37.26359426392238
+              ]
+            }
+          },
+          {
+            "index": 13,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              3,
+              4
+            ],
+            "angles": [
+              155,
+              168,
+              187
+            ],
+            "last_collision": 1.36,
+            "cause_ball": 1,
+            "duration": 5.394600000000766,
+            "difference_makers": 2,
+            "jitter": {
+              "x": [
+                -1.723249472111375,
+                -23.12539547147759,
+                40.93362757322489
+              ],
+              "y": [
+                23.581524149237268,
+                8.933544401113254,
+                -7.764795154686598
+              ]
+            }
+          },
+          {
+            "index": 30,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              2,
+              5
+            ],
+            "angles": [
+              188,
+              157,
+              199
+            ],
+            "last_collision": 0.9,
+            "cause_ball": 2,
+            "duration": 6.39,
+            "difference_makers": 2,
+            "jitter": {
+              "x": [
+                24.0,
+                13.0,
+                7.0
+              ],
+              "y": [
+                -30.0,
+                -59.0,
+                27.0
+              ]
+            }
+          }
     ],
 
     "three_dm": [
@@ -156,7 +445,6 @@
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [224, 149, 200],
-            "preemption": true,
             "last_collision": 0.86,
             "cause_ball": 1,
             
@@ -171,7 +459,6 @@
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [166, 208, 215],
-            "preemption": true,
             "cause_ball": 3,
             "last_collision": 1.46,
             "jitter": {
@@ -185,7 +472,6 @@
             "num_balls": 3,
             "ball_positions": [1, 2, 3],
             "angles": [224, 214, 204],
-            "preemption": true,
             "last_collision": 1.01,
             "cause_ball": 3,
             
@@ -200,7 +486,6 @@
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [154, 164, 204],
-            "preemption": true,
             "last_collision": 0.57,
             "cause_ball": 2,
             
@@ -215,7 +500,188 @@
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [160, 164, 212],
-            "preemption": true,
+            "last_collision": 0.94,
+            "cause_ball": 1,
+            
+            "jitter": {
+                "x": [20, 40, 20],
+                "y": [3, 30, 41]
+            },
+            "file_name": "videos/complex/three_dm/stim5.mp4"
+        },
+        {
+            "index": 40,
+            "num_balls": 3,
+            "ball_positions": [
+              3,
+              4,
+              5
+            ],
+            "angles": [
+              164,
+              177,
+              202
+            ],
+            "last_collision": 1.83,
+            "cause_ball": 3,
+            "duration": 6.66,
+            "difference_makers": 3,
+            "jitter": {
+              "x": [
+                36.0,
+                11.0,
+                38.0
+              ],
+              "y": [
+                -43.0,
+                -13.0,
+                -2.0
+              ]
+            }
+          },
+          {
+            "index": 41,
+            "num_balls": 3,
+            "ball_positions": [
+              3,
+              4,
+              5
+            ],
+            "angles": [
+              181,
+              188,
+              227
+            ],
+            "last_collision": 1.14,
+            "cause_ball": 2,
+            "duration": 4.86,
+            "difference_makers": 3,
+            "jitter": {
+              "x": [
+                24.0,
+                15.0,
+                1.0
+              ],
+              "y": [
+                18.0,
+                9.0,
+                2.0
+              ]
+            }
+          },
+          {
+            "index": 45,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              2,
+              4
+            ],
+            "angles": [
+              149,
+              193,
+              227
+            ],
+            "last_collision": 0.44,
+            "cause_ball": 1,
+            "duration": 6.53,
+            "difference_makers": 3,
+            "jitter": {
+              "x": [
+                4.0,
+                -13.0,
+                3.0
+              ],
+              "y": [
+                -23.0,
+                10.0,
+                -14.0
+              ]
+            }
+          },
+          {
+            "index": 46,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              4,
+              5
+            ],
+            "angles": [
+              250,
+              181,
+              237
+            ],
+            "last_collision": 1.67,
+            "cause_ball": 3,
+            "duration": 6.26,
+            "difference_makers": 3,
+            "jitter": {
+              "x": [
+                -6.0,
+                8.0,
+                -32.0
+              ],
+              "y": [
+                -31.0,
+                -38.0,
+                3.0
+              ]
+            }
+          },
+          {
+            "index": 48,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              3,
+              4
+            ],
+            "angles": [
+              163,
+              167,
+              220
+            ],
+            "last_collision": 1.3,
+            "cause_ball": 2,
+            "duration": 5.16,
+            "difference_makers": 3,
+            "jitter": {
+              "x": [
+                9.0,
+                2.0,
+                -14.0
+              ],
+              "y": [
+                10.0,
+                1.0,
+                -10.0
+              ]
+            }
+          }
+    ],
+
+
+    "five_candidate": [
+        {
+            "index": 1,
+            "num_balls": 3,
+            "ball_positions": [2, 4, 5],
+            "angles": [160, 164, 212],
+            "last_collision": 0.94,
+            "cause_ball": 1,
+            
+            "jitter": {
+                "x": [20, 40, 20],
+                "y": [3, 30, 41]
+            },
+            "file_name": "videos/complex/three_dm/stim5.mp4"
+        },
+        {
+            "index": 2,
+            "num_balls": 3,
+            "ball_positions": [2, 4, 5],
+            "angles": [160, 164, 212],
             "last_collision": 0.94,
             "cause_ball": 1,
             
@@ -225,6 +691,358 @@
             },
             "file_name": "videos/complex/three_dm/stim5.mp4"
         }
+    ],
+
+
+    "misses": [
+        {
+            "index": 1,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              4,
+              5
+            ],
+            "angles": [
+              193,
+              177,
+              128
+            ],
+            "last_collision": null,
+            "cause_ball": null,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                4.079802006770216,
+                14.389726068198492,
+                7.224079648774984
+              ],
+              "y": [
+                15.609336443683224,
+                -21.984220441468135,
+                4.355022829807561
+              ]
+            }
+          },
+          {
+            "index": 2,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              3,
+              4
+            ],
+            "angles": [
+              181,
+              176,
+              206
+            ],
+            "last_collision": 1.58,
+            "cause_ball": 2,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                13.102932079279345,
+                -2.2990961871779367,
+                19.91038434020423
+              ],
+              "y": [
+                -4.787368401464928,
+                12.068329835455023,
+                7.025162819267404
+              ]
+            }
+          },
+          {
+            "index": 3,
+            "num_balls": 3,
+            "ball_positions": [
+              5,
+              2,
+              3
+            ],
+            "angles": [
+              186,
+              202,
+              171
+            ],
+            "last_collision": 0.54,
+            "cause_ball": 3,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                21.726573082806716,
+                14.361454399026341,
+                3.375060455872493
+              ],
+              "y": [
+                -4.321716689397952,
+                -5.714590100456513,
+                -2.5801575720972187
+              ]
+            }
+          },
+          {
+            "index": 4,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              4,
+              5
+            ],
+            "angles": [
+              155,
+              165,
+              150
+            ],
+            "last_collision": 1.93,
+            "cause_ball": 3,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -6.297249009707327,
+                -0.26393937831718783,
+                12.569569883437149
+              ],
+              "y": [
+                13.74708810587755,
+                -30.309479637914993,
+                2.8682658541387545
+              ]
+            }
+          },
+          {
+            "index": 5,
+            "num_balls": 3,
+            "ball_positions": [
+              5,
+              2,
+              3
+            ],
+            "angles": [
+              174,
+              173,
+              159
+            ],
+            "last_collision": null,
+            "cause_ball": null,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -2.411829617812617,
+                -10.271797666857719,
+                -19.195571016841903
+              ],
+              "y": [
+                -17.03138260933877,
+                -23.496237548896545,
+                2.7229850132566185
+              ]
+            }
+          },
+          {
+            "index": 6,
+            "num_balls": 3,
+            "ball_positions": [
+              5,
+              1,
+              3
+            ],
+            "angles": [
+              206,
+              170,
+              189
+            ],
+            "last_collision": 0.91,
+            "cause_ball": 2,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -14.763870516165255,
+                5.531524376670367,
+                1.0778562288479299
+              ],
+              "y": [
+                2.350730310026134,
+                6.938962820070347,
+                -17.20243463868165
+              ]
+            }
+          },
+          {
+            "index": 7,
+            "num_balls": 3,
+            "ball_positions": [
+              5,
+              4,
+              3
+            ],
+            "angles": [
+              167,
+              167,
+              171
+            ],
+            "last_collision": null,
+            "cause_ball": null,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                5.879891779318163,
+                26.579844178506015,
+                2.617700795997407
+              ],
+              "y": [
+                31.97353058185367,
+                -7.84638171290426,
+                -8.939838238481094
+              ]
+            }
+          },
+          {
+            "index": 8,
+            "num_balls": 3,
+            "ball_positions": [
+              4,
+              1,
+              3
+            ],
+            "angles": [
+              178,
+              204,
+              186
+            ],
+            "last_collision": 0.17,
+            "cause_ball": 3,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -2.693373580582242,
+                -31.066486655616032,
+                1.7821529128260993
+              ],
+              "y": [
+                23.081768781805664,
+                -11.829894315588758,
+                6.303249372029967
+              ]
+            }
+          },
+          {
+            "index": 9,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              3,
+              2
+            ],
+            "angles": [
+              201,
+              185,
+              177
+            ],
+            "last_collision": null,
+            "cause_ball": null,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                13.845084920523238,
+                11.306574951918222,
+                -4.269501726981863
+              ],
+              "y": [
+                -21.989953086701625,
+                4.959387636077195,
+                -22.3773826140385
+              ]
+            }
+          },
+          {
+            "index": 10,
+            "num_balls": 3,
+            "ball_positions": [
+              1,
+              4,
+              2
+            ],
+            "angles": [
+              172,
+              170,
+              183
+            ],
+            "last_collision": null,
+            "cause_ball": null,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                18.35158625586147,
+                -22.461774915365538,
+                30.943346760135007
+              ],
+              "y": [
+                33.91992484355394,
+                35.36527211974315,
+                3.0599199333441995
+              ]
+            }
+          },
+          {
+            "index": 11,
+            "num_balls": 3,
+            "ball_positions": [
+              4,
+              2,
+              5
+            ],
+            "angles": [
+              153,
+              228,
+              206
+            ],
+            "last_collision": 0.77,
+            "cause_ball": 2,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -12.0991436722631,
+                -7.201686768590788,
+                -18.970044363531446
+              ],
+              "y": [
+                13.886592937378888,
+                33.898268314061895,
+                21.82326016787723
+              ]
+            }
+          },
+          {
+            "index": 12,
+            "num_balls": 3,
+            "ball_positions": [
+              2,
+              3,
+              5
+            ],
+            "angles": [
+              175,
+              211,
+              188
+            ],
+            "last_collision": 1.19,
+            "cause_ball": 2,
+            "duration": 10.023299999989979,
+            "jitter": {
+              "x": [
+                -18.70148135322499,
+                -1.6070663337344246,
+                -7.581043424952476
+              ],
+              "y": [
+                29.477510616563876,
+                15.76389046101446,
+                5.039170584914459
+              ]
+            }
+          }
     ]
 
     

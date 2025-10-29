@@ -99,7 +99,7 @@ class Ball:
     def add_noise(self, noise=.1):
         noiseval = gaussian_noise(noise)
         # angular velocity in terms of radians
-        self.body.rotate_velocity(noiseval)
+        # self.body.rotate_velocity(noiseval)
 
 class CollisionListener(b2ContactListener):
     def __init__(self, sim):
@@ -206,12 +206,12 @@ def is_hit(sim, effect_ball, sim_seconds):
     return False, 0
 
 #need to pass in actual data
-def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1):
+def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_index = 1, record=False, counterfactual=None, headless=False, clip_num=1):
 
     ind = colors.index(col_dict[cause_color])
     colors.pop(ind)
     shuffle(colors)
-    colors.insert(cause_ball-1, col_dict[cause_color])
+    colors.insert(cause_index-1, col_dict[cause_color])
 
     # ball parameters
     ball_params = [
@@ -316,7 +316,7 @@ def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_bal
                 sim_seconds += time_step
                 sim.sim_seconds += time_step
 
-        if (hit and sim_seconds > hit+2) or sim_seconds > 18:
+        if (hit and sim_seconds > hit+2) or sim_seconds > 10:
             running = False
 
         if not headless:
@@ -370,12 +370,14 @@ def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_bal
         'sim_time': sim_seconds,
         'hit': isinstance(hit, float),
         'cause_ball': cause_ball.name if cause_ball else None,
-        'cause_collisions': cause_ball.all_collisions,
+        'cause_collisions': cause_ball.all_collisions if cause_ball else None,
+        'effect_collisions': effect_ball.all_collisions,
         'noise_ball': noise_ball.name if noise_ball else None,
         'diverge': diverge_step,
         'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
         'final_pos': final_pos,
-        'collisions': sim.collisions
+        'collisions': sim.collisions,
+        'duration': sim_seconds
     }
 
 if __name__ == '__main__':

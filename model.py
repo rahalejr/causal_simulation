@@ -14,7 +14,7 @@ def process_conditions(conds_list):
     for i in conds_list:
         cond = Condition(i['angles'], [1, 2, 3, 4, 5], i['preemption'], i['unambiguous'], i['jitter'])
         run_condition(cond)
-    pass
+    
 
 def run_condition(cond):
 
@@ -175,7 +175,7 @@ def collision_compare(output, counterfactual):
     return noisy_steps
 
 if __name__ == '__main__':
-    filename = 'video_meta.json'
+    filename = 'complex_conditions.json'
     if os.path.exists(filename):
         with open(filename, 'r') as f:
             try:
@@ -185,4 +185,4 @@ if __name__ == '__main__':
     else:
         data = []
     
-    process_conditions(data)
+    process_conditions(data['one_dm'])
