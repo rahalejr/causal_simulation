@@ -1,7 +1,8 @@
 import os
 import json
 import numpy as np
-from random import shuffle, sample
+from random import shuffle, sample, randint
+from copy import deepcopy
 from simulation import run
 from conditions import Condition
 from videos.qualpaths import paths
@@ -43,11 +44,9 @@ def add_conditions(new_data, filename='conditions.json', append=True):
 
 def generate_conditions():
     kept_conditions = []
-    
-    indices = {'True': 1, 'False': 1}
 
     for _ in range(2000):
-        sd = 30
+        sd = 20
         num_angles = 3
         raw_angles = np.random.normal(loc=180, scale=sd, size=num_angles)
         clipped_angles = np.clip(raw_angles, 110, 250)
@@ -57,6 +56,7 @@ def generate_conditions():
         cond = Condition(angles, ball_positions)
 
         sim = run(cond, record=False, counterfactual=None, headless=True)
+
 
         if sim['hit']:
 
@@ -78,17 +78,17 @@ def generate_conditions():
                     time_diff = round(time_diff, 2)
 
 
-                    while True:
-                        if input('replay: ').upper() != 'Y':
-                            break
-                        run(cond, record=False, counterfactual=None, headless=False)
+                    # while True:
+                    #     if input('replay: ').upper() != 'Y':
+                    #         break
+                    #     run(cond, record=False, counterfactual=None, headless=False)
 
-                    if input('keep? :') != 'y':
-                        continue
+                    # if input('keep? :') != 'y':
+                    #     continue
                     
 
                     info = {
-                        "index": indices[str(sim['hit'])],
+                        "index": _,
                         "num_balls": 3,
                         "ball_positions": ball_positions,
                         "angles": angles,
@@ -100,42 +100,120 @@ def generate_conditions():
                     }
 
                     kept_conditions.append(info)
-                    indices[str(sim['hit'])] += 1
 
     add_conditions(kept_conditions, filename="newconds.json")
 
+def run_cf(condition, headless=False):
+    colors = ['red', 'green', 'yellow', 'blue', 'purple']
+    
+    cf_angles = deepcopy(condition['angles'])
+    cf_pos = deepcopy(condition['ball_positions'])
+    cf_jitter = deepcopy(condition['jitter'])
+    remove_index = condition['cause_ball']
 
-def play_conditions():
+    cf_angles.pop(remove_index - 1)
+    cf_pos.pop(remove_index - 1)
+    [cf_jitter[axis].pop(remove_index - 1) for axis in ['x', 'y']]
 
-    filtered = get_conditions('complex_conditions.json')
+    counterfactual = Condition(cf_angles, cf_pos, jitter=cf_jitter)
+
+    cf_output = run(
+        counterfactual,
+        actual_data=None,
+        cause_color=colors[(condition['index'] - 1) % len(colors)],
+        cause_index=remove_index,
+        record=False,
+        counterfactual=None,
+        headless=headless
+    )
+
+    return cf_output
+
+def time_diff(sim):
+    colls = sim.get('cause_collisions') or []
+    if not colls:
+        return None
+
+    times = []
+    for c in colls:
+        times.append(c['time'])
+        if c['name'] == 'effect':
+            break
+
+    if not times:
+        return None
+
+    if len(times) > 1:
+        diff = times[-1] - times[-2]
+    else:
+        diff = times[-1]
+
+    return round(diff, 2)
+
+def play_conditions(ind):
+
+    filtered = get_conditions('collisions.json')
     kept = []
 
-    for c in filtered['five_candidate']:
+    c = filtered[ind-1]
+    ind = c['index']
+    cause = c['cause_ball']
+    filename = f"videos/bin/stim{c['index']}.mp4"
+    cond = Condition(c['angles'], c['ball_positions'], jitter=c['jitter'], filename=filename)
+    run_cf(c)
+    output = run(cond, actual_data = None, noise = .01, cause_color = 'red', cause_index = cause, record=False, counterfactual=None, headless=False)
 
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
-        output = run(cond, 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
-        if input("Keep?: ").upper() == 'Y':
-            if input("Play Counterfactual?: ").upper() == 'Y':
-                run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
-            kept.append(c)
-
-    add_conditions(kept, filename="training.json", append=True)
 
 def record_conditions():
 
-    colors = ['red', 'green', 'yellow', 'blue', 'purple']
-    shuffle(colors)
-    conditions = get_conditions('newconds.json')
-    counter = 0
+    file = 'newconds.json'
+
+    colors = ['red', 'green', 'blue']
+    conditions = get_conditions(file)
+    cond_output = []
     for c in conditions:
-        filename = f"videos/bin/sim_{c['index']}.mp4"
-        cond = Condition(c['angles'], c['ball_positions'], jitter=c['jitter'], filename=filename)
-        output = run(cond, actual_data = None, noise = .01, cause_color = colors[counter % 5], cause_index = 1, record=True, counterfactual=None, headless=False)
-        counter += 1
+        ind = c['index']
+        cause = c['cause_ball'] if c['cause_ball'] else 1
+        filename = filename = f"videos/bin/stim{c['index']}.mp4"
+        angles, cf_angles = deepcopy(c['angles']), deepcopy(c['angles'])
+        # if group == 'miss':
+        #     sd = randint(3, 10)
+        #     angles = np.array(angles) + np.random.normal(0, sd, len(angles)).astype(int)
+        angles = list(angles)
+        pos, cf_pos = deepcopy(c['ball_positions']), deepcopy(c['ball_positions'])
+        jitter, cf_jitter = deepcopy(c['jitter']), deepcopy(c['jitter'])
+        cause_color = colors[(ind-1) % 3]
+        # if group == 'miss':
+        #     cause_color = colors[randint(0,2)]
+        cond = Condition(angles, pos, jitter=jitter, filename=filename)
+        sim = run(cond, actual_data = None, noise = .01, cause_color = cause_color, cause_index = 1, record=True, counterfactual=None, headless=False)
+        # c['duration'] = output['duration']
+        # c['cause_ball'] = output['cause_ball']
+        # c['last_collision'] = time_diff(output)
+        # c['filename'] = filename
+        # c['colors'] = output['colors']
+        # c['cause_color'] = cause_color
+        info = {
+            "index": c['index'],
+            "num_balls": 3,
+            "ball_positions": c['ball_positions'],
+            "angles": angles,
+            "cause_ball": sim["cause_ball"] if sim["cause_ball"] else None,
+            "duration": round(sim["duration"], 2),
+            "last_collision": time_diff(sim),
+            "jitter": cond.jitter,
+            "colors": sim['colors'],
+            "cause_color": cause_color,
+            "preemption": False,
+            "filename": f"stimuli/collisions/miss/stim{c['index']}.mp4"
+        }
+
+        cond_output.append(info)
+    add_conditions(cond_output, filename=f"revised_stim.json", append=True)
 
 if __name__ == '__main__':
     # generate_conditions()
-    # play_conditions()
+    # play_conditions(16)
     record_conditions()
     # simple_info()
 

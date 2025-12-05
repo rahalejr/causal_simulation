@@ -1,0 +1,113 @@
+[
+  {
+    "index": 18,
+    "num_balls": 3,
+    "ball_positions": [
+      1,
+      2,
+      3
+    ],
+    "angles": [
+      162,
+      160,
+      183
+    ],
+    "cause_ball": 2,
+    "duration": 3.01,
+    "last_collision": 0.72,
+    "jitter": {
+      "x": [
+        2.0,
+        -13.0,
+        24.0
+      ],
+      "y": [
+        28.0,
+        -20.0,
+        28.0
+      ]
+    },
+    "colors": [
+      "blue",
+      "red",
+      "green"
+    ],
+    "cause_color": "blue",
+    "preemption": false,
+    "filename": "stimuli/collisions/miss/stim18.mp4"
+  },
+  {
+    "index": 28,
+    "num_balls": 3,
+    "ball_positions": [
+      2,
+      4,
+      5
+    ],
+    "angles": [
+      165,
+      216,
+      155
+    ],
+    "cause_ball": 2,
+    "duration": 3.74,
+    "last_collision": 0.68,
+    "jitter": {
+      "x": [
+        23.0,
+        -20.0,
+        18.0
+      ],
+      "y": [
+        1.0,
+        3.0,
+        15.0
+      ]
+    },
+    "colors": [
+      "red",
+      "green",
+      "blue"
+    ],
+    "cause_color": "red",
+    "preemption": false,
+    "filename": "stimuli/collisions/miss/stim28.mp4"
+  },
+  {
+    "index": 29,
+    "num_balls": 3,
+    "ball_positions": [
+      1,
+      2,
+      4
+    ],
+    "angles": [
+      205,
+      174,
+      200
+    ],
+    "cause_ball": 3,
+    "duration": 4.31,
+    "last_collision": 0.38,
+    "jitter": {
+      "x": [
+        33.0,
+        12.0,
+        17.0
+      ],
+      "y": [
+        -4.0,
+        14.0,
+        -7.0
+      ]
+    },
+    "colors": [
+      "green",
+      "blue",
+      "red"
+    ],
+    "cause_color": "green",
+    "preemption": false,
+    "filename": "stimuli/collisions/miss/stim29.mp4"
+  }
+]

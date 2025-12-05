@@ -1,4 +1,93 @@
 {
+    "training": [
+      {
+        "ball_positions": [2, 4],
+        "index": 1,
+        "num_balls": 2,
+        "outcome": "goal",
+        "angles": [
+          217,
+          170
+        ],
+        "preemption": false,
+        "cause_ball": 1,
+        "collisions": 7,
+        "unambiguous": true,
+        "jitter": {
+          "x": [
+            -8.133252215620892,
+            9.675828526679721
+          ],
+          "y": [
+            -24.63073344136649,
+            15.284831939664352
+          ]
+        }
+      },
+      {
+        "index": 2,
+        "outcome": "miss",
+        "num_balls": 3,
+        "ball_positions": [
+          5,
+          2,
+          3
+        ],
+        "angles": [
+          174,
+          173,
+          159
+        ],
+        "last_collision": null,
+        "cause_ball": null,
+        "duration": 10.023299999989979,
+        "jitter": {
+          "x": [
+            -2.411829617812617,
+            -10.271797666857719,
+            -19.195571016841903
+          ],
+          "y": [
+            -17.03138260933877,
+            -23.496237548896545,
+            2.7229850132566185
+          ]
+        }
+      },
+      {
+        "ball_positions": [1, 2, 3, 4, 5],
+        "index": 3,
+        "num_balls": 5,
+        "outcome": "goal",
+        "angles": [
+          184.6989587652136,
+          187.51264477342397,
+          178.72270915885045,
+          176.43183104712097,
+          178.04071566985255
+        ],
+        "preemption": false,
+        "cause_ball": 3,
+        "collisions": 7,
+        "unambiguous": true,
+        "jitter": {
+          "x": [
+            -13.790644417584659,
+            12.428543635475542,
+            -8.133252215620892,
+            9.675828526679721,
+            -51.63769713159871
+          ],
+          "y": [
+            0.5718298540393203,
+            33.01384904135752,
+            -24.63073344136649,
+            15.284831939664352,
+            15.10239804792211
+          ]
+        }
+      }
+    ],
     "one_dm": [
         {
             "index": 1,
@@ -70,7 +159,7 @@
             "file_name": "videos/complex/one_dm/stim5.mp4"
         },
         {
-        "index": 34,
+        "index": 6,
         "num_balls": 3,
         "ball_positions": [
             1,
@@ -100,7 +189,7 @@
         }
         },
         {
-        "index": 35,
+        "index": 7,
         "num_balls": 3,
         "ball_positions": [
             1,
@@ -129,7 +218,7 @@
             ]
         }},
         {
-            "index": 32,
+            "index": 8,
             "num_balls": 3,
             "ball_positions": [
                 1,
@@ -159,7 +248,7 @@
             }
             },
             {
-            "index": 5,
+            "index": 9,
             "num_balls": 3,
             "ball_positions": [
                 1,
@@ -189,7 +278,7 @@
             }
             },
             {
-            "index": 20,
+            "index": 10,
             "num_balls": 3,
             "ball_positions": [
                 1,
@@ -222,7 +311,7 @@
 
     "two_dm": [
         {
-            "index": 1,
+            "index": 11,
             "num_balls": 3,
             "ball_positions": [1, 4, 5],
             "angles": [200, 133, 150],
@@ -235,7 +324,7 @@
             "file_name": "videos/complex/two_dm/stim1.mp4"
         },
         {
-            "index": 2,
+            "index": 12,
             "num_balls": 4,
             "ball_positions": [1, 2, 4],
             "angles": [174, 148, 140],
@@ -249,7 +338,7 @@
             "file_name": "videos/complex/two_dm/stim2.mp4"
         },
         {
-            "index": 3,
+            "index": 13,
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [155, 189, 143],
@@ -262,7 +351,7 @@
             "file_name": "videos/complex/two_dm/stim3.mp4"
         },
         {
-            "index": 4,
+            "index": 14,
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [189, 220, 140],
@@ -275,7 +364,7 @@
             "file_name": "videos/complex/two_dm/stim4.mp4"
         },
         {
-            "index": 5,
+            "index": 15,
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [166, 208, 170],
@@ -288,7 +377,7 @@
             "file_name": "videos/complex/two_dm/stim5.mp4"
         },
         {
-            "index": 3,
+            "index": 16,
             "num_balls": 3,
             "ball_positions": [
               1,
@@ -318,7 +407,7 @@
             }
           },
           {
-            "index": 6,
+            "index": 17,
             "num_balls": 3,
             "ball_positions": [
               1,
@@ -348,7 +437,7 @@
             }
           },
           {
-            "index": 11,
+            "index": 18,
             "num_balls": 3,
             "ball_positions": [
               2,
@@ -378,7 +467,7 @@
             }
           },
           {
-            "index": 13,
+            "index": 19,
             "num_balls": 3,
             "ball_positions": [
               2,
@@ -408,7 +497,7 @@
             }
           },
           {
-            "index": 30,
+            "index": 20,
             "num_balls": 3,
             "ball_positions": [
               1,
@@ -441,7 +530,7 @@
 
     "three_dm": [
         {
-            "index": 1,
+            "index": 21,
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [224, 149, 200],
@@ -455,7 +544,7 @@
             "file_name": "videos/complex/three_dm/stim1.mp4"
         },
         {
-            "index": 2,
+            "index": 22,
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [166, 208, 215],
@@ -468,7 +557,7 @@
             "file_name": "videos/complex/three_dm/stim2.mp4"
         },
         {
-            "index": 3,
+            "index": 23,
             "num_balls": 3,
             "ball_positions": [1, 2, 3],
             "angles": [224, 214, 204],
@@ -482,7 +571,7 @@
             "file_name": "videos/complex/three_dm/stim3.mp4"
         },
         {
-            "index": 4,
+            "index": 24,
             "num_balls": 3,
             "ball_positions": [1, 3, 5],
             "angles": [154, 164, 204],
@@ -496,7 +585,7 @@
             "file_name": "videos/complex/three_dm/stim4.mp4"
         },
         {
-            "index": 5,
+            "index": 25,
             "num_balls": 3,
             "ball_positions": [2, 4, 5],
             "angles": [160, 164, 212],
@@ -510,7 +599,7 @@
             "file_name": "videos/complex/three_dm/stim5.mp4"
         },
         {
-            "index": 40,
+            "index": 26,
             "num_balls": 3,
             "ball_positions": [
               3,
@@ -540,7 +629,7 @@
             }
           },
           {
-            "index": 41,
+            "index": 27,
             "num_balls": 3,
             "ball_positions": [
               3,
@@ -570,7 +659,7 @@
             }
           },
           {
-            "index": 45,
+            "index": 28,
             "num_balls": 3,
             "ball_positions": [
               1,
@@ -600,7 +689,7 @@
             }
           },
           {
-            "index": 46,
+            "index": 29,
             "num_balls": 3,
             "ball_positions": [
               2,
@@ -630,7 +719,7 @@
             }
           },
           {
-            "index": 48,
+            "index": 30,
             "num_balls": 3,
             "ball_positions": [
               1,

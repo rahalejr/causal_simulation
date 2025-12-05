@@ -23,7 +23,7 @@ gate_gap_height = 225
 
 # radomly assign ball colors
 red, green, yellow, blue, purple = (255, 0, 0), (20, 82, 20), (255, 255, 0), (0, 0, 255), (128, 0, 128)
-colors = [red, green, yellow, blue, purple]
+colors = [red, green, blue]
 
 # fix this redundancy
 col_dict = {
@@ -219,8 +219,6 @@ def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_ind
         {'ball': 1, 'rgb': colors[0]},
         {'ball': 2, 'rgb': colors[1]},
         {'ball': 3, 'rgb': colors[2]},
-        {'ball': 4, 'rgb': colors[3]},
-        {'ball': 5, 'rgb': colors[4]}
 ]
 
     shutil.rmtree("frames") if os.path.exists("frames") else None
@@ -316,7 +314,7 @@ def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_ind
                 sim_seconds += time_step
                 sim.sim_seconds += time_step
 
-        if (hit and sim_seconds > hit+2) or sim_seconds > 10:
+        if (hit and sim_seconds > hit+2) or sim_seconds > 8:
             running = False
 
         if not headless:
@@ -377,7 +375,7 @@ def run(condition, actual_data = None, noise = 0.1, cause_color='red', cause_ind
         'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
         'final_pos': final_pos,
         'collisions': sim.collisions,
-        'duration': sim_seconds
+        'duration': round(hit, 2)
     }
 
 if __name__ == '__main__':
