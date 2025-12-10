@@ -16,6 +16,7 @@ class Condition:
         for i in ball_positions:
             self.y_positions.append(round(spacing*i))
 
+        self.ball_positions = ball_positions
         self.angles = angles
         self.radians = [ang*np.pi/180 for ang in angles]
         self.preemption = preemption

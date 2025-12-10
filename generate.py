@@ -76,19 +76,19 @@ def generate_conditions():
 
 def play_conditions():
 
-    filtered = get_conditions('complex_conditions.json')
+    collisions = get_conditions('collisions.json')
     kept = []
 
-    for c in filtered['training']:
+    for c in collisions:
 
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
-        output = run(cond, 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
-        if input("Keep?: ").upper() == 'Y':
-            if input("Play Counterfactual?: ").upper() == 'Y':
-                run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
-            kept.append(c)
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
+        output = run(cond, actual_data = None, cause_color = 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
+        # if input("Keep?: ").upper() == 'Y':
+        #     if input("Play Counterfactual?: ").upper() == 'Y':
+        #         run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
+        #     kept.append(c)
 
-    add_conditions(kept, filename="training.json", append=True)
+    # add_conditions(kept, filename="training.json", append=True)
 
 def record_conditions():
 
@@ -113,8 +113,8 @@ def record_conditions():
 
 if __name__ == '__main__':
     # generate_conditions()
-    # play_conditions()
-    record_conditions()
+    play_conditions()
+    # record_conditions()
     # simple_info()
 
 

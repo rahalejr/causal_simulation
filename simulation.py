@@ -23,7 +23,7 @@ gate_gap_height = 225
 
 # radomly assign ball colors
 red, green, yellow, blue, purple = (255, 0, 0), (20, 82, 20), (255, 255, 0), (0, 0, 255), (128, 0, 128)
-colors = [red, green, yellow, blue, purple]
+colors = [green, red, yellow, blue, purple]
 
 # fix this redundancy
 col_dict = {
@@ -53,6 +53,8 @@ class Simulation:
         self.cause_ball = ''
         self.step = 0
         self.sim_seconds = 0
+
+        self.pending_noise = []
     
     def get_ball(self, name):
         try:
@@ -131,10 +133,11 @@ class CollisionListener(b2ContactListener):
                     matching = True
                     break
             # unique counterfactual collision, no instance in actual
-            if matching == False:
+            if not matching:
                 for obj in [A,B]:
                     if isinstance(obj, Ball):
-                        obj.add_noise(self.sim.noise)
+                        self.sim.pending_noise.append(obj)
+                        # obj.add_noise(self.sim.noise)
 
         names, noisy = [], False
         if isinstance(A, Ball):
@@ -218,21 +221,12 @@ def is_hit(sim, effect_ball, sim_seconds):
 
 #need to pass in actual data
 def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
-
-    ind = colors.index(col_dict[cause_color])
-    colors.pop(ind)
-    shuffle(colors)
-    colors.insert(cause_ball-1, col_dict[cause_color])
+    ball_colors = [colors[i-1] for i in condition.ball_positions]
 
     # ball parameters
-    ball_params = [
-        {'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0},
-        {'ball': 1, 'rgb': colors[0]},
-        {'ball': 2, 'rgb': colors[1]},
-        {'ball': 3, 'rgb': colors[2]},
-        {'ball': 4, 'rgb': colors[3]},
-        {'ball': 5, 'rgb': colors[4]}
-    ]
+    ball_params = [{'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0}]
+    for i in range(len(ball_colors)):
+        ball_params.append({'ball': i+1, 'rgb': ball_colors[i]})
 
     shutil.rmtree("frames") if os.path.exists("frames") else None
     os.makedirs("frames")
@@ -383,7 +377,7 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
         'cause_collisions': cause_ball.all_collisions,
         'noise_ball': noise_ball.name if noise_ball else None,
         'diverge': diverge_step,
-        'colors': [rgb_to_name[c] for c in colors[0:sim.num_balls]],
+        'colors': [rgb_to_name[c] for c in ball_colors],
         'final_pos': final_pos,
         'collisions': sim.collisions
     }
