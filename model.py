@@ -11,10 +11,9 @@ from conditions import Condition
 n_simulations = 1
 
 def process_conditions(conds_list):
-    for i in conds_list:
-        cond = Condition(i['angles'], [1, 2, 3, 4, 5], i['preemption'], i['unambiguous'], i['jitter'])
+    for c in conds_list:
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
         run_condition(cond)
-    pass
 
 def run_condition(cond):
 
@@ -170,16 +169,8 @@ def collision_compare(output, counterfactual):
     return noisy_steps
 
 if __name__ == '__main__':
-    filename = 'video_meta.json'
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
-            try:
-                data = json.load(f)
-            except json.JSONDecodeError:
-                data = []
-    else:
-        data = []
-    
-    #process_conditions(data[8:])
-    cond = [data[4]]
-    process_conditions(cond)
+    filename = 'collisions.json'
+    with open(filename, 'r') as f:
+        data = json.load(f)
+
+    process_conditions(data)
