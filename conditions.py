@@ -7,7 +7,7 @@ ball_radius = 28
 
 class Condition:
 
-    def __init__(self, angles, ball_positions, preemption=False, unambiguous=False, jitter=None, filename=''):
+    def __init__(self, angles, ball_positions, preemption=False, unambiguous=False, jitter=None, filename='', order=[-1,-1,-1], index=-1):
         self.num_balls = len(angles)
         
         self.y_positions = []
@@ -15,7 +15,7 @@ class Condition:
 
         for i in ball_positions:
             self.y_positions.append(round(spacing*i))
-
+        self.order = order
         self.ball_positions = ball_positions
         self.angles = angles
         self.radians = [ang*np.pi/180 for ang in angles]
@@ -27,6 +27,7 @@ class Condition:
         self.diverge = 0
         self.noise_ball = None
         self.filename = filename
+        self.index = index
 
         if not jitter:
             jitter_scale = 20 if self.num_balls > 2 else 50

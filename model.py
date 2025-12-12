@@ -5,6 +5,7 @@ import os
 import json
 import copy
 import numpy as np
+import pandas as pd
 from simulation import run, gaussian_noise
 from conditions import Condition
 
@@ -15,11 +16,16 @@ perturb_simulations = 10
 perturb = 3
 
 def process_conditions(conds_list):
+    table = []
     for c in conds_list:
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
-        run_condition(cond)
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'], order=c['order'])
+        table += run_condition(cond)
+    
+    df = pd.DataFrame(table)
+    df.to_csv('csm_output.csv', index=False)
 
 def run_condition(cond):
+    results = []
 
     actual_output=run(cond, record=False, counterfactual=None, headless=(not debug))
 
@@ -61,13 +67,19 @@ def run_condition(cond):
         print('robust ', c)
         robust_balls += [robust(actual_output, cond, c)]
     
-    #test
-    print("DM ", diff_maker_balls, "\n")
-    print("HOW ", how_balls, "\n")
-    print("WHETHER ", whether_balls, "\n")
-    print("SUFFICIENT ", sufficient_balls, "\n")
-    print("ROBUST ", robust_balls, "\n")
-    return
+    for b in range(cond.num_balls):
+        row = {
+            'stimulus': cond.index,
+            'ball_index': b+1,                         # 1-based index
+            'order': cond.order[b],                    # order value from condition
+            'DM': diff_maker_balls[b],
+            'HOW': how_balls[b],
+            'WHETHER': whether_balls[b],
+            'SUFFICIENT': sufficient_balls[b],
+            'ROBUST': robust_balls[b]
+        }
+        results.append(row)
+    return results
 
 def difference_maker(actual_output, cond, c):
     new_cond = remove_ball(cond,c)
@@ -185,4 +197,4 @@ if __name__ == '__main__':
     with open(filename, 'r') as f:
         data = json.load(f)
 
-    process_conditions([data[29]])
+    process_conditions(data[0:3])
