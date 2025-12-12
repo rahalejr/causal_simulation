@@ -9,6 +9,8 @@ from simulation import run, gaussian_noise
 from conditions import Condition
 
 n_simulations = 1
+perturb_simulations = 1
+perturb = 1
 
 def process_conditions(conds_list):
     for c in conds_list:
@@ -28,26 +30,31 @@ def run_condition(cond):
     # difference maker cause
     diff_maker_balls = []
     for c in range(cond.num_balls):
+        print('DM ', c)
         diff_maker_balls += [difference_maker(actual_output, cond, c)]
             
     # whether cause
     whether_balls = []
     for c in range(cond.num_balls):
+        print('whether ', c)
         whether_balls+= [whether(actual_output, cond, c)]
 
     # how cause
     how_balls = []
     for c in range(cond.num_balls):
-        how_balls += [how(actual_output, cond, c, n_simulations)]
+        print('how ', c)
+        how_balls += [how(actual_output, cond, c)]
     
     # sufficient cause
     sufficient_balls = []
     for c in range(cond.num_balls):
+        print('sufficient ', c)
         sufficient_balls += [sufficient(actual_output,cond, c)]
 
     #robust cause
     robust_balls = []
     for c in range(cond.num_balls):
+        print('robust ', c)
         robust_balls += [robust(actual_output, cond, c)]
     
     #test
@@ -74,11 +81,10 @@ def whether(actual_output, cond, c):
         outcomes.append(actual_output['hit']!= output['hit'])
     return sum(outcomes)/float(n_simulations)
     
-def how(actual_output, cond, c, n_simulations):
-    new_cond = change_ball(cond,c)
+def how(actual_output, cond, c):
     outcomes = []
-    for _ in range(0,n_simulations):
-        #need to add noise to these, right now they are all identical
+    for _ in range(0, perturb_simulations):
+        new_cond = change_ball(cond,c)
         output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=False)
         outcomes.append((output['final_pos'], output['sim_time']) != (actual_output['final_pos'] , actual_output['sim_time']))
     return sum(outcomes)/float(n_simulations)
@@ -93,12 +99,13 @@ def sufficient(actual_output, cond, c):
     return sum(outcomes)/float(n_simulations)
 
 def robust(actual_output, cond, c):
-    new_cond = change_others(cond,c)
     outcomes = []
-    for _ in range(0,n_simulations):
-        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=False)
+    for _ in range(0,perturb_simulations):
+        new_cond = change_others(cond,c)
+        new_actual = run(new_cond, record=False, counterfactual=None, headless=False)
+        output = run(new_cond, actual_data=new_actual, record=False, counterfactual=None, headless=False)
         # if goal still occurs when changing others
-        outcomes.append(output['hit'])
+        outcomes.append(output['hit'] != new_actual['hit'])
     return sum(outcomes)/float(n_simulations)
 
 def remove_ball(cond, c):
@@ -109,40 +116,40 @@ def remove_ball(cond, c):
     del new_cond.radians[c]
     del new_cond.jitter['x'][c]
     del new_cond.jitter['y'][c]
+    del new_cond.ball_positions[c]
     new_cond.num_balls -= 1
 
     return new_cond
 
 def remove_others(cond, c):
     new_cond = copy.deepcopy(cond)
-
-    del new_cond.angles[:c]
-    del new_cond.angles[c+1:]
-    del new_cond.y_positions[:c]
-    del new_cond.y_positions[c+1:]
-    del new_cond.radians[:c]
-    del new_cond.radians[c+1:]
-    del new_cond.jitter['x'][:c]
-    del new_cond.jitter['y'][:c]
-    del new_cond.jitter['x'][c+1:]
-    del new_cond.jitter['y'][c+1:]
+    inds = list(range(cond.num_balls))
+    inds.pop(c)
+    inds = sorted(inds, reverse=True)
+    for i in inds:
+        del new_cond.angles[i]
+        del new_cond.y_positions[i]
+        del new_cond.radians[i]
+        del new_cond.jitter['x'][i]
+        del new_cond.jitter['y'][i]
+        del new_cond.ball_positions[i]
+    
     new_cond.num_balls = 1
     
     return new_cond
 
 def change_ball(cond, c):
     new_cond = copy.deepcopy(cond)
-    new_cond.angles[c] += gaussian_noise(0.0001)
-    new_cond.radians[c] = new_cond.angles[c] * np.pi / 180
+    new_cond.jitter['x'][c] += gaussian_noise(1)*perturb
+    new_cond.jitter['y'][c] += gaussian_noise(1)*perturb
     return new_cond
 
 def change_others(cond, c):
     new_cond = copy.deepcopy(cond)
     for i in range(cond.num_balls):
-        if i == c : continue
-        else:
-            new_cond.angles[i] += gaussian_noise(10)
-            new_cond.radians[i] = new_cond.angles[i] * np.pi / 180
+        if i != c :
+            new_cond.jitter['x'][i] += gaussian_noise(1)*perturb
+            new_cond.jitter['y'][i] += gaussian_noise(1)*perturb
     return new_cond
 
 #useless function 
@@ -151,7 +158,7 @@ def collision_compare(output, counterfactual):
     j = 0
     noisy_steps = []
     #is this an off by 1 error?, does it run when i == len(output?)
-    while i < len(output['collisions']) and j < len(counterfactual['collisions']):
+    while i <= len(output['collisions']) and j <= len(counterfactual['collisions']):
         #need to make fool proof by comparing objects too
         if output['collisions'][i] == counterfactual['collisions'][j]:
             i += 1
