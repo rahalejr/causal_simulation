@@ -111,6 +111,7 @@ class Ball:
     def add_noise(self, noise=2):
         z = gaussian_noise(1)
         angle_deg = z * noise
+        print(angle_deg, self.name)
         angle_rad = angle_deg * (math.pi / 180)
 
         self.rotate_velocity(angle_rad)
@@ -134,6 +135,7 @@ class CollisionListener(b2ContactListener):
                     matching = True
                     break
             if not matching:
+                print('noise add')
                 for obj in [A,B]:
                     if isinstance(obj, Ball):
                         self.sim.pending_noise.append(obj)
@@ -219,7 +221,7 @@ def is_hit(sim, effect_ball, sim_seconds):
     return False, 0
 
 #need to pass in actual data
-def run(condition, actual_data = None, noise = 2, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
+def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
     ball_colors = [colors[i-1] for i in condition.ball_positions]
 
     # ball parameters
@@ -278,9 +280,29 @@ def run(condition, actual_data = None, noise = 2, cause_color='red', cause_ball 
             sim_seconds     += time_step
 
             if sim.pending_noise:
-                for b in sim.pending_noise:
+                for b in set(sim.pending_noise):
                     b.add_noise(sim.noise)
                 sim.pending_noise.clear()
+
+            if actual_data:
+                actual_collisions = actual_data['collisions']
+                cf_current = sim.collisions[-1] if sim.collisions else None
+
+                for ac in actual_collisions:
+                    if sim.step - ac['step'] == 1:
+
+                        matched = False
+                        if cf_current:
+                            if cf_current['objects'] == ac['objects']:
+                                matched = True
+
+                        if not matched:
+                            # inject noise into all involved balls
+                            for obj in ac['objects']:
+                                b = sim.find_ball(obj)
+                                if isinstance(b, Ball):
+                                    sim.pending_noise.append(b) 
+
 
         if (hit and sim_seconds > hit + 2) or sim_seconds > 6:
             break
@@ -337,26 +359,6 @@ def run(condition, actual_data = None, noise = 2, cause_color='red', cause_ball 
     else:
         noise_ball, diverge_step = None, None
 
-
-    if actual_data:
-        for collision in actual_data['collisions']:
-            if collision['step'] == sim.step:
-                #prevents index error if sim.collisions is empty
-                if not sim.collisions:
-                    for obj in collision['objects']:
-                        b = sim.find_ball(obj)
-                        if isinstance(b, Ball):
-                            sim.pending_noise.append(b)
-                #if there is a counterfactual collision at the same (current) step with the same objects
-                elif sim.collisions[-1]['step'] == sim.step and sim.collisions[-1]['objects'] == collision['objects']:
-                    continue
-                #if there ISNT a matching counterfactual collision, add noise to both balls
-                else:
-                    for obj in collision['objects']:
-                        b = sim.find_ball(obj)
-                        if isinstance(b, Ball):
-                            sim.pending_noise.append(b)
-                        
 
     return {
         'num_balls': sim.num_balls,

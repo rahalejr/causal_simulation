@@ -8,9 +8,11 @@ import numpy as np
 from simulation import run, gaussian_noise
 from conditions import Condition
 
-n_simulations = 1
-perturb_simulations = 1
-perturb = 1
+debug = False
+
+n_simulations = 10
+perturb_simulations = 10
+perturb = 3
 
 def process_conditions(conds_list):
     for c in conds_list:
@@ -19,8 +21,10 @@ def process_conditions(conds_list):
 
 def run_condition(cond):
 
-    actual_output=run(cond, record=False, counterfactual=None, headless=False)
-    #counterfactual = run(remove_ball(cond, 2),record=False, counterfactual=None, headless=False)
+    actual_output=run(cond, record=False, counterfactual=None, headless=(not debug))
+
+    # whether(actual_output, cond, 1)
+    #counterfactual = run(remove_ball(cond, 2),record=False, counterfactual=None, headless=(not debug))
     #print(collision_compare(actual_output, counterfactual)) 
     #whether(actual_output, cond, 2)
     #how(actual_output, cond, 2)
@@ -59,33 +63,33 @@ def run_condition(cond):
     
     #test
     print("DM ", diff_maker_balls, "\n")
-    print("HOW ", diff_maker_balls, "\n")
-    print("WHETHER ", diff_maker_balls, "\n")
-    print("SUFFICIENT ", diff_maker_balls, "\n")
-    print("ROBUST ", diff_maker_balls, "\n")
+    print("HOW ", how_balls, "\n")
+    print("WHETHER ", whether_balls, "\n")
+    print("SUFFICIENT ", sufficient_balls, "\n")
+    print("ROBUST ", robust_balls, "\n")
     return
 
 def difference_maker(actual_output, cond, c):
     new_cond = remove_ball(cond,c)
     outcomes = []
     for _ in range(0,n_simulations):
-        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=False)
+        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=(not debug))
         outcomes.append((output['final_pos'], output['sim_time']) != (actual_output['final_pos'] , actual_output['sim_time']))
     return sum(outcomes)/float(n_simulations)
          
-def whether(actual_output, cond, c):
+def whether(actual_output, cond, c, num_sims=n_simulations):
     new_cond = remove_ball(cond,c)
     outcomes = []
-    for _ in range(0,n_simulations):
-        output = run(new_cond, actual_data=actual_output,record=False, counterfactual=None, headless=False)
+    for _ in range(0,num_sims):
+        output = run(new_cond, actual_data=actual_output,record=False, counterfactual=None, headless=(not debug))
         outcomes.append(actual_output['hit']!= output['hit'])
-    return sum(outcomes)/float(n_simulations)
+    return sum(outcomes)/float(num_sims)
     
 def how(actual_output, cond, c):
     outcomes = []
     for _ in range(0, perturb_simulations):
         new_cond = change_ball(cond,c)
-        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=False)
+        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=(not debug))
         outcomes.append((output['final_pos'], output['sim_time']) != (actual_output['final_pos'] , actual_output['sim_time']))
     return sum(outcomes)/float(n_simulations)
 
@@ -93,7 +97,7 @@ def sufficient(actual_output, cond, c):
     new_cond = remove_others(cond, c)
     outcomes = []
     for _ in range(0,n_simulations):
-        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=False)
+        output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=(not debug))
         # this is effectively the whether cause, comparing to all cause balls removed (always false)
         outcomes.append(output['hit'])
     return sum(outcomes)/float(n_simulations)
@@ -102,10 +106,11 @@ def robust(actual_output, cond, c):
     outcomes = []
     for _ in range(0,perturb_simulations):
         new_cond = change_others(cond,c)
-        new_actual = run(new_cond, record=False, counterfactual=None, headless=False)
-        output = run(new_cond, actual_data=new_actual, record=False, counterfactual=None, headless=False)
+        new_actual = run(new_cond, record=False, counterfactual=None, headless=(not debug))
+        cond_whether = remove_ball(new_cond, c)
+        new_whether = run(cond_whether, actual_data=new_actual, record=False, counterfactual=None, headless=(not debug))
         # if goal still occurs when changing others
-        outcomes.append(output['hit'] != new_actual['hit'])
+        outcomes.append(new_whether['hit'] == False and new_actual['hit'] == True)
     return sum(outcomes)/float(n_simulations)
 
 def remove_ball(cond, c):
@@ -180,4 +185,4 @@ if __name__ == '__main__':
     with open(filename, 'r') as f:
         data = json.load(f)
 
-    process_conditions(data)
+    process_conditions([data[29]])
