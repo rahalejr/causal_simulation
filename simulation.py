@@ -229,8 +229,9 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
     for i in range(len(ball_colors)):
         ball_params.append({'ball': i+1, 'rgb': ball_colors[i], 'position': condition.ball_positions[i]})
 
-    shutil.rmtree("frames") if os.path.exists("frames") else None
-    os.makedirs("frames")
+    if record:
+        shutil.rmtree("frames") if os.path.exists("frames") else None
+        os.makedirs("frames")
 
     if not headless:
         pygame.init()

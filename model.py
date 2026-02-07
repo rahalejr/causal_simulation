@@ -1,5 +1,4 @@
-# noise values range from .1 to 2
-# how many e's do we need to generate?
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 import os
 import json
@@ -11,33 +10,47 @@ from conditions import Condition
 
 debug = False
 
-n_simulations = 10
+n_simulations = 100
 perturb_simulations = 10
 perturb = 3
 
+
 def process_conditions(conds_list):
     table = []
-    for c in conds_list:
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'], order=c['order'])
-        table += run_condition(cond)
-    
-    df = pd.DataFrame(table)
+
+    payloads = []
+    for i, c in enumerate(conds_list):
+        stim_index = c.get('index', i)
+        payloads.append((c, stim_index))
+
+    with ProcessPoolExecutor() as ex:
+        futures = [ex.submit(run_condition, p) for p in payloads]
+        results = [f.result() for f in as_completed(futures)]
+
+    for stim_index, rows in sorted(results, key=lambda x: x[0]):
+        table.extend(rows)
+
+    df = pd.DataFrame(table).sort_values(['stimulus', 'ball_index'], kind='mergesort').reset_index(drop=True)
     df.to_csv('csm_output.csv', index=False)
 
-def run_condition(cond):
+
+def run_condition(payload):
+    c, stim_index = payload
+    cond = Condition(
+        index           = stim_index,
+        angles          = c['angles'],
+        preemption      = c['preemption'],
+        jitter          = c['jitter'],
+        ball_positions  = c['ball_positions'],
+        filename        = c['filename'],
+        order           = c['order']
+    )
+
     results = []
 
     actual_output=run(cond, record=False, counterfactual=None, headless=(not debug))
 
-    # whether(actual_output, cond, 1)
-    #counterfactual = run(remove_ball(cond, 2),record=False, counterfactual=None, headless=(not debug))
-    #print(collision_compare(actual_output, counterfactual)) 
-    #whether(actual_output, cond, 2)
-    #how(actual_output, cond, 2)
-    #sufficient(cond, 2)
-    #robust(actual_output, cond, 2)
-    #print(collision_compare(actual_output, counterfactual))
-    # difference maker cause
+
     diff_maker_balls = []
     for c in range(cond.num_balls):
         print('DM ', c)
@@ -79,7 +92,7 @@ def run_condition(cond):
             'ROBUST': robust_balls[b]
         }
         results.append(row)
-    return results
+    return stim_index, results
 
 def difference_maker(actual_output, cond, c):
     new_cond = remove_ball(cond,c)
@@ -193,8 +206,8 @@ def collision_compare(output, counterfactual):
     return noisy_steps
 
 if __name__ == '__main__':
-    filename = 'collisions.json'
+    filename = 'new_coll.json'
     with open(filename, 'r') as f:
         data = json.load(f)
 
-    process_conditions(data[0:3])
+    process_conditions(data)
