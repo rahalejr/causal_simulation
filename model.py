@@ -10,8 +10,8 @@ from conditions import Condition
 
 debug = False
 
-n_simulations = 100
-perturb_simulations = 10
+n_simulations = 1000
+perturb_simulations = 100
 perturb = 3
 
 
@@ -23,7 +23,7 @@ def process_conditions(conds_list):
         stim_index = c.get('index', i)
         payloads.append((c, stim_index))
 
-    with ProcessPoolExecutor() as ex:
+    with ProcessPoolExecutor(max_workers=8) as ex:
         futures = [ex.submit(run_condition, p) for p in payloads]
         results = [f.result() for f in as_completed(futures)]
 
@@ -83,8 +83,8 @@ def run_condition(payload):
     for b in range(cond.num_balls):
         row = {
             'stimulus': cond.index,
-            'ball_index': b+1,                         # 1-based index
-            'order': cond.order[b],                    # order value from condition
+            'ball_index': b+1,
+            'order': cond.order[b],
             'DM': diff_maker_balls[b],
             'HOW': how_balls[b],
             'WHETHER': whether_balls[b],
