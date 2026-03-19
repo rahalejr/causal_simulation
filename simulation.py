@@ -220,9 +220,11 @@ def is_hit(sim, effect_ball, sim_seconds):
         return sim_seconds, final_pos
     return False, 0
 
-#need to pass in actual data
-def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
+
+def run(condition, pause = 10, actual_data = None, noise = 3, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
     ball_colors = [colors[i-1] for i in condition.ball_positions]
+
+    screen = pygame.display.set_mode((1000, 800), display=1)
 
     # ball parameters
     ball_params = [{'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0, 'position': -1}]
@@ -261,10 +263,21 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
     collision_listener = CollisionListener(sim)
     world.contactListener = collision_listener 
 
+    moving_ball = sim.balls[1] if len(sim.balls) > 1 else None
+
+    effect_start_pos = (effect_ball.body.position[0], effect_ball.body.position[1])
+    moving_start_pos = (moving_ball.body.position[0], moving_ball.body.position[1]) if moving_ball else None
+
+    initial_distance_to_effect = math.sqrt(
+    (moving_start_pos[0] - effect_start_pos[0])**2 +
+    (moving_start_pos[1] - effect_start_pos[1])**2
+    ) if moving_ball else None
+
     running, hit = True, False
     sim_seconds = 0
     final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
+    confidence = None;
 
     while running:
 
@@ -279,6 +292,25 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
             sim.step        += 1
             sim.sim_seconds += time_step
             sim_seconds     += time_step
+
+            if moving_ball and initial_distance_to_effect:
+                distance_to_effect = math.sqrt(
+                    (moving_ball.body.position[0] - effect_ball.body.position[0])**2 +
+                    (moving_ball.body.position[1] - effect_ball.body.position[1])**2
+                )
+                percent_x_distance = (
+                    (initial_distance_to_effect - distance_to_effect) / initial_distance_to_effect * 100
+                )
+            else:
+                print('broken')
+                percent_x_distance = 0
+            
+            if percent_x_distance >= pause:
+                confidence = input(f"Confidence in cause (0-100)?: ")
+                confidence = int(confidence)/10
+                running = False
+                break
+
 
             if sim.pending_noise:
                 for b in set(sim.pending_noise):
@@ -315,10 +347,8 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
 
             screen.fill((255, 255, 255))
 
-            if frame_count == 0:
-                effect_start_pos = (int(effect_ball.body.position[0]) + 6, int(effect_ball.body.position[1]) + 6)
 
-            draw_checkerboard_square(screen, effect_start_pos, side=ball_radius * 2 + 12)
+            draw_checkerboard_square(screen, [effect_start_pos[0]+6, effect_start_pos[1]+6], side=ball_radius * 2 + 12)
 
             vert_wall_len = (height - gate_gap_height - 2 * margin) / 2
 
@@ -360,21 +390,25 @@ def run(condition, actual_data = None, noise = 3, cause_color='red', cause_ball 
     else:
         noise_ball, diverge_step = None, None
 
-
     return {
-        'num_balls': sim.num_balls,
-        'clear_cut': True if hit and noise_ball is None and len(effect_ball.collided_with) == 1 else False,
-        'angles': condition.angles,
-        'sim_time': sim_seconds,
-        'hit': isinstance(hit, float),
-        'cause_ball': cause_ball.name if cause_ball else None,
-        'cause_collisions': cause_ball.all_collisions if cause_ball else None,
-        'noise_ball': noise_ball.name if noise_ball else None,
-        'diverge': diverge_step,
-        'colors': [rgb_to_name[c] for c in ball_colors],
-        'final_pos': final_pos,
-        'collisions': sim.collisions
+        'pause': pause,
+        'confidence': confidence
     }
+
+    # return {
+    #     'num_balls': sim.num_balls,
+    #     'clear_cut': True if hit and noise_ball is None and len(effect_ball.collided_with) == 1 else False,
+    #     'angles': condition.angles,
+    #     'sim_time': sim_seconds,
+    #     'hit': isinstance(hit, float),
+    #     'cause_ball': cause_ball.name if cause_ball else None,
+    #     'cause_collisions': cause_ball.all_collisions if cause_ball else None,
+    #     'noise_ball': noise_ball.name if noise_ball else None,
+    #     'diverge': diverge_step,
+    #     'colors': [rgb_to_name[c] for c in ball_colors],
+    #     'final_pos': final_pos,
+    #     'collisions': sim.collisions
+    # }
 
 if __name__ == '__main__':
     pass

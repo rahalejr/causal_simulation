@@ -44,9 +44,9 @@ def add_conditions(new_data, filename='conditions.json', append=True):
 def generate_conditions():
     kept_conditions = []
 
-    for j in [4]:
+    for j in [1]:
         for _ in range(200):
-            sd = 30 if j==2 else 20
+            sd = 30
             num_angles = j
             raw_angles = np.random.normal(loc=180, scale=sd, size=num_angles)
             clipped_angles = np.clip(raw_angles, 110, 250)
@@ -54,6 +54,8 @@ def generate_conditions():
             cond = Condition(angles, False)
 
             sim = run(cond, record=False, counterfactual=None, headless=True)
+
+
 
             if sim['hit'] and sim['clear_cut']:
                 counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'diverge': 150, 'noise_ball': sim['noise_ball']}, headless=True)
@@ -76,19 +78,22 @@ def generate_conditions():
 
 def play_conditions():
 
-    collisions = get_conditions('collisions.json')
-    kept = []
+    collisions = get_conditions('calibration.json')
+    post = []
 
-    for c in collisions:
+    for interval in [25, 40, 70]:
+        shuffle(collisions)
 
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
-        output = run(cond, actual_data = None, cause_color = 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
+        for c in collisions:
+            cond = Condition(angles=c['angles'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
+            output = run(cond, pause=interval, actual_data = None, cause_color = 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
+            post.append({**c, 'pause': interval, 'confidence': output['confidence']})
         # if input("Keep?: ").upper() == 'Y':
         #     if input("Play Counterfactual?: ").upper() == 'Y':
         #         run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
         #     kept.append(c)
 
-    # add_conditions(kept, filename="training.json", append=True)
+    add_conditions(post, filename="calibrated.json", append=True)
 
 def record_conditions():
 

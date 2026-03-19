@@ -1,0 +1,553 @@
+[
+  {
+    "index": 1,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      230
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "hit": false,
+    "jitter": {
+      "x": [
+        0
+      ],
+      "y": [
+        0
+      ]
+    },
+    "breakpoint": 2.13,
+    "filename": "stimuli/collisions/calibration/stim1.mp4"
+  },
+  {
+    "index": 2,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      237
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "hit": true,
+    "jitter": {
+      "x": [
+        0
+      ],
+      "y": [
+        0
+      ]
+    },
+    "breakpoint": 2.5,
+    "filename": "stimuli/collisions/calibration/stim2.mp4"
+  },
+  {
+    "index": 3,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      120
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "hit": false,
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "breakpoint": 2.93,
+    "filename": "stimuli/collisions/calibration/stim3.mp4"
+  },
+  {
+    "index": 4,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      160
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "hit": true,
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "breakpoint": 1.57,
+    "filename": "stimuli/collisions/calibration/stim4.mp4"
+  },
+  {
+    "index": 5,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      119
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "hit": false,
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "breakpoint": 3.0,
+    "filename": "stimuli/collisions/calibration/stim5.mp4"
+  },
+  {
+    "index": 6,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      185
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.47,
+    "filename": "stimuli/collisions/calibration/stim6.mp4"
+  },
+  {
+    "index": 7,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      180
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 1.47,
+    "filename": "stimuli/collisions/calibration/stim7.mp4"
+  },
+  {
+    "index": 8,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      129
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 2.33,
+    "filename": "stimuli/collisions/calibration/stim8.mp4"
+  },
+  {
+    "index": 9,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      140
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.9,
+    "filename": "stimuli/collisions/calibration/stim9.mp4"
+  },
+  {
+    "index": 10,
+    "num_balls": 1,
+    "ball_positions": [
+      5
+    ],
+    "angles": [
+      200
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 1.57,
+    "filename": "stimuli/collisions/calibration/stim10.mp4"
+  },
+  {
+    "index": 11,
+    "num_balls": 1,
+    "ball_positions": [
+      5
+    ],
+    "angles": [
+      150
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 1.7,
+    "filename": "stimuli/collisions/calibration/stim11.mp4"
+  },
+  {
+    "index": 12,
+    "num_balls": 1,
+    "ball_positions": [
+      5
+    ],
+    "angles": [
+      153
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.63,
+    "filename": "stimuli/collisions/calibration/stim12.mp4"
+  },
+  {
+    "index": 13,
+    "num_balls": 1,
+    "ball_positions": [
+      5
+    ],
+    "angles": [
+      147
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.73,
+    "filename": "stimuli/collisions/calibration/stim13.mp4"
+  },
+  {
+    "index": 14,
+    "num_balls": 1,
+    "ball_positions": [
+      2
+    ],
+    "angles": [
+      130
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 2.26,
+    "filename": "stimuli/collisions/calibration/stim14.mp4"
+  },
+  {
+    "index": 15,
+    "num_balls": 1,
+    "ball_positions": [
+      2
+    ],
+    "angles": [
+      133
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 2.13,
+    "filename": "stimuli/collisions/calibration/stim15.mp4"
+  },
+  {
+    "index": 16,
+    "num_balls": 1,
+    "ball_positions": [
+      2
+    ],
+    "angles": [
+      127
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 2.43,
+    "filename": "stimuli/collisions/calibration/stim16.mp4"
+  },
+  {
+    "index": 17,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      137
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 2.0,
+    "filename": "stimuli/collisions/calibration/stim17.mp4"
+  },
+  {
+    "index": 18,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      132
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 2.2,
+    "filename": "stimuli/collisions/calibration/stim18.mp4"
+  },
+  {
+    "index": 19,
+    "num_balls": 1,
+    "ball_positions": [
+      3
+    ],
+    "angles": [
+      142
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.86,
+    "filename": "stimuli/collisions/calibration/stim19.mp4"
+  },
+  {
+    "index": 20,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      160
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": true,
+    "breakpoint": 1.57,
+    "filename": "stimuli/collisions/calibration/stim20.mp4"
+  },
+  {
+    "index": 21,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      155
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.63,
+    "filename": "stimuli/collisions/calibration/stim21.mp4"
+  },
+  {
+    "index": 22,
+    "num_balls": 1,
+    "ball_positions": [
+      1
+    ],
+    "angles": [
+      165
+    ],
+    "cause_ball": 1,
+    "order": [
+      1
+    ],
+    "jitter": {
+      "x": [
+        30
+      ],
+      "y": [
+        0
+      ]
+    },
+    "hit": false,
+    "breakpoint": 1.53,
+    "filename": "stimuli/collisions/calibration/stim22.mp4"
+  }
+]
+
