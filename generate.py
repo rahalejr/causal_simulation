@@ -1,6 +1,8 @@
 import os
 import json
 import numpy as np
+import multiprocessing as mp
+from concurrent.futures import ProcessPoolExecutor
 from random import shuffle
 from simulation import run
 from conditions import Condition
@@ -31,13 +33,11 @@ def simple_info(filename='kept_video_meta.json'):
 def add_conditions(new_data, filename='conditions.json', append=True):
     conditions = get_conditions(filename) if append else []
     
-    # append new data
     if isinstance(new_data, list):
         conditions.extend(new_data)
     else:
         conditions.append(new_data)
     
-    # write back to file
     with open(filename, 'w') as f:
         json.dump(conditions, f, indent=2)
 
@@ -54,8 +54,6 @@ def generate_conditions():
             cond = Condition(angles, False)
 
             sim = run(cond, record=False, counterfactual=None, headless=True)
-
-
 
             if sim['hit'] and sim['clear_cut']:
                 counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'diverge': 150, 'noise_ball': sim['noise_ball']}, headless=True)
@@ -75,9 +73,7 @@ def generate_conditions():
 
         add_conditions(kept_conditions, append=False)
 
-
 def play_conditions():
-
     collisions = get_conditions('calibration.json')
     post = []
 
@@ -86,23 +82,18 @@ def play_conditions():
 
         for c in collisions:
             cond = Condition(angles=c['angles'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
-            output = run(cond, pause=interval, actual_data = None, cause_color = 'red', cause_ball = c['cause_ball'], record=False, counterfactual=None, headless=False)
+            output = run(cond, pause=interval, actual_data=None, cause_color='red', cause_ball=c['cause_ball'], record=False, counterfactual=None, headless=False)
             post.append({**c, 'pause': interval, 'confidence': output['confidence']})
-        # if input("Keep?: ").upper() == 'Y':
-        #     if input("Play Counterfactual?: ").upper() == 'Y':
-        #         run(cond, 'red', record=False, counterfactual={'remove': c['cause_ball'], 'diverge': 0, 'noise_ball': 'blue'}, headless=False)
-        #     kept.append(c)
 
     add_conditions(post, filename="calibrated.json", append=True)
 
 def record_conditions():
-
     colors = ['red', 'green', 'yellow', 'blue', 'purple']
     shuffle(colors)
     conditions = get_conditions('complex_conditions.json')['three_dm']
     for c in conditions:
         cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
-        output = run(cond, colors[(c['index'] -1)], cause_ball = c['cause_ball'], record=True, counterfactual=None, headless=False)
+        output = run(cond, colors[(c['index'] - 1)], cause_ball=c['cause_ball'], record=True, counterfactual=None, headless=False)
         colls = output['cause_collisions']
         times = []
         for i in colls:
@@ -116,10 +107,58 @@ def record_conditions():
         time_diff = round(time_diff, 2)
         print(output)
 
+def _noise_worker(args):
+    noise, conditions, repeats = args
+    results = []
+
+    for idx, c in enumerate(conditions):
+        hits = 0
+
+        for _ in range(repeats):
+            cond = Condition(
+                angles=c['angles'],
+                jitter=c['jitter'],
+                ball_positions=c['ball_positions'],
+                filename=c['filename']
+            )
+
+            output = run(
+                cond,
+                pause=c['pause'],
+                actual_data=None,
+                cause_color='red',
+                cause_ball=c['cause_ball'],
+                record=False,
+                counterfactual=None,
+                headless=True,
+                noise=noise
+            )
+
+            hits += int(output['hit'])
+
+        results.append((idx, noise, hits / repeats))
+
+    return results
+
+def set_noise():
+    conditions = get_conditions('calibrated.json')
+    noises = [10.0, 8.0, 7.0, 6.0, 5.0, 3.0]
+    repeats = 100
+
+    ctx = mp.get_context('spawn')
+
+    with ProcessPoolExecutor(max_workers=len(noises), mp_context=ctx) as executor:
+        jobs = [(noise, conditions, repeats) for noise in noises]
+
+        for noise_results in executor.map(_noise_worker, jobs):
+            for idx, noise, hit_rate in noise_results:
+                conditions[idx][f'noise_{noise}'] = hit_rate
+
+    add_conditions(conditions, filename='noise_calibration.json', append=False)
+
 if __name__ == '__main__':
     # generate_conditions()
-    play_conditions()
+    # play_conditions()
+    set_noise()
     # record_conditions()
     # simple_info()
-
-

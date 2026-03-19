@@ -39,7 +39,7 @@ rgb_to_name = {v: k for k, v in col_dict.items()}
 
 
 class Simulation:
-    def __init__(self, balls, counterfactual = False, actual_data = None, noise=2):
+    def __init__(self, balls, counterfactual = False, actual_data = None, noise=6):
         self.balls = balls
         if actual_data:
             self.actual_collisions = actual_data['collisions']
@@ -108,7 +108,7 @@ class Ball:
         self.body.linearVelocity = (new_vx, new_vy)
 
 
-    def add_noise(self, noise=2):
+    def add_noise(self, noise=6):
         z = gaussian_noise(1)
         angle_deg = z * noise
         print(angle_deg, self.name)
@@ -221,7 +221,7 @@ def is_hit(sim, effect_ball, sim_seconds):
     return False, 0
 
 
-def run(condition, pause = 10, actual_data = None, noise = 3, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
+def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
     ball_colors = [colors[i-1] for i in condition.ball_positions]
 
     screen = pygame.display.set_mode((1000, 800), display=1)
@@ -278,6 +278,7 @@ def run(condition, pause = 10, actual_data = None, noise = 3, cause_color='red',
     final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
     confidence = None;
+    noise_added = False
 
     while running:
 
@@ -305,11 +306,13 @@ def run(condition, pause = 10, actual_data = None, noise = 3, cause_color='red',
                 print('broken')
                 percent_x_distance = 0
             
-            if percent_x_distance >= pause:
-                confidence = input(f"Confidence in cause (0-100)?: ")
-                confidence = int(confidence)/10
-                running = False
-                break
+            if (percent_x_distance >= pause) and not noise_added:
+                # confidence = input(f"Confidence in cause (0-100)?: ")
+                # confidence = int(confidence)/10
+                # running = False
+                # break
+                moving_ball.add_noise(sim.noise)
+                noise_added = True
 
 
             if sim.pending_noise:
@@ -391,8 +394,7 @@ def run(condition, pause = 10, actual_data = None, noise = 3, cause_color='red',
         noise_ball, diverge_step = None, None
 
     return {
-        'pause': pause,
-        'confidence': confidence
+        'hit': isinstance(hit, float)
     }
 
     # return {
