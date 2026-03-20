@@ -84,7 +84,7 @@ def run_condition(payload):
         row = {
             'stimulus': cond.index,
             'ball_index': b+1,
-            'order': cond.order[b],
+            'order': cond.order.index(b + 1) + 1,
             'DM': diff_maker_balls[b],
             'HOW': how_balls[b],
             'WHETHER': whether_balls[b],
@@ -116,7 +116,7 @@ def how(actual_output, cond, c):
         new_cond = change_ball(cond,c)
         output = run(new_cond, actual_data=actual_output, record=False, counterfactual=None, headless=(not debug))
         outcomes.append((output['final_pos'], output['sim_time']) != (actual_output['final_pos'] , actual_output['sim_time']))
-    return sum(outcomes)/float(n_simulations)
+    return sum(outcomes)/float(perturb_simulations)
 
 def sufficient(actual_output, cond, c):
     new_cond = remove_others(cond, c)
@@ -136,7 +136,7 @@ def robust(actual_output, cond, c):
         new_whether = run(cond_whether, actual_data=new_actual, record=False, counterfactual=None, headless=(not debug))
         # if goal still occurs when changing others
         outcomes.append(new_whether['hit'] == False and new_actual['hit'] == True)
-    return sum(outcomes)/float(n_simulations)
+    return sum(outcomes)/float(perturb_simulations)
 
 def remove_ball(cond, c):
     new_cond = copy.deepcopy(cond)
@@ -147,6 +147,7 @@ def remove_ball(cond, c):
     del new_cond.jitter['x'][c]
     del new_cond.jitter['y'][c]
     del new_cond.ball_positions[c]
+    del new_cond.order[c]
     new_cond.num_balls -= 1
 
     return new_cond
@@ -162,6 +163,7 @@ def remove_others(cond, c):
         del new_cond.radians[i]
         del new_cond.jitter['x'][i]
         del new_cond.jitter['y'][i]
+        del new_cond.order[i]
         del new_cond.ball_positions[i]
     
     new_cond.num_balls = 1
@@ -182,31 +184,9 @@ def change_others(cond, c):
             new_cond.jitter['y'][i] += gaussian_noise(1)*perturb
     return new_cond
 
-#useless function 
-def collision_compare(output, counterfactual):
-    i = 0 
-    j = 0
-    noisy_steps = []
-    #is this an off by 1 error?, does it run when i == len(output?)
-    while i <= len(output['collisions']) and j <= len(counterfactual['collisions']):
-        #need to make fool proof by comparing objects too
-        if output['collisions'][i] == counterfactual['collisions'][j]:
-            i += 1
-            j += 1
-        elif output['collisions'][i]['step'] < counterfactual['collisions'][j]['step']:
-            noisy_steps.append(output['collisions'][i]['step'])
-            i += 1
-        else:
-            noisy_steps.append(counterfactual['collisions'][j]['step'])
-            j += 1
-        if i == len(output['collisions']) - 1:
-            noisy_steps.extend(item['step'] for item in counterfactual['collisions'][j+1:])
-        if j == len(counterfactual['collisions']) - 1:
-            noisy_steps.extend(item['step'] for item in output['collisions'][i+1:])
-    return noisy_steps
 
 if __name__ == '__main__':
-    filename = 'new_coll.json'
+    filename = 'collisions.json'
     with open(filename, 'r') as f:
         data = json.load(f)
 

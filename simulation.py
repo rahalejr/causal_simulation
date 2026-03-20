@@ -224,8 +224,6 @@ def is_hit(sim, effect_ball, sim_seconds):
 def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red', cause_ball = 1, record=False, counterfactual=None, headless=False, clip_num=1, is_cf = False):
     ball_colors = [colors[i-1] for i in condition.ball_positions]
 
-    screen = pygame.display.set_mode((1000, 800), display=1)
-
     # ball parameters
     ball_params = [{'ball': 'effect', 'rgb': (180, 180, 180), 'ypos': round(height / 2), 'angle': 0, 'position': -1}]
     for i in range(len(ball_colors)):
@@ -237,7 +235,7 @@ def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red',
 
     if not headless:
         pygame.init()
-        screen = pygame.display.set_mode((width, height))
+        screen = pygame.display.set_mode((width, height), display = 1)
         clock = pygame.time.Clock()
 
     remove = counterfactual['remove'] if counterfactual else None
@@ -277,8 +275,6 @@ def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red',
     sim_seconds = 0
     final_pos = round(height / 2)
     SIM_FRAME_TIME = 1.0 / framerate
-    confidence = None;
-    noise_added = False
 
     while running:
 
@@ -294,26 +290,6 @@ def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red',
             sim.sim_seconds += time_step
             sim_seconds     += time_step
 
-            if moving_ball and initial_distance_to_effect:
-                distance_to_effect = math.sqrt(
-                    (moving_ball.body.position[0] - effect_ball.body.position[0])**2 +
-                    (moving_ball.body.position[1] - effect_ball.body.position[1])**2
-                )
-                percent_x_distance = (
-                    (initial_distance_to_effect - distance_to_effect) / initial_distance_to_effect * 100
-                )
-            else:
-                print('broken')
-                percent_x_distance = 0
-            
-            if (percent_x_distance >= pause) and not noise_added:
-                # confidence = input(f"Confidence in cause (0-100)?: ")
-                # confidence = int(confidence)/10
-                # running = False
-                # break
-                moving_ball.add_noise(sim.noise)
-                noise_added = True
-
 
             if sim.pending_noise:
                 for b in set(sim.pending_noise):
@@ -322,22 +298,16 @@ def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red',
 
             if actual_data:
                 actual_collisions = actual_data['collisions']
-                cf_current = sim.collisions[-1] if sim.collisions else None
+                cf_currents = [c for c in sim.collisions if c['step'] == sim.step - 1]
 
                 for ac in actual_collisions:
                     if sim.step - ac['step'] == 1:
-
-                        matched = False
-                        if cf_current:
-                            if cf_current['objects'] == ac['objects']:
-                                matched = True
-
+                        matched = any(cf['objects'] == ac['objects'] for cf in cf_currents)
                         if not matched:
-                            # inject noise into all involved balls
                             for obj in ac['objects']:
                                 b = sim.find_ball(obj)
                                 if isinstance(b, Ball):
-                                    sim.pending_noise.append(b) 
+                                    sim.pending_noise.append(b)
 
 
         if (hit and sim_seconds > hit + 2) or sim_seconds > 6:
@@ -387,30 +357,19 @@ def run(condition, pause = 10, actual_data = None, noise = 6, cause_color='red',
 
 
     cause_ball = effect_ball.last_collision()
-    if cause_ball and len(cause_ball.ball_collisions) and hit:
-       noise_ball = cause_ball.ball_collisions[0]['object']
-       diverge_step = cause_ball.ball_collisions[0]['step']
-    else:
-        noise_ball, diverge_step = None, None
+
 
     return {
-        'hit': isinstance(hit, float)
+        'num_balls': sim.num_balls,
+        'angles': condition.angles,
+        'sim_time': sim_seconds,
+        'hit': isinstance(hit, float),
+        'cause_ball': cause_ball.name if cause_ball else None,
+        'cause_collisions': cause_ball.all_collisions if cause_ball else None,
+        'colors': [rgb_to_name[c] for c in ball_colors],
+        'final_pos': final_pos,
+        'collisions': sim.collisions
     }
-
-    # return {
-    #     'num_balls': sim.num_balls,
-    #     'clear_cut': True if hit and noise_ball is None and len(effect_ball.collided_with) == 1 else False,
-    #     'angles': condition.angles,
-    #     'sim_time': sim_seconds,
-    #     'hit': isinstance(hit, float),
-    #     'cause_ball': cause_ball.name if cause_ball else None,
-    #     'cause_collisions': cause_ball.all_collisions if cause_ball else None,
-    #     'noise_ball': noise_ball.name if noise_ball else None,
-    #     'diverge': diverge_step,
-    #     'colors': [rgb_to_name[c] for c in ball_colors],
-    #     'final_pos': final_pos,
-    #     'collisions': sim.collisions
-    # }
 
 if __name__ == '__main__':
     pass
