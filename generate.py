@@ -4,7 +4,7 @@ import numpy as np
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor
 from random import shuffle
-from simulation import run
+from simulation_csm import run
 from conditions import Condition
 from videos.qualpaths import paths
 

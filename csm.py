@@ -5,7 +5,7 @@ import json
 import copy
 import numpy as np
 import pandas as pd
-from simulation import run, gaussian_noise
+from simulation_csm import run, gaussian_noise
 from conditions import Condition
 
 debug = False
