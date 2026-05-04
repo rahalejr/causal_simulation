@@ -23,9 +23,15 @@ def process_conditions(conds_list):
         stim_index = c.get('index', i)
         payloads.append((c, stim_index))
 
+    total = len(payloads)
+    results = []
+
     with ProcessPoolExecutor(max_workers=8) as ex:
         futures = [ex.submit(run_condition, p) for p in payloads]
-        results = [f.result() for f in as_completed(futures)]
+        for done, future in enumerate(as_completed(futures), start=1):
+            result = future.result()
+            print(f'[{done}/{total}] stim {result[0]}', flush=True)
+            results.append(result)
 
     for stim_index, rows in sorted(results, key=lambda x: x[0]):
         table.extend(rows)
@@ -52,32 +58,32 @@ def run_condition(payload):
 
 
     diff_maker_balls = []
+    print(f'stim {stim_index}: dm', flush=True)
     for c in range(cond.num_balls):
-        print('DM ', c)
         diff_maker_balls += [difference_maker(actual_output, cond, c)]
             
     # whether cause
     whether_balls = []
+    print(f'stim {stim_index}: whether', flush=True)
     for c in range(cond.num_balls):
-        print('whether ', c)
         whether_balls+= [whether(actual_output, cond, c)]
 
     # how cause
     how_balls = []
+    print(f'stim {stim_index}: how', flush=True)
     for c in range(cond.num_balls):
-        print('how ', c)
         how_balls += [how(actual_output, cond, c)]
     
     # sufficient cause
     sufficient_balls = []
+    print(f'stim {stim_index}: sufficient', flush=True)
     for c in range(cond.num_balls):
-        print('sufficient ', c)
         sufficient_balls += [sufficient(actual_output,cond, c)]
 
     #robust cause
     robust_balls = []
+    print(f'stim {stim_index}: robust', flush=True)
     for c in range(cond.num_balls):
-        print('robust ', c)
         robust_balls += [robust(actual_output, cond, c)]
     
     for b in range(cond.num_balls):

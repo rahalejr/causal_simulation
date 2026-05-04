@@ -24,9 +24,15 @@ def process_conditions(conds_list, output_file='rick_output.csv'):
         stim_index = c.get('index', i)
         payloads.append((c, stim_index))
 
+    total = len(payloads)
+    results = []
+
     with ProcessPoolExecutor(max_workers=max_workers) as ex:
         futures = [ex.submit(run_condition, p) for p in payloads]
-        results = [f.result() for f in as_completed(futures)]
+        for done, future in enumerate(as_completed(futures), start=1):
+            result = future.result()
+            print(f'[{done}/{total}] stim {result[0]}', flush=True)
+            results.append(result)
 
     for stim_index, rows in sorted(results, key=lambda x: x[0]):
         table.extend(rows)
