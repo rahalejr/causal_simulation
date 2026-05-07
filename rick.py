@@ -54,40 +54,52 @@ def run_condition(payload):
         jitter=c['jitter'],
         ball_positions=c['ball_positions'],
         filename=c['filename'],
-        order=c['order']
+        order=c['order'],
+        shape=c.get('shape', 'ball')
     )
 
     actual_output = run(cond, record=False, headless=(not debug))
 
-    chain = build_causal_chain(actual_output, effect_slot=effect_slot)
-    score_by_slot = score_chain(actual_output, chain)
+    support = build_causal_support(actual_output, effect_slot=effect_slot)
+    features_by_slot = support_features(actual_output, support)
 
     slot_to_ball_index = {
         cond.ball_positions[i]: i + 1
         for i in range(cond.num_balls)
     }
 
-    score_by_ball = {}
-    for slot, score in score_by_slot.items():
+    features_by_ball = {}
+    for slot, features in features_by_slot.items():
         ball_index = slot_to_ball_index.get(slot)
         if ball_index is not None:
-            score_by_ball[ball_index] = score
+            features_by_ball[ball_index] = features
 
     results = []
     for b in range(cond.num_balls):
         ball_index = b + 1
+        features = features_by_ball.get(
+            ball_index,
+            {
+                'target_alignment': 0.0,
+                'mapping_ease': 0.0,
+                'support_count': 0,
+            }
+        )
         row = {
             'stimulus': cond.index,
             'ball_index': ball_index,
             'order': cond.order.index(ball_index) + 1,
-            'RICK': score_by_ball.get(ball_index, 0.0)
+            'target_alignment': float(features['target_alignment']),
+            'mapping_ease': float(features['mapping_ease']),
+            'support_count': int(features['support_count']),
+            'support_gate': int(features['support_count'] > 0),
         }
         results.append(row)
 
     return stim_index, results
 
 
-def build_causal_chain(actual_output, effect_slot=-1):
+def build_causal_support(actual_output, effect_slot=-1):
     collisions = actual_output.get('collisions', [])
 
     indexed = []
@@ -100,40 +112,76 @@ def build_causal_chain(actual_output, effect_slot=-1):
             continue
         indexed.append((idx, c))
 
-    chain = []
-    target = effect_slot
-    before_key = None
-
-    while True:
-        candidates = []
-        for idx, c in indexed:
-            key = (c['step'], idx)
-            if c['collided'] != target:
-                continue
-            if before_key is not None and not (key < before_key):
-                continue
-            candidates.append((key, c))
-
-        if not candidates:
+    terminal_idx = None
+    for pos in range(len(indexed) - 1, -1, -1):
+        _, c = indexed[pos]
+        if c['collided'] == effect_slot:
+            terminal_idx = pos
             break
 
-        candidates.sort(key=lambda x: x[0])
-        _, chosen = candidates[-1]
-        chain.append(chosen)
-        target = chosen['collider']
-        chosen_idx = collisions.index(chosen)
-        before_key = (chosen['step'], chosen_idx)
+    if terminal_idx is None:
+        return []
 
-    return chain
+    support = [indexed[terminal_idx]]
+    relevant_slots = {indexed[terminal_idx][1]['collider']}
+
+    for pos in range(terminal_idx - 1, -1, -1):
+        idx, c = indexed[pos]
+        if c['collided'] not in relevant_slots:
+            continue
+        support.append((idx, c))
+        relevant_slots.add(c['collider'])
+
+    support.sort(key=lambda item: (item[1]['step'], item[0]))
+    return [c for _, c in support]
 
 
-def score_chain(actual_output, chain):
-    raw_scores = {}
+def clamp(value, low, high):
+    return max(low, min(high, value))
+
+
+def direction_alignment(velocity, direction):
+    vx = float(velocity[0])
+    vy = float(velocity[1])
+    speed = np.hypot(vx, vy)
+    if speed == 0:
+        return 0.0
+    return (vx / speed) * direction[0] + (vy / speed) * direction[1]
+
+
+def target_alignment(collision):
+    collided_pre_position = collision.get('collided_pre_position')
+    target_pre_position = collision.get('target_pre_position')
+    collided_pre_velocity = collision.get('collided_pre_velocity')
+    collided_post_velocity = collision.get('collided_post_velocity')
+
+    if collided_pre_position is None or target_pre_position is None:
+        return 0.0
+    if collided_pre_velocity is None or collided_post_velocity is None:
+        return 0.0
+
+    dx = float(target_pre_position[0]) - float(collided_pre_position[0])
+    dy = float(target_pre_position[1]) - float(collided_pre_position[1])
+    dist = np.hypot(dx, dy)
+    if dist == 0:
+        return 0.0
+
+    direction_x = dx / dist
+    direction_y = dy / dist
+
+    direction = (direction_x, direction_y)
+    pre_alignment = direction_alignment(collided_pre_velocity, direction)
+    post_alignment = direction_alignment(collided_post_velocity, direction)
+    return clamp(post_alignment - pre_alignment, -1.0, 1.0)
+
+
+def support_features(actual_output, support):
+    aggregates = {}
     ease_cache = {}
 
-    for collision in chain:
+    for collision in support:
         collider = collision.get('collider')
-        magnitude = float(collision.get('magnitude') or 0.0)
+        alignment = target_alignment(collision)
         snapshot_id = collision.get('snapshot_id')
 
         if collider is None or snapshot_id is None:
@@ -150,23 +198,37 @@ def score_chain(actual_output, chain):
             )
 
         ease = ease_cache[snapshot_id]
-        score = magnitude * ease
+        if collider not in aggregates:
+            aggregates[collider] = {
+                'target_alignment_max': None,
+                'mapping_ease_max': None,
+                'count': 0,
+            }
 
-        if collider not in raw_scores:
-            raw_scores[collider] = 0.0
-        raw_scores[collider] += score
+        current_alignment = aggregates[collider]['target_alignment_max']
+        current_ease = aggregates[collider]['mapping_ease_max']
 
-    total = sum(raw_scores.values())
+        aggregates[collider]['target_alignment_max'] = (
+            alignment if current_alignment is None else max(current_alignment, alignment)
+        )
+        aggregates[collider]['mapping_ease_max'] = (
+            ease if current_ease is None else max(current_ease, ease)
+        )
+        aggregates[collider]['count'] += 1
 
-    if total > 0:
-        normalized_scores = {
-            ball: (score / total) * 100.0
-            for ball, score in raw_scores.items()
+    features = {}
+    for collider, values in aggregates.items():
+        count = values['count']
+        if count <= 0:
+            continue
+        features[collider] = {
+            # Aggregate repeated support collisions to one bounded feature row per ball.
+            'target_alignment': values['target_alignment_max'],
+            'mapping_ease': values['mapping_ease_max'],
+            'support_count': count,
         }
-    else:
-        normalized_scores = {}
 
-    return normalized_scores
+    return features
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@ import numpy as np
 import multiprocessing as mp
 from concurrent.futures import ProcessPoolExecutor
 from random import shuffle
-from simulation_csm import run
+from simulation_engine import run_simple as run
 from conditions import Condition
 from videos.qualpaths import paths
 
@@ -51,20 +51,24 @@ def generate_conditions():
             raw_angles = np.random.normal(loc=180, scale=sd, size=num_angles)
             clipped_angles = np.clip(raw_angles, 110, 250)
             angles = clipped_angles.tolist()
-            cond = Condition(angles, False)
+            ball_positions = list(range(1, num_angles + 1))
+            cond = Condition(angles=angles, ball_positions=ball_positions)
 
             sim = run(cond, record=False, counterfactual=None, headless=True)
 
-            if sim['hit'] and sim['clear_cut']:
-                counterfactual = run(cond, record=False, counterfactual={'remove': sim['cause_ball'], 'diverge': 150, 'noise_ball': sim['noise_ball']}, headless=True)
+            if sim['hit'] and sim['cause_ball'] is not None:
+                counterfactual = run(
+                    cond,
+                    record=False,
+                    counterfactual={'remove': sim['cause_ball']},
+                    headless=True
+                )
                 
                 cond.preemption = counterfactual['hit']
                 cond.collisions = sim['collisions']
                 cond.cause_ball = sim['cause_ball']
                 cond.sim_time = sim['sim_time']
-                cond.unambiguous = sim['clear_cut']
-                cond.noise_ball = sim['noise_ball']
-                cond.diverge = sim['diverge']
+                cond.unambiguous = True
 
                 kept_conditions.append(cond.info())
                 if cond.preemption:
@@ -74,16 +78,16 @@ def generate_conditions():
         add_conditions(kept_conditions, append=False)
 
 def play_conditions():
-    collisions = get_conditions('calibration.json')
+    collisions = get_conditions('new_coll.json')
     post = []
 
     for interval in [25, 40, 70]:
-        shuffle(collisions)
+        # shuffle(collisions)
 
         for c in collisions:
-            cond = Condition(angles=c['angles'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'])
+            cond = Condition(angles=c['angles'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['filename'], shape=c.get('shape', 'ball'))
             output = run(cond, pause=interval, actual_data=None, cause_color='red', cause_ball=c['cause_ball'], record=False, counterfactual=None, headless=False)
-            post.append({**c, 'pause': interval, 'confidence': output['confidence']})
+            post.append({**c, 'pause': interval})
 
     add_conditions(post, filename="calibrated.json", append=True)
 
@@ -92,8 +96,8 @@ def record_conditions():
     shuffle(colors)
     conditions = get_conditions('complex_conditions.json')['three_dm']
     for c in conditions:
-        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'])
-        output = run(cond, colors[(c['index'] - 1)], cause_ball=c['cause_ball'], record=True, counterfactual=None, headless=False)
+        cond = Condition(angles=c['angles'], preemption=c['preemption'], jitter=c['jitter'], ball_positions=c['ball_positions'], filename=c['file_name'], shape=c.get('shape', 'ball'))
+        output = run(cond, cause_color=colors[(c['index'] - 1)], cause_ball=c['cause_ball'], record=True, counterfactual=None, headless=False)
         colls = output['cause_collisions']
         times = []
         for i in colls:
@@ -119,7 +123,8 @@ def _noise_worker(args):
                 angles=c['angles'],
                 jitter=c['jitter'],
                 ball_positions=c['ball_positions'],
-                filename=c['filename']
+                filename=c['filename'],
+                shape=c.get('shape', 'ball')
             )
 
             output = run(
@@ -158,7 +163,7 @@ def set_noise():
 
 if __name__ == '__main__':
     # generate_conditions()
-    # play_conditions()
-    set_noise()
+    play_conditions()
+    # set_noise()
     # record_conditions()
     # simple_info()

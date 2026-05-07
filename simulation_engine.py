@@ -54,6 +54,66 @@ def rotate_velocity(vx, vy, theta):
     return vx * cos_t - vy * sin_t, vx * sin_t + vy * cos_t
 
 
+def norm_shape(shape):
+    if shape in {"ball", "square", "hexagon"}:
+        return shape
+    if shape == "circle":
+        return "ball"
+    return "ball"
+
+
+def square_half():
+    inscribed = ball_radius / math.sqrt(2.0)
+    circumscribed = ball_radius
+    return 0.5 * (inscribed + circumscribed)
+
+
+def square_verts(size=None):
+    half = square_half() if size is None else size
+    return [(-half, -half), (half, -half), (half, half), (-half, half)]
+
+
+def hex_apothem():
+    inscribed = ball_radius * math.sqrt(3.0) / 2.0
+    circumscribed = ball_radius
+    return 0.5 * (inscribed + circumscribed)
+
+
+def hex_radius(apothem):
+    return 2.0 * apothem / math.sqrt(3.0)
+
+
+def hex_verts(apothem=None):
+    r = hex_radius(hex_apothem() if apothem is None else apothem)
+    return [
+        (
+            r * math.cos(math.pi / 6.0 + 2.0 * math.pi * i / 6.0),
+            r * math.sin(math.pi / 6.0 + 2.0 * math.pi * i / 6.0),
+        )
+        for i in range(6)
+    ]
+
+
+def body_shape(shape):
+    if shape == "square":
+        return b2PolygonShape(vertices=square_verts())
+    if shape == "hexagon":
+        return b2PolygonShape(vertices=hex_verts())
+    return b2CircleShape(radius=ball_radius)
+
+
+def poly_points(ball, extra=0.0):
+    cx = float(ball.body.position[0])
+    cy = float(ball.body.position[1])
+
+    if ball.shape == "square":
+        verts = square_verts(square_half() + extra)
+    else:
+        verts = hex_verts(hex_apothem() + extra)
+
+    return [(int(cx + x), int(cy + y)) for x, y in verts]
+
+
 def sort_objs(items):
     return sorted(items, key=lambda item: (item == "wall", str(item)))
 
@@ -128,7 +188,7 @@ def draw_checkerboard_square(surface, center, side, num_checks=16):
     checker_colors = [(200, 200, 200), (255, 255, 255)]
 
     for row in range(num_checks):
-        for col in range(num_checks):
+        for col in range(1, num_checks):
             color = checker_colors[(row + col) % 2]
             rect = pygame.Rect(
                 x0 - half + col * check_size,
@@ -165,6 +225,7 @@ class Ball:
             self.name = state["name"]
             self.slot = state["slot"]
             self.color = tuple(state["color"])
+            self.shape = norm_shape(state.get("shape", "ball"))
             self.noisy = bool(state.get("noisy", False))
             xpos, ypos = state["position"]
             vx, vy = state["velocity"]
@@ -172,20 +233,24 @@ class Ball:
             self.name = params["ball"]
             self.slot = params["position"]
             self.color = params["rgb"]
+            self.shape = norm_shape(params.get("shape", "ball"))
             self.noisy = False
             xpos = round(width / 4) if self.name == "effect" else width + 30 + params["x_jitter"]
             ypos = params["ypos"]
             vx = 0.0 if self.name == "effect" else speed * np.cos(params["angle"])
             vy = 0.0 if self.name == "effect" else speed * np.sin(params["angle"])
 
+        is_poly = self.shape != "ball"
         self.body = world.CreateDynamicBody(
             position=(float(xpos), float(ypos)),
-            shapes=b2CircleShape(radius=ball_radius),
+            fixedRotation=is_poly,
+            shapes=body_shape(self.shape),
         )
         self.body.fixtures[0].restitution = 1.0
         self.body.fixtures[0].friction = 0.0
         self.body.linearDamping = 0.0
         self.body.linearVelocity = (float(vx), float(vy))
+        self.body.angularVelocity = 0.0
         self.body.userData = self
 
         self.collided_with = set()
@@ -242,6 +307,7 @@ class Ball:
             "name": self.name,
             "slot": self.slot,
             "color": list(self.color),
+            "shape": self.shape,
             "position": [float(self.body.position[0]), float(self.body.position[1])],
             "velocity": [float(self.body.linearVelocity[0]), float(self.body.linearVelocity[1])],
             "noisy": bool(self.noisy),
@@ -394,6 +460,10 @@ class CollisionListener(b2ContactListener):
             "collided_post_position": None,
             "collider_post_velocity": None,
             "collided_post_velocity": None,
+            "effect_pre_position": None,
+            "goal_position": None,
+            "target_kind": None,
+            "target_pre_position": None,
         }
 
         if isinstance(a, Ball) and isinstance(b, Ball):
@@ -420,16 +490,33 @@ class CollisionListener(b2ContactListener):
                 float(collided.body.linearVelocity[1]),
             ]
 
+            effect_pre_position = [
+                float(self.sim.effect_ball.body.position[0]),
+                float(self.sim.effect_ball.body.position[1]),
+            ]
+            goal_position = [float(left_edge_x), float(height / 2.0)]
+
+            collision["effect_pre_position"] = effect_pre_position
+            collision["goal_position"] = goal_position
+            if collided.name == "effect":
+                collision["target_kind"] = "goal"
+                collision["target_pre_position"] = goal_position
+            else:
+                collision["target_kind"] = "effect"
+                collision["target_pre_position"] = effect_pre_position
+
         self.sim.collisions.append(collision)
         self.sim.pending_idxs.append(len(self.sim.collisions) - 1)
 
 
 def build_params(condition):
+    shape = norm_shape(getattr(condition, "shape", "ball"))
     ball_cols = [colors[index - 1] for index in condition.ball_positions]
     params = [
         {
             "ball": "effect",
             "rgb": (180, 180, 180),
+            "shape": shape,
             "ypos": round(height / 2),
             "angle": 0,
             "position": -1,
@@ -443,6 +530,7 @@ def build_params(condition):
             {
                 "ball": index + 1,
                 "rgb": ball_cols[index],
+                "shape": shape,
                 "position": condition.ball_positions[index],
                 "ypos": condition.y_positions[index] + condition.jitter["y"][index],
                 "angle": condition.radians[index],
@@ -562,8 +650,13 @@ def render_scene(screen, sim, effect_pos):
 
     for ball in sim.balls:
         center = (int(ball.body.position[0]), int(ball.body.position[1]))
-        pygame.draw.circle(screen, (0, 0, 0), center, ball_radius + 1)
-        pygame.draw.circle(screen, ball.color, center, ball_radius)
+        if ball.shape == "ball":
+            pygame.draw.circle(screen, (0, 0, 0), center, ball_radius + 1)
+            pygame.draw.circle(screen, ball.color, center, ball_radius)
+            continue
+
+        pygame.draw.polygon(screen, (0, 0, 0), poly_points(ball, extra=1.0))
+        pygame.draw.polygon(screen, ball.color, poly_points(ball))
 
 
 def write_vid(filename):

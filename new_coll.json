@@ -1,5 +1,6 @@
 [
   {
+    "shape": "square",
     "index": 1,
     "num_balls": 3,
     "ball_positions": [
@@ -38,6 +39,7 @@
     "filename": "stimuli/collisions/hit/stim1.mp4"
   },
   {
+    "shape": "hexagon",
     "index": 2,
     "order": [3, 1, 2],
     "num_balls": 3,

@@ -49,7 +49,8 @@ def run_condition(payload):
         jitter          = c['jitter'],
         ball_positions  = c['ball_positions'],
         filename        = c['filename'],
-        order           = c['order']
+        order           = c['order'],
+        shape           = c.get('shape', 'ball')
     )
 
     results = []
