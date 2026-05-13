@@ -80,7 +80,7 @@ def run_condition(payload):
         features = features_by_ball.get(
             ball_index,
             {
-                'target_alignment': 0.0,
+                'collision_magnitude': 0.0,
                 'mapping_ease': 0.0,
                 'support_count': 0,
             }
@@ -89,7 +89,7 @@ def run_condition(payload):
             'stimulus': cond.index,
             'ball_index': ball_index,
             'order': cond.order.index(ball_index) + 1,
-            'target_alignment': float(features['target_alignment']),
+            'collision_magnitude': float(features['collision_magnitude']),
             'mapping_ease': float(features['mapping_ease']),
             'support_count': int(features['support_count']),
             'support_gate': int(features['support_count'] > 0),
@@ -140,39 +140,35 @@ def clamp(value, low, high):
     return max(low, min(high, value))
 
 
-def direction_alignment(velocity, direction):
+def unit_direction(velocity):
     vx = float(velocity[0])
     vy = float(velocity[1])
     speed = np.hypot(vx, vy)
     if speed == 0:
-        return 0.0
-    return (vx / speed) * direction[0] + (vy / speed) * direction[1]
+        return None
+    return np.array((vx / speed, vy / speed), dtype=float)
 
 
-def target_alignment(collision):
-    collided_pre_position = collision.get('collided_pre_position')
-    target_pre_position = collision.get('target_pre_position')
+def collision_magnitude(collision):
     collided_pre_velocity = collision.get('collided_pre_velocity')
     collided_post_velocity = collision.get('collided_post_velocity')
 
-    if collided_pre_position is None or target_pre_position is None:
-        return 0.0
     if collided_pre_velocity is None or collided_post_velocity is None:
         return 0.0
 
-    dx = float(target_pre_position[0]) - float(collided_pre_position[0])
-    dy = float(target_pre_position[1]) - float(collided_pre_position[1])
-    dist = np.hypot(dx, dy)
-    if dist == 0:
+    pre_direction = unit_direction(collided_pre_velocity)
+    post_direction = unit_direction(collided_post_velocity)
+
+    # A collision that writes a direction into a previously stationary object
+    # counts as maximal magnitude on this scale.
+    if pre_direction is None:
+        return 1.0 if post_direction is not None else 0.0
+
+    if post_direction is None:
         return 0.0
 
-    direction_x = dx / dist
-    direction_y = dy / dist
-
-    direction = (direction_x, direction_y)
-    pre_alignment = direction_alignment(collided_pre_velocity, direction)
-    post_alignment = direction_alignment(collided_post_velocity, direction)
-    return clamp(post_alignment - pre_alignment, -1.0, 1.0)
+    cosine = clamp(float(np.dot(pre_direction, post_direction)), -1.0, 1.0)
+    return np.arccos(cosine) / np.pi
 
 
 def support_features(actual_output, support):
@@ -181,7 +177,7 @@ def support_features(actual_output, support):
 
     for collision in support:
         collider = collision.get('collider')
-        alignment = target_alignment(collision)
+        magnitude = collision_magnitude(collision)
         snapshot_id = collision.get('snapshot_id')
 
         if collider is None or snapshot_id is None:
@@ -200,16 +196,16 @@ def support_features(actual_output, support):
         ease = ease_cache[snapshot_id]
         if collider not in aggregates:
             aggregates[collider] = {
-                'target_alignment_max': None,
+                'collision_magnitude_max': None,
                 'mapping_ease_max': None,
                 'count': 0,
             }
 
-        current_alignment = aggregates[collider]['target_alignment_max']
+        current_magnitude = aggregates[collider]['collision_magnitude_max']
         current_ease = aggregates[collider]['mapping_ease_max']
 
-        aggregates[collider]['target_alignment_max'] = (
-            alignment if current_alignment is None else max(current_alignment, alignment)
+        aggregates[collider]['collision_magnitude_max'] = (
+            magnitude if current_magnitude is None else max(current_magnitude, magnitude)
         )
         aggregates[collider]['mapping_ease_max'] = (
             ease if current_ease is None else max(current_ease, ease)
@@ -223,7 +219,7 @@ def support_features(actual_output, support):
             continue
         features[collider] = {
             # Aggregate repeated support collisions to one bounded feature row per ball.
-            'target_alignment': values['target_alignment_max'],
+            'collision_magnitude': values['collision_magnitude_max'],
             'mapping_ease': values['mapping_ease_max'],
             'support_count': count,
         }

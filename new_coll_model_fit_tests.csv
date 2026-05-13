@@ -1,0 +1,3 @@
+test,chisq,df,p_value
+model_main_effect,524.6431836603515,1,4.133941684432271e-116
+model_by_num_dm_interaction,295.7805977950957,2,5.91642361387895e-65
